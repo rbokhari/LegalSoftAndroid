@@ -1,0 +1,37 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/ripple_bg"
+    tools:context="app.legalsoft.ve.employee.EmployeeDetail">
+
+    <include
+        android:id="@+id/app_bar"
+        layout="@layout/app_toolbar" />
+
+    <ImageView
+        android:id="@+id/imgEmployeeDetailPicture"
+        android:layout_below="@+id/app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:paddingTop="1dp"
+        android:background="@color/primaryColor"
+        android:src="@drawable/photo" />
+
+    <app.legalsoft.ve.tabs.SlidingTabLayout
+        android:id="@+id/employeeTabs"
+        android:animateLayoutChanges="true"
+        android:background="@color/primaryColor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/tabPager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+
+
+</LinearLayout>

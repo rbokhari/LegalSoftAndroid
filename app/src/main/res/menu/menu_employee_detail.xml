@@ -1,0 +1,12 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="app.legalsoft.ve.employee.EmployeeDetail">
+
+    <item
+        android:id="@+id/action_UpdatePhoto"
+        android:orderInCategory="100"
+        android:title="Update Photo"
+        app:showAsAction="never" />
+
+</menu>
