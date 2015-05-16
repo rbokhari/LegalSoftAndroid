@@ -45,7 +45,7 @@ public class EmployeeModel implements Parcelable {
     public EmployeeModel(){}
 
     public EmployeeModel(Parcel source){
-        GlobalFunctions.showMessage(MyApplication.getAppContext(), "From Parcel source");
+        GlobalFunctions.showMessage("From Parcel source");
         EmployeeId = source.readInt();
         EmpCode = source.readString();
         EmpName = source.readString();

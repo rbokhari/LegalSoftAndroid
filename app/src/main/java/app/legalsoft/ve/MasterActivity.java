@@ -65,17 +65,17 @@ public class MasterActivity extends ActionBarActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
             drawerFragment =
-                    (NavigationDrawerFragment)getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
+                    (NavigationDrawerFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
 
-            drawerFragment.setUp(R.id.fragment_navigation_drawer, (DrawerLayout)findViewById(R.id.drawer_layout), toolbar);
+            drawerFragment.setUp(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout), toolbar);
 
             recyclerView = (RecyclerView) findViewById(R.id.rMenu);
             Resources res = getResources();
 
-            mTitle =res.getStringArray(R.array.home_menu); // new String[]{"Definition", "Staff", "Case", "Forms", "Reports", "Validation"};
-            mIcon = new int[]{R.drawable.ic_action_edit, R.drawable.ic_action_add_group, R.drawable.ic_action_collection, R.drawable.ic_action_dock, R.drawable.ic_action_important, R.drawable.ic_action_read};
+            mTitle = res.getStringArray(R.array.home_menu);
+            mIcon = new int[]{R.drawable.ic_action_edit, R.drawable.ic_action_add_group, R.drawable.ic_action_collection, R.drawable.ic_action_dock, R.drawable.ic_action_important, R.drawable.ic_action_read, R.drawable.ic_action_read};
 
-            adapter = new rvAdapter(getApplicationContext(),getData());
+            adapter = new rvAdapter(getApplicationContext(), getData());
 
             recyclerView.setAdapter(adapter);
             recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
@@ -103,7 +103,7 @@ public class MasterActivity extends ActionBarActivity {
             //selectItem(intentValue);
         } catch (Resources.NotFoundException e) {
             e.printStackTrace();
-            GlobalFunctions.showMessage(MyApplication.getAppContext(), "MasterActivity: " + e.getMessage());
+            GlobalFunctions.showMessage("MasterActivity: " + e.getMessage());
         }
     }
 
@@ -112,10 +112,9 @@ public class MasterActivity extends ActionBarActivity {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
         View v;
-        for (int i=0; i <= recyclerView.getAdapter().getItemCount(); i++)
-        {
+        for (int i = 0; i <= recyclerView.getAdapter().getItemCount(); i++) {
             v = recyclerView.getChildAt(i);
-            if (v!=null) {
+            if (v != null) {
                 //recyclerView.getAdapter()
                 v.setBackgroundColor(Color.TRANSPARENT);
             }
@@ -151,7 +150,7 @@ public class MasterActivity extends ActionBarActivity {
         }
 
         v = recyclerView.getChildAt(position);
-        if (v!=null) {
+        if (v != null) {
             v.setBackgroundColor(Color.LTGRAY);
             //TextView txtview = (TextView) v.findViewById(R.id.mText);
             //Typeface font = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Light.ttf");
@@ -164,11 +163,9 @@ public class MasterActivity extends ActionBarActivity {
         drawerLayout.closeDrawer(Gravity.LEFT);
     }
 
-    private ArrayList<HomeMenuModel> getData()
-    {
-        ArrayList<HomeMenuModel> menu=new ArrayList<HomeMenuModel>();
-        for (int i=0;i<mTitle.length; i++)
-        {
+    private ArrayList<HomeMenuModel> getData() {
+        ArrayList<HomeMenuModel> menu = new ArrayList<HomeMenuModel>();
+        for (int i = 0; i < mTitle.length; i++) {
             menu.add(new HomeMenuModel(mTitle[i], mIcon[i]));
         }
         return menu;
@@ -194,19 +191,16 @@ public class MasterActivity extends ActionBarActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
-        }
-        else if (id==android.R.id.home){
+        } else if (id == android.R.id.home) {
             NavUtils.navigateUpFromSameTask(this);
-        }
-        else if (id == R.id.menuItem_client) {
+        } else if (id == R.id.menuItem_client) {
             newFragment = new ClientFragment();
             transaction.replace(R.id.fragment_main_content, newFragment);
             transaction.addToBackStack(null);
             transaction.commit();
 
             return true;
-        }
-        else if (id == R.id.menuItem_employee){
+        } else if (id == R.id.menuItem_employee) {
             newFragment = new EmployeeFragment();
             transaction.replace(R.id.fragment_main_content, newFragment);
             transaction.addToBackStack(null);

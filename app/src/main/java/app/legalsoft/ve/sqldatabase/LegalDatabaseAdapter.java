@@ -9,6 +9,8 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import app.legalsoft.ve.model.EmployeeModel;
+import app.legalsoft.ve.model.OfficeExpenseDetailModel;
+import app.legalsoft.ve.model.OfficeExpenseModel;
 import app.legalsoft.ve.util.CONSTANTS;
 import app.legalsoft.ve.util.GlobalFunctions;
 
@@ -29,7 +31,9 @@ public class LegalDatabaseAdapter extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         try {
             db.execSQL(EmployeeModel.Create_Table());
-            GlobalFunctions.showMessage(context, "onCreate Table Created");
+            db.execSQL(OfficeExpenseModel.Create_Table());
+            db.execSQL(OfficeExpenseDetailModel.Create_Table());
+            GlobalFunctions.showMessage("onCreate Table Created");
         } catch (SQLException e) {
             Toast.makeText(context, "onCreate Error : " + e.getMessage(),Toast.LENGTH_LONG).show();
             e.printStackTrace();
@@ -39,10 +43,12 @@ public class LegalDatabaseAdapter extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         onCreate(db);
-        GlobalFunctions.showMessage(context, "onUpgrade");
+
+        GlobalFunctions.showMessage("onUpgrade");
     }
 
-    public Boolean InsertEmployees(ArrayList<EmployeeModel> employeeModels, Boolean clearPrevious){
-        return true;
+
+    public static void DeleteTableData(SQLiteDatabase database, String TableName) {
+        database.delete(TableName, null, null);
     }
 }

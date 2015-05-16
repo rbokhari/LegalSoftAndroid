@@ -17,6 +17,7 @@ public class OfficeExpenseDetailModel implements Parcelable {
     public int EmpInsurrance;
     public int CompanyInsurrance;
     public int Total;
+    public int TotalCaseAllowance;
     public String Remarks;
 
     public int getExpenseDetailID() {
@@ -55,6 +56,8 @@ public class OfficeExpenseDetailModel implements Parcelable {
         return Total;
     }
 
+    public int getTotalCaseAllowance() { return TotalCaseAllowance; }
+
     public String getRemarks() {
         return Remarks;
     }
@@ -64,14 +67,14 @@ public class OfficeExpenseDetailModel implements Parcelable {
         return "CREATE TABLE OfficeExpenseDetail(ExpenseDetailID INTEGER PRIMARY KEY, ExpenseID INTEGER, EmployeeID INTEGER, " +
                 "Salary NUMERIC(10,5), " +
                 "SalaryAllowance NUMERIC(10,5), OtherAllowance NUMERIC(10,5)," +
-                "EmpInsurrance NUMERIC(10,5), CompanyInsurrance NUMERIC(10,5), Total NUMERIC(10,5), Remarks VARCHAR(255));";
+                "EmpInsurrance NUMERIC(10,5), CompanyInsurrance NUMERIC(10,5), Total NUMERIC(10,5), TotalCaseAllowance NUMERIC(10,5), Remarks VARCHAR(255));";
 
     }
 
     public static String Insert_Table(){
         return "INSERT INTO OfficeExpenseDetail(ExpenseDetailID, ExpenseID, EmployeeID,Salary,SalaryAllowance, OtherAllowance, EmpInsurrance, " +
-                "CompanyInsurrance,Total, Remarks) VALUES( " +
-                "?,?,?,?,?,?,?,?,?,?)";   //1-10 Columns
+                "CompanyInsurrance,Total, TotalCaseAllowance, Remarks) VALUES( " +
+                "?,?,?,?,?,?,?,?,?,?, ?)";   //1-11 Columns
     }
 
     @Override
@@ -90,6 +93,7 @@ public class OfficeExpenseDetailModel implements Parcelable {
         dest.writeDouble(getEmpInsurrance());
         dest.writeDouble(getCompanyInsurrance());
         dest.writeDouble(getTotal());
+        dest.writeDouble(getTotalCaseAllowance());
         dest.writeString(getRemarks());
     }
 

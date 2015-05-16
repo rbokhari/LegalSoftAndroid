@@ -1,17 +1,13 @@
 package app.legalsoft.ve.employee;
 
-
 import android.content.ComponentName;
 import android.content.Intent;
-import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.os.Handler;
-import android.provider.Settings;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -20,23 +16,10 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Spinner;
 import android.widget.TextView;
-
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.ArrayList;
-import java.util.List;
-
 import app.legalsoft.ve.R;
 import app.legalsoft.ve.callbacks.EmployeesLoadedListener;
 import app.legalsoft.ve.model.EmployeeModel;
-import app.legalsoft.ve.network.VolleySingleton;
 import app.legalsoft.ve.recycler.RecyclerTouchListener;
 import app.legalsoft.ve.recycler.rvEmployeeAdapter;
 import app.legalsoft.ve.services.EmployeeService;
@@ -48,15 +31,12 @@ import app.legalsoft.ve.util.MyApplication;
 import me.tatarka.support.job.JobInfo;
 import me.tatarka.support.job.JobScheduler;
 
-
 /**
  * A simple {@link Fragment} subclass.
  */
 public class EmployeeFragment extends Fragment implements EmployeesLoadedListener {
 
     static RecyclerView employeeRecyclerView;
-    //private static final String urlData = "http://192.168.159.1:84/api/employee";//   "http://192.168.159.1:90/api/supplier";
-    //private static final String urlData = "http://192.168.1.37:84/api/employee";//
     private static rvEmployeeAdapter adapterEmployee;
     private SwipeRefreshLayout swipeRefreshLayout;
     static TextView tLoading;
@@ -87,7 +67,7 @@ public class EmployeeFragment extends Fragment implements EmployeesLoadedListene
             //constructEmployeeJob();
 
         } catch (Exception e) {
-            GlobalFunctions.showMessage(MyApplication.getAppContext(), e.getMessage());
+            GlobalFunctions.showMessage(e.getMessage());
         }
     }
 
@@ -207,10 +187,13 @@ public class EmployeeFragment extends Fragment implements EmployeesLoadedListene
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     //GlobalFunctions.showMessage(MyApplication.getAppContext(), position + "");
+                    tLoading.setVisibility(View.VISIBLE);
+                    employeeRecyclerView.setVisibility(View.GONE);
                     data = MyApplication.getWriteableDatabase().readEmployees(position + "");
 
                     adapterEmployee.setEmployeeList(data);
                     employeeRecyclerView.setVisibility(View.VISIBLE);
+                    tLoading.setVisibility(View.GONE);
                 }
 
                 @Override

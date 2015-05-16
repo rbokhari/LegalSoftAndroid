@@ -1,15 +1,10 @@
 package app.legalsoft.ve.services;
 
-import android.os.AsyncTask;
-
 import java.util.ArrayList;
-
 import app.legalsoft.ve.callbacks.EmployeesLoadedListener;
 import app.legalsoft.ve.model.EmployeeModel;
 import app.legalsoft.ve.tasks.EmployeeAsyncTask;
-import app.legalsoft.ve.util.AppDataLoader;
 import app.legalsoft.ve.util.GlobalFunctions;
-import app.legalsoft.ve.util.MyApplication;
 import me.tatarka.support.job.JobParameters;
 import me.tatarka.support.job.JobService;
 
@@ -22,7 +17,7 @@ public class EmployeeService extends JobService implements EmployeesLoadedListen
 
     @Override
     public boolean onStartJob(JobParameters jobParameters) {
-        GlobalFunctions.showMessage(MyApplication.getAppContext(), "onStartJob");
+        GlobalFunctions.showMessage("onStartJob");
         this.jobParameters = jobParameters;
         new EmployeeAsyncTask(this).execute();
 
@@ -31,7 +26,7 @@ public class EmployeeService extends JobService implements EmployeesLoadedListen
 
     @Override
     public boolean onStopJob(JobParameters jobParameters) {
-        GlobalFunctions.showMessage(MyApplication.getAppContext(), "onStopJob");
+        GlobalFunctions.showMessage("onStopJob");
         return false;
     }
 

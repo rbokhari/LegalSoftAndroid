@@ -2,12 +2,14 @@ package app.legalsoft.ve.employee;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -19,6 +21,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Base64;
 import android.util.Log;
+import android.view.ContextThemeWrapper;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -36,6 +39,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,6 +62,7 @@ import app.legalsoft.ve.util.MyApplication;
 
 public class EmployeeDetail extends ActionBarActivity {
 
+    private static final int PIC_CROP = 104;
     private Toolbar toolbar;
 
     static ViewPager mPager;
@@ -59,7 +70,8 @@ public class EmployeeDetail extends ActionBarActivity {
     static int empId;
     static ImageView imgPicture ;
     static FragmentManager fragmentManager;
-    final int ACTIVITY_SELECT_IMAGE = 101;
+    final int REQUEST_CAMERA = 102;
+    final int SELECT_FILE = 103;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,21 +120,26 @@ public class EmployeeDetail extends ActionBarActivity {
             selectImage();
             //PhotoDialog photoDialog = new PhotoDialog();
             //photoDialog.show(getSupportFragmentManager(), "Option");
-
+            //Intent takePicture = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            //startActivityForResult(takePicture, ACTIVITY_SELECT_IMAGE);//zero can be replaced with any action code
 
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
-final int REQUEST_CAMERA = 102;
-    final int SELECT_FILE = 103;
+
 
     private void selectImage() {
         final CharSequence[] items = { "Take Photo", "Choose from Library",
                 "Cancel" };
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(MyApplication.getAppContext());
-        builder.setTitle("Add Photo!");
+        //AlertDialog.Builder builder = new AlertDialog.Builder(EmployeeDetail.this);
+        //android.R.style.Theme_Holo_Light_DarkActionBar
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(
+                new ContextThemeWrapper(EmployeeDetail.this, android.R.style.Theme_Holo));
+
+        builder.setTitle("Update Photo");
         builder.setItems(items, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int item) {
@@ -150,9 +167,11 @@ final int REQUEST_CAMERA = 102;
         super.onActivityResult(requestCode, resultCode, data);
 
         switch(requestCode) {
-            case ACTIVITY_SELECT_IMAGE:
+            case SELECT_FILE:
                 if(resultCode == RESULT_OK){
+
                     Uri selectedImage = data.getData();
+/*
                     String[] filePathColumn = {MediaStore.Images.Media.DATA};
 
                     Cursor cursor = getContentResolver().query(selectedImage, filePathColumn, null, null, null);
@@ -162,12 +181,82 @@ final int REQUEST_CAMERA = 102;
                     String filePath = cursor.getString(columnIndex);
                     GlobalFunctions.m(filePathColumn[0]);
                     cursor.close();
+*/
+                    //Bitmap yourSelectedImage = BitmapFactory.decodeFile(filePath);
 
-
-                    Bitmap yourSelectedImage = BitmapFactory.decodeFile(filePath);
 
                     imgPicture.setImageURI(selectedImage);
+
+
+                    Bitmap thumbnail = null;
+                    try {
+                        thumbnail = MediaStore.Images.Media
+                                .getBitmap(getContentResolver(), selectedImage);
+
+                        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                        thumbnail.compress(Bitmap.CompressFormat.JPEG,100, stream);
+                        byte[] imgBytes = stream.toByteArray();
+
+                        // Update sqlLite database with this image
+                        MyApplication.getWriteableDatabase().UpdatePhoto(empId, imgBytes);
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    /*try {
+                        InputStream inputStream = getContentResolver().openInputStream(selectedImage);
+
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }*/
+
                 }
+                break;
+            case REQUEST_CAMERA:
+                if (resultCode == RESULT_OK){
+                    //Uri selectedImage = data.getData();
+                    //imgPicture.setImageURI(selectedImage);
+
+                    performCrop(data.getData());
+
+                    Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
+                    imgPicture.setImageBitmap(thumbnail);
+
+                    ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                    thumbnail.compress(Bitmap.CompressFormat.JPEG,100, stream);
+                    byte[] imgBytes = stream.toByteArray();
+
+                    // Update sqlLite database with this image
+                    MyApplication.getWriteableDatabase().UpdatePhoto(empId, imgBytes);
+
+                }
+                break;
+        }
+    }
+
+    private void performCrop(Uri imageUri){
+        try {
+            //call the standard crop action intent (the user device may not support it)
+            Intent cropIntent = new Intent("com.android.camera.action.CROP");
+            //indicate image type and Uri
+            cropIntent.setDataAndType(imageUri, "image/*");
+            //set crop properties
+            cropIntent.putExtra("crop", "true");
+            //indicate aspect of desired crop
+            cropIntent.putExtra("aspectX", 1);
+            cropIntent.putExtra("aspectY", 1);
+            //indicate output X and Y
+            cropIntent.putExtra("outputX", 256);
+            cropIntent.putExtra("outputY", 256);
+            //retrieve data on return
+            cropIntent.putExtra("return-data", true);
+            //start the activity - we handle returning in onActivityResult
+            startActivityForResult(cropIntent, PIC_CROP);
+        }
+        catch(ActivityNotFoundException anfe){
+            //display an error message
+            String errorMessage = "Whoops - your device doesn't support the crop action!";
+            GlobalFunctions.showMessage(errorMessage);
         }
     }
 

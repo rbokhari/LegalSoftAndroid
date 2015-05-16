@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    package="app.legalsoft.ve" >
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="app.legalsoft.ve">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -11,7 +10,9 @@
 
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
-    <uses-feature android:name="android.hardware.camera" android:required="true" />
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
@@ -20,10 +21,10 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
         <activity
             android:name=".LoginActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -35,7 +36,7 @@
             android:label="@string/title_activity_home" />
         <activity
             android:name=".MasterActivity"
-            android:label="@string/title_activity_master" >
+            android:label="@string/title_activity_master">
 
             <!--
                 meta-data
@@ -45,14 +46,22 @@
         </activity>
         <activity
             android:name=".employee.EmployeeDetail"
-            android:label="@string/title_activity_employee_detail" >
-            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value="app.legalsoft.ve.MasterActivity">
+            android:label="@string/title_activity_employee_detail">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="app.legalsoft.ve.MasterActivity">
 
             </meta-data>
         </activity>
-        <service android:name="app.legalsoft.ve.services.EmployeeService"
-            android:permission="android.permission.BIND_JOB_SERVICE"
-            android:exported="true"/>
+
+        <service
+            android:name="app.legalsoft.ve.services.EmployeeService"
+            android:exported="true"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+        <service
+            android:name="app.legalsoft.ve.services.OfficeExpenseService"
+            android:exported="true"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
     </application>
 
 </manifest>

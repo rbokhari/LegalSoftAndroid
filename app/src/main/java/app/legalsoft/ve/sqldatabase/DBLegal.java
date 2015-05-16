@@ -1,88 +1,35 @@
 package app.legalsoft.ve.sqldatabase;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteException;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteStatement;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.provider.Settings;
-import android.util.Base64;
-import android.widget.Toast;
-
 import java.util.ArrayList;
-
 import app.legalsoft.ve.model.EmployeeModel;
-import app.legalsoft.ve.util.CONSTANTS;
+import app.legalsoft.ve.model.OfficeExpenseDetailModel;
+import app.legalsoft.ve.model.OfficeExpenseModel;
 import app.legalsoft.ve.util.GlobalFunctions;
-import app.legalsoft.ve.util.MyApplication;
 
 /**
  * Created by Syed.Rahman on 19/04/2015.
  */
 
 public class DBLegal {
-
     private LegalDatabaseAdapter mAdapter;
     private SQLiteDatabase mDatabase;
-
 
     public DBLegal(Context context) {
         mAdapter = new LegalDatabaseAdapter(context);
         mDatabase = mAdapter.getWritableDatabase();
     }
-/*
-    public Boolean InsertEmployees(ArrayList<EmployeeModel> employeeModels, Boolean clearPrevious) {
-
-        String insertSQL = "INSERT INTO EmployeeDef(EmployeeId,Emp_code,EmpName,EmpName_EN,FamilyName,SectionID,GSM,Occupation,EmpEmail,LevelID,MailAddress,EmpSalary,EmpAllowance,EmpPassword,IsActive,IsAdmin,NationalityID,CreatedBy,CreatedOn,UploadStatusID) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-        SQLiteStatement statement = mDatabase.compileStatement(insertSQL);
-
-        mDatabase.beginTransaction();
-        for (int i = 0; i < employeeModels.size(); i++) {
-            EmployeeModel currentEmp = employeeModels.get(i);
-            statement.clearBindings();
-            //for a given column index, simply bind the data to be put inside that index
-            statement.bindLong(1, currentEmp.getEmpID());
-            statement.bindString(2, currentEmp.getEmpCode());
-            statement.bindString(3, currentEmp.getEmpName());
-            statement.bindString(4, currentEmp.getEmpName_EN());
-            statement.bindString(5, currentEmp.getFamilyName());
-            statement.bindString(6, currentEmp.getSectionID());
-            statement.bindString(7, currentEmp.getGSM());
-            statement.bindString(8, currentEmp.getOccupation());
-            statement.bindString(9, currentEmp.getEmpEmail());
-            statement.bindString(10, currentEmp.getLevelID());
-            statement.bindString(11, currentEmp.getMailAddress());
-            statement.bindLong(12, currentEmp.getEmpSalary());
-            statement.bindLong(13, currentEmp.getEmpAllowance());
-            statement.bindString(14, currentEmp.getEmpPassword());
-            statement.bindLong(15, currentEmp.getIsActive());
-            statement.bindLong(16, currentEmp.getIsAdmin());
-            statement.bindString(17, currentEmp.getNationalityID());
-            statement.bindLong(18, currentEmp.getCreatedBy());
-            statement.bindString(19, currentEmp.getCreatedOn().toString());
-            statement.bindLong(20, currentEmp.getUploadStatusID());
-
-            statement.execute();
-        }
-        mDatabase.setTransactionSuccessful();
-        mDatabase.endTransaction();
-
-        return true;
-    }*/
 
     public Boolean InsertEmployees(ArrayList<EmployeeModel> employeeModels, Boolean clearPrevious) {
         if (employeeModels!=null || employeeModels.size()>0) {
             if (clearPrevious) {
-                DeleteTableData("EmployeeDef");
+                //DeleteTableData("EmployeeDef");
+                LegalDatabaseAdapter.DeleteTableData(mDatabase, "EmployeeDef");
             }
-            /*String insertSQL = "INSERT INTO EmployeeDef(EmployeeId,Emp_code,EmpName,EmpName_EN, FamilyName, SectionID, " +
-                    "GSM,Occupation, EmpEmail, LevelID, MailAddress, EmpSalary, EmpAllowance, IsActive, IsAdmin, StartDate, EndDate, " +
-                    "NationalityID, CreatedBy, CreatedOn, EmpPicture) VALUES( " +
-                    "?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";   //1-21 Columns*/
 
             String insertSQL = EmployeeModel.Insert_Table();
 
@@ -144,6 +91,18 @@ public class DBLegal {
         return true;
     }
 
+    public Boolean UpdatePhoto(int id, byte[] img){
+        ContentValues contentValues = new ContentValues();
+        String whereClause = "EmployeeId = ?";
+        String[] whereArgs = new String[] {
+                id + ""
+        };
+        contentValues.put("EmpPicture", img);
+        mDatabase.update("EmployeeDef", contentValues, whereClause, whereArgs);
+
+        return true;
+    }
+
     public ArrayList<EmployeeModel> readEmployees(String statusId) {
         ArrayList<EmployeeModel> list = new ArrayList<>();
 
@@ -176,7 +135,6 @@ public class DBLegal {
         if (cursor != null && cursor.moveToFirst()) {
             //L.m("loading entries " + cursor.getCount() + new Date(System.currentTimeMillis()));
             do {
-
                 //create a new movie object and retrieve the data from the cursor to be stored in this movie object
                 EmployeeModel employee = new EmployeeModel();
                 //each step is a 2 part process, find the index of the column first, find the data of that column using
@@ -253,8 +211,77 @@ public class DBLegal {
         return employee;
     }
 
-    public void DeleteTableData(String TableName) {
-        mDatabase.delete(TableName, null, null);
-    }
+    public Boolean InsertOfficeExpense(ArrayList<OfficeExpenseModel> officeExpenseModels, ArrayList<OfficeExpenseDetailModel> officeExpenseDetailModels, Boolean clearPrevious) {
+        if (officeExpenseModels!=null || officeExpenseModels.size()>0) {
+            if (clearPrevious) {
+                LegalDatabaseAdapter.DeleteTableData(mDatabase, "OfficeExpense");
+                LegalDatabaseAdapter.DeleteTableData(mDatabase, "OfficeExpenseDetail");
+            }
 
+            GlobalFunctions.m("Started size :" + officeExpenseModels.size());
+            mDatabase.beginTransaction();
+            for (int i = 0; i < officeExpenseModels.size(); i++) {
+                OfficeExpenseModel current = officeExpenseModels.get(i);
+                ContentValues contentValues = new ContentValues();
+
+                //for a given column index, simply bind the data to be put inside that index
+                if (current.getExpenseID() != 0) {
+                    GlobalFunctions.m("ExpenseId : " + current.getExpenseID());
+
+                    contentValues.put("ExpenseID",current.getExpenseID());
+                    contentValues.put("ExpenseCode",current.getExpenseCode());
+                    contentValues.put("ExpenseDate", current.getExpenseDate());
+                    contentValues.put("MonthID",current.getMonthID());
+                    contentValues.put("Year",current.getYear());
+                    contentValues.put("TotalEmpInsurrance",current.getTotalEmpInsurrance());
+                    contentValues.put("TotalCompanyInsurrance",current.getTotalCompanyInsurrance());
+                    contentValues.put("TotalRent",current.getTotalRent());
+                    contentValues.put("PettyCash",current.getPettyCash());
+                    contentValues.put("TotalSupport",current.getTotalSupport());
+                    contentValues.put("Installment",current.getInstallment());
+                    contentValues.put("TotalSalary", current.getTotalSalary());
+                    contentValues.put("GrandTotal",current.getGrandTotal());
+                    contentValues.put("BankAccountID",current.getBankAccountID());
+                    contentValues.put("CreatedBy", current.getCreatedBy());
+                    contentValues.put("CreatedOn",current.getCreatedOn());
+                    contentValues.put("ModifiedBy", current.getModifiedBy());
+                    contentValues.put("ModifiedOn", current.getModifiedOn());
+
+                    mDatabase.insert("OfficeExpense", null, contentValues);
+                }
+            }
+
+            GlobalFunctions.m("DetailSize ; " + officeExpenseDetailModels.size());
+
+            for (int i = 0; i < officeExpenseDetailModels.size(); i++) {
+                OfficeExpenseDetailModel current = officeExpenseDetailModels.get(i);
+                ContentValues contentValues = new ContentValues();
+
+                GlobalFunctions.m("ExpenseDetailId : " + current.getExpenseDetailID());
+
+                contentValues.put("ExpenseDetailID", current.getExpenseDetailID());
+                contentValues.put("ExpenseID", current.getExpenseID());
+                contentValues.put("EmployeeID", current.getEmployeeID());
+                contentValues.put("Salary", current.getSalary());
+                contentValues.put("SalaryAllowance", current.getSalaryAllowance());
+                contentValues.put("OtherAllowance", current.getOtherAllowance());
+                contentValues.put("EmpInsurrance", current.getEmpInsurrance());
+                contentValues.put("CompanyInsurrance", current.getCompanyInsurrance());
+                contentValues.put("Total", current.getTotal());
+                contentValues.put("TotalCaseAllowance", current.getTotalCaseAllowance());
+                contentValues.put("Remarks", current.getRemarks());
+
+                mDatabase.insert("OfficeExpenseDetail", null, contentValues);
+            }
+
+            mDatabase.setTransactionSuccessful();
+            mDatabase.endTransaction();
+            GlobalFunctions.m("InsertOfficeExpense finished ----------------------------");
+
+        }
+        else{
+            GlobalFunctions.m("InsertOfficeExpense finished -- No Record to update !");
+        }
+        return true;
+    }
 }

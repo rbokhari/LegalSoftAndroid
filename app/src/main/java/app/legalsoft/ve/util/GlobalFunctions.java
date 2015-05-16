@@ -17,8 +17,9 @@ import app.legalsoft.ve.R;
  */
 public  class GlobalFunctions {
 
-    public static void showMessage(Context context, String message){
-        Toast.makeText(context, message, Toast.LENGTH_LONG).show();
+    public static void showMessage(String message){
+        //Toast.makeText(context, message, Toast.LENGTH_LONG).show();
+        Toast.makeText(MyApplication.getAppContext(), message, Toast.LENGTH_LONG).show();
     }
 
     public static Boolean getIsNotNull(JSONObject jsonObject, String key){

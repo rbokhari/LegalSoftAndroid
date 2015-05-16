@@ -68,7 +68,9 @@ public class EmployeeDetailGeneral extends Fragment {
         tSection.setText(employeeModel.getSectionID());
         //try {
             //tJoiningDate.setText(format.parse(employeeModel.getStartDate().substring(0, 10)).toString());
+        if (employeeModel.getStartDate().length()>0) {
             tJoiningDate.setText(employeeModel.getStartDate().substring(0, 10));
+        }
         //} catch (ParseException e) {
         //    tJoiningDate.setText(employeeModel.getStartDate());
         //}

@@ -11,6 +11,7 @@
         <item>Forms</item>
         <item>Reports</item>
         <item>Validation</item>
+        <item>Log Out</item>
     </string-array>
     <integer-array name="home_icon">
         <item>@drawable/ic_action_edit</item>

@@ -1,8 +1,10 @@
 package app.legalsoft.ve;
 
+import android.content.ComponentName;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,10 +17,18 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import app.legalsoft.ve.callbacks.OfficeExpensesLoadedListener;
 import app.legalsoft.ve.model.HomeMenuModel;
+import app.legalsoft.ve.model.OfficeExpenseModel;
 import app.legalsoft.ve.recycler.RecyclerTouchListener;
 import app.legalsoft.ve.recycler.rvAdapter;
+import app.legalsoft.ve.services.EmployeeService;
+import app.legalsoft.ve.services.OfficeExpenseService;
+import app.legalsoft.ve.util.CONSTANTS;
 import app.legalsoft.ve.util.DividerItemDecoration;
+import app.legalsoft.ve.util.MyApplication;
+import me.tatarka.support.job.JobInfo;
+import me.tatarka.support.job.JobScheduler;
 
 
 public class HomeActivity extends ActionBarActivity {
@@ -27,6 +37,7 @@ public class HomeActivity extends ActionBarActivity {
     private static rvAdapter adapter;
     String[] mTitle;
     int[] mIcon;
+    private JobScheduler mJobScheduler;
 
     public void HomeActivity(){
 
@@ -36,14 +47,22 @@ public class HomeActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        mJobScheduler = JobScheduler.getInstance(MyApplication.getAppContext());
 
-        //Toast.makeText(this, "HomeActivity",Toast.LENGTH_LONG).show();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                constructOfficeExpenseJob();
+            }
+        }, 10000);
 
         recyclerView = (RecyclerView) findViewById(R.id.rMenu);
         Resources res = getResources();
 
-        mTitle =res.getStringArray(R.array.home_menu); // new String[]{"Definition", "Staff", "Case", "Forms", "Reports", "Validation"};
-        mIcon = new int[]{R.drawable.ic_action_edit, R.drawable.ic_action_add_group, R.drawable.ic_action_collection, R.drawable.ic_action_dock, R.drawable.ic_action_important, R.drawable.ic_action_read};
+        mTitle =res.getStringArray(R.array.home_menu);
+        mIcon = new int[]{R.drawable.ic_action_edit, R.drawable.ic_action_add_group,
+                R.drawable.ic_action_collection, R.drawable.ic_action_dock,
+                R.drawable.ic_action_important, R.drawable.ic_action_read, R.drawable.ic_action_read};
 
         adapter = new rvAdapter(getApplicationContext(),getData());
 
@@ -112,4 +131,16 @@ public class HomeActivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    private void constructOfficeExpenseJob(){
+        JobInfo.Builder builder = new JobInfo.Builder(CONSTANTS.OFFICEEXPENSE_JOB_ID,
+                new ComponentName(MyApplication.getAppContext(), OfficeExpenseService.class));
+
+        builder.setPeriodic(CONSTANTS.OFFICEEXPENSE_JOB_SERVICE_PERIODIC_INTERVAL)
+                .setRequiredNetworkType(JobInfo.NETWORK_TYPE_UNMETERED);
+        //.setPersisted(true);
+
+        mJobScheduler.schedule(builder.build());
+    }
+
 }
