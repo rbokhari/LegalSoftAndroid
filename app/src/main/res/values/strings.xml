@@ -69,4 +69,5 @@
     <string name="volley_network_error">Oops ! Network error occured !</string>
     <string name="volley_parse_error">Oops ! parse error occured !</string>
     <string name="pick_option">Pick an Opttion</string>
+    <string name="title_activity_employee_salary">Employee Salary</string>
 </resources>

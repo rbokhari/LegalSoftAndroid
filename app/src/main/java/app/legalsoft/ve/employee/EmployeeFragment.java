@@ -167,16 +167,15 @@ public class EmployeeFragment extends Fragment implements EmployeesLoadedListene
             });
 
             if (savedInstanceState==null) {
-                GlobalFunctions.m("Loading data properly");
+                //GlobalFunctions.m("Loading data properly");
                 data = MyApplication.getWriteableDatabase().readEmployees(spinnerStatus.getSelectedItemPosition() + "");
                 if (data.isEmpty()){
-                    GlobalFunctions.m("calling service");
                     new EmployeeAsyncTask(this).execute();
                 }
             }
             else{
                 data = savedInstanceState.getParcelableArrayList(CONSTANTS.EMPLOYEE_MODEL_PARCELABLE_KEY);
-                GlobalFunctions.m("Loading data Parcelable");
+                //GlobalFunctions.m("Loading data Parcelable");
             }
             adapterEmployee.setEmployeeList(data);
             tLoading.setVisibility(View.GONE);

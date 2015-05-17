@@ -54,7 +54,7 @@ public class HomeActivity extends ActionBarActivity {
             public void run() {
                 constructOfficeExpenseJob();
             }
-        }, 10000);
+        }, 99000);
 
         recyclerView = (RecyclerView) findViewById(R.id.rMenu);
         Resources res = getResources();

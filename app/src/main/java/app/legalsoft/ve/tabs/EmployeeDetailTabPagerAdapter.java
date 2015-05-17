@@ -27,6 +27,7 @@ public class EmployeeDetailTabPagerAdapter extends FragmentPagerAdapter {
         super(fm);
         tabs = MyApplication.getsInstance().getResources().getStringArray(R.array.tab_employee_detail);
         this.employeeModel = employeeModel;
+
     }
 
     @Override

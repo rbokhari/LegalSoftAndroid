@@ -50,36 +50,39 @@ public class EmployeeDetailGeneral extends Fragment {
 
         employeeModel = employeeModel.fromBundle(b);
         SimpleDateFormat format = new SimpleDateFormat("MMM dd,yyyy");
+        if (employeeModel!=null) {
 
-        tEmpName = (TextView) view.findViewById(R.id.txtEmpName);
-        tNameEn = (TextView) view.findViewById(R.id.txtEmpNameEn);
-        tFamilyName = (TextView) view.findViewById(R.id.txtFamilyName);
-        tSection = (TextView) view.findViewById(R.id.txtSection);
-        tJoiningDate = (TextView) view.findViewById(R.id.txtJoiningDate);
-        tMobile = (TextView) view.findViewById(R.id.txtMobile);
-        tDesignation = (TextView) view.findViewById(R.id.txtEmpDesignation);
-        tEmail = (TextView) view.findViewById(R.id.txtEmail);
-        tAddress = (TextView) view.findViewById(R.id.txtAddress);
-        tNationality = (TextView) view.findViewById(R.id.txtNationality);
-
-        tEmpName.setText(employeeModel.getEmpName());
-        tNameEn.setText(employeeModel.getEmpName_EN());
-        tFamilyName.setText(employeeModel.getFamilyName());
-        tSection.setText(employeeModel.getSectionID());
-        //try {
+            tEmpName = (TextView) view.findViewById(R.id.txtEmpName);
+            tNameEn = (TextView) view.findViewById(R.id.txtEmpNameEn);
+            tFamilyName = (TextView) view.findViewById(R.id.txtFamilyName);
+            tSection = (TextView) view.findViewById(R.id.txtSection);
+            tJoiningDate = (TextView) view.findViewById(R.id.txtJoiningDate);
+            tMobile = (TextView) view.findViewById(R.id.txtMobile);
+            tDesignation = (TextView) view.findViewById(R.id.txtEmpDesignation);
+            tEmail = (TextView) view.findViewById(R.id.txtEmail);
+            tAddress = (TextView) view.findViewById(R.id.txtAddress);
+            tNationality = (TextView) view.findViewById(R.id.txtNationality);
+            tEmpName.setText(employeeModel.getEmpName());
+            tNameEn.setText(employeeModel.getEmpName_EN());
+            tFamilyName.setText(employeeModel.getFamilyName());
+            tSection.setText(employeeModel.getSectionID());
+            //try {
             //tJoiningDate.setText(format.parse(employeeModel.getStartDate().substring(0, 10)).toString());
-        if (employeeModel.getStartDate().length()>0) {
-            tJoiningDate.setText(employeeModel.getStartDate().substring(0, 10));
+            if (employeeModel.getStartDate().length() > 0) {
+                tJoiningDate.setText(employeeModel.getStartDate().substring(0, 10));
+            }
+            else{
+                tJoiningDate.setText("");
+            }
+            //} catch (ParseException e) {
+            //    tJoiningDate.setText(employeeModel.getStartDate());
+            //}
+            tMobile.setText(employeeModel.getGSM());
+            tDesignation.setText(employeeModel.getOccupation());
+            tEmail.setText(employeeModel.getEmpEmail());
+            tAddress.setText(employeeModel.getMailAddress());
+            tNationality.setText(employeeModel.getNationalityID());
         }
-        //} catch (ParseException e) {
-        //    tJoiningDate.setText(employeeModel.getStartDate());
-        //}
-        tMobile.setText(employeeModel.getGSM());
-        tDesignation.setText(employeeModel.getOccupation());
-        tEmail.setText(employeeModel.getEmpEmail());
-        tAddress.setText(employeeModel.getMailAddress());
-        tNationality.setText(employeeModel.getNationalityID());
-
         return view;
     }
 

@@ -10,6 +10,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Environment;
+import android.provider.ContactsContract;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -68,10 +69,13 @@ public class EmployeeDetail extends ActionBarActivity {
     static ViewPager mPager;
     static SlidingTabLayout mTabs;
     static int empId;
+    static int currentTab = 0;
     static ImageView imgPicture ;
     static FragmentManager fragmentManager;
     final int REQUEST_CAMERA = 102;
     final int SELECT_FILE = 103;
+
+    static EmployeeModel employeeModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +88,7 @@ public class EmployeeDetail extends ActionBarActivity {
 
         Intent intent = getIntent();
         empId = intent.getIntExtra("employeeId", 0);
+        currentTab = intent.getIntExtra("currentTab",0);
 
         toolbar = (Toolbar) findViewById(R.id.app_bar);
 
@@ -96,6 +101,8 @@ public class EmployeeDetail extends ActionBarActivity {
         mTabs.setDistributeEvenly(true);
 
         getData();
+
+        mPager.setCurrentItem(currentTab);
     }
 
     @Override
@@ -124,6 +131,51 @@ public class EmployeeDetail extends ActionBarActivity {
             //startActivityForResult(takePicture, ACTIVITY_SELECT_IMAGE);//zero can be replaced with any action code
 
             return true;
+        }
+        else if (id== R.id.action_AddContact){
+            // Creates a new Intent to insert a contact
+            Intent intent = new Intent(ContactsContract.Intents.Insert.ACTION);
+            // Sets the MIME type to match the Contacts Provider
+            intent.setType(ContactsContract.RawContacts.CONTENT_TYPE);
+            intent.putExtra(ContactsContract.Intents.Insert.EMAIL, employeeModel.getEmpEmail())
+                    .putExtra(ContactsContract.Intents.Insert.EMAIL_TYPE, ContactsContract.CommonDataKinds.Email.TYPE_WORK)
+                    .putExtra(ContactsContract.Intents.Insert.NAME, employeeModel.getEmpName())
+                    .putExtra(ContactsContract.Intents.Insert.JOB_TITLE, employeeModel.getOccupation())
+                    .putExtra(ContactsContract.Intents.Insert.POSTAL, employeeModel.getMailAddress())
+                    .putExtra(ContactsContract.CommonDataKinds.Photo.PHOTO, employeeModel.getEmpPicture())
+                    .putExtra(ContactsContract.Intents.Insert.PHONE, employeeModel.getGSM())
+                    .putExtra(ContactsContract.Intents.Insert.PHONE_TYPE, ContactsContract.CommonDataKinds.Phone.TYPE_MOBILE);
+            startActivity(intent);
+
+            return true;
+        }
+        else if(id== R.id.action_Call){
+            if (employeeModel!=null && employeeModel.getGSM().length()>0) {
+                Intent callIntent = new Intent(Intent.ACTION_CALL);
+                callIntent.setData(Uri.parse("tel:" + employeeModel.getGSM()));
+                startActivity(callIntent);
+            }
+            return true;
+        }
+        else if (id==R.id.action_SMS){
+            if (employeeModel!=null && employeeModel.getGSM().length()>0) {
+                Intent sendIntent = new Intent(Intent.ACTION_VIEW);
+                sendIntent.setData(Uri.parse("sms:" + employeeModel.getGSM()));
+                //sendIntent.putExtra("sms_body", x);       // put extra message
+                startActivity(sendIntent);
+            }
+            return true;
+        }
+        else if (id == R.id.action_email){
+            if (employeeModel!=null && employeeModel.getEmpEmail().length()>0){
+                Intent intent = new Intent(Intent.ACTION_SENDTO); // it's not ACTION_SEND
+                intent.setType("text/plain");
+                intent.putExtra(Intent.EXTRA_SUBJECT, "From LegalSoft");
+                //intent.putExtra(Intent.EXTRA_TEXT, "Body of email");
+                intent.setData(Uri.parse("mailto:" + employeeModel.getEmpEmail())); // or just "mailto:" for blank
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK); // this will make such that when user returns to your app, your app is displayed, instead of the email app.
+                startActivity(intent);
+            }
         }
         return super.onOptionsItemSelected(item);
     }
@@ -261,7 +313,7 @@ public class EmployeeDetail extends ActionBarActivity {
     }
 
     public static void getData(){
-        EmployeeModel employeeModel = MyApplication.getWriteableDatabase().readEmployeeById(empId + "");
+        employeeModel = MyApplication.getWriteableDatabase().readEmployeeById(empId + "");
         if (employeeModel.getEmpPicture()!=null) {
             //GlobalFunctions.showMessage(MyApplication.getAppContext(), employeeModel.getEmpPicture().toString());
             //employeeModel.EmpPicture = jsonObject.getString("empPic");
@@ -271,5 +323,6 @@ public class EmployeeDetail extends ActionBarActivity {
         }
         mPager.setAdapter(new EmployeeDetailTabPagerAdapter(fragmentManager,employeeModel));
         mTabs.setViewPager(mPager);
+
     }
 }

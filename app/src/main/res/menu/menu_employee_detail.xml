@@ -9,4 +9,27 @@
         android:title="Update Photo"
         app:showAsAction="never" />
 
+    <item
+        android:id="@+id/action_AddContact"
+        android:orderInCategory="100"
+        android:title="Add Contact"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_Call"
+        android:orderInCategory="100"
+        android:title="Call"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_SMS"
+        android:orderInCategory="100"
+        android:title="SMS"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_email"
+        android:orderInCategory="100"
+        android:title="Email"
+        app:showAsAction="never" />
 </menu>

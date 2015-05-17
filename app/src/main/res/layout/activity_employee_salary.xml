@@ -1,0 +1,25 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="app.legalsoft.ve.employee.EmployeeSalary">
+
+    <include
+        android:id="@+id/app_bar"
+        layout="@layout/app_toolbar" />
+
+    <TextView
+        android:id="@+id/tHeading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:gravity="center"
+        android:padding="8dp"
+        android:text="Salary Detail"
+        android:background="@color/primaryColor"
+        android:textColor="#FFF"
+        android:textSize="24dp"
+        android:visibility="visible" />
+
+</LinearLayout>
