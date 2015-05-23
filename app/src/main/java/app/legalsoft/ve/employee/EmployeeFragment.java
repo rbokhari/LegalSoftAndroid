@@ -168,7 +168,7 @@ public class EmployeeFragment extends Fragment implements EmployeesLoadedListene
 
             if (savedInstanceState==null) {
                 //GlobalFunctions.m("Loading data properly");
-                data = MyApplication.getWriteableDatabase().readEmployees(spinnerStatus.getSelectedItemPosition() + "");
+                data = MyApplication.getWriteableDatabase().getEmployees(spinnerStatus.getSelectedItemPosition() + "");
                 if (data.isEmpty()){
                     new EmployeeAsyncTask(this).execute();
                 }
@@ -188,7 +188,7 @@ public class EmployeeFragment extends Fragment implements EmployeesLoadedListene
                     //GlobalFunctions.showMessage(MyApplication.getAppContext(), position + "");
                     tLoading.setVisibility(View.VISIBLE);
                     employeeRecyclerView.setVisibility(View.GONE);
-                    data = MyApplication.getWriteableDatabase().readEmployees(position + "");
+                    data = MyApplication.getWriteableDatabase().getEmployees(position + "");
 
                     adapterEmployee.setEmployeeList(data);
                     employeeRecyclerView.setVisibility(View.VISIBLE);
@@ -210,7 +210,7 @@ public class EmployeeFragment extends Fragment implements EmployeesLoadedListene
     void refreshItem(){
         tLoading.setVisibility(View.VISIBLE);
         employeeRecyclerView.setVisibility(View.GONE);
-        data = MyApplication.getWriteableDatabase().readEmployees(spinnerStatus.getSelectedItemPosition() + "");
+        data = MyApplication.getWriteableDatabase().getEmployees(spinnerStatus.getSelectedItemPosition() + "");
         adapterEmployee.setEmployeeList(data);
         tLoading.setVisibility(View.GONE);
         employeeRecyclerView.setVisibility(View.VISIBLE);

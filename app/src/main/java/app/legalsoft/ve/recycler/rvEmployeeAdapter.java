@@ -41,7 +41,6 @@ public class rvEmployeeAdapter extends RecyclerView.Adapter<rvEmployeeHolder> {
     {
         this.dataList = listEmployee;
         notifyItemRangeChanged(0, listEmployee.size());
-        Log.d("setEmployeeList", "----------------======= setEmployeeList =====--------------");
     }
 
     @Override
@@ -70,9 +69,7 @@ public class rvEmployeeAdapter extends RecyclerView.Adapter<rvEmployeeHolder> {
         else{
             holder.imgEmp.setImageResource(R.drawable.photo);
         }
-
-        //Log.d("icon:---", String.valueOf(dataList.get(position).getTitleIcon()));
-    }
+   }
 
     @Override
     public int getItemCount() {

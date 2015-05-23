@@ -20,6 +20,9 @@ public class OfficeExpenseDetailModel implements Parcelable {
     public int TotalCaseAllowance;
     public String Remarks;
 
+    public int MonthId;
+    public String YearName;
+
     public int getExpenseDetailID() {
         return ExpenseDetailID;
     }

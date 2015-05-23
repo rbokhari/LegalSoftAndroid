@@ -5,6 +5,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
+import android.provider.Settings;
+
 import java.util.ArrayList;
 import app.legalsoft.ve.model.EmployeeModel;
 import app.legalsoft.ve.model.OfficeExpenseDetailModel;
@@ -103,7 +105,7 @@ public class DBLegal {
         return true;
     }
 
-    public ArrayList<EmployeeModel> readEmployees(String statusId) {
+    public ArrayList<EmployeeModel> getEmployees(String statusId) {
         ArrayList<EmployeeModel> list = new ArrayList<>();
 
         switch (statusId){
@@ -157,7 +159,7 @@ public class DBLegal {
         return list;
     }
 
-    public EmployeeModel readEmployeeById(String id) {
+    public EmployeeModel getEmployeeById(String id) {
         EmployeeModel employee= new EmployeeModel();
 
         //get a list of columns to be retrieved, we need all of them
@@ -284,4 +286,95 @@ public class DBLegal {
         }
         return true;
     }
+
+
+    public ArrayList<OfficeExpenseDetailModel> getOfficeExpenseByEmployeeId(int EmployeeId){
+        ArrayList<OfficeExpenseDetailModel> data = new ArrayList<>();
+
+        String[] columns = {"Salary, SalaryAllowance, OtherAllowance, EmpInsurrance, CompanyInsurrance, Total, TotalCaseAllowance, Remarks"};
+
+        String whereClause = "EmployeeID = ?";
+        String[] whereArgs = new String[] {
+                EmployeeId + ""
+        };
+        final String strQuery = "SELECT Year, MonthID, Salary, SalaryAllowance, OtherAllowance, EmpInsurrance, CompanyInsurrance, Total, TotalCaseAllowance, Remarks" +
+                " FROM OfficeExpenseDetail INNER JOIN OfficeExpense ON OfficeExpenseDetail.ExpenseId = OfficeExpense.ExpenseId " +
+                " WHERE OfficeExpenseDetail.EmployeeId = ? ORDER BY Year Desc, MonthID Asc";
+        //db.rawQuery(strQuery, new String[]{String.valueOf(EmployeeId)});
+        Cursor cursor;
+        //cursor = mDatabase.query("OfficeExpenseDetail", columns, whereClause, whereArgs, null, null, null);
+
+        cursor = mDatabase.rawQuery(strQuery, whereArgs);
+        if (cursor!=null && cursor.moveToFirst()){
+
+            do {
+                OfficeExpenseDetailModel expense;
+
+                if (cursor.getPosition() == 0){         // First record fill for Section head, only get year & month value, all other values 0.
+                    expense = new OfficeExpenseDetailModel();
+                    expense.YearName = cursor.getString(0);
+                    expense.MonthId = cursor.getInt(1);
+                    data.add(expense);
+
+
+                    // Add all values as a second record in array list.
+                    expense = new OfficeExpenseDetailModel();
+                    expense.YearName = cursor.getString(0);
+                    expense.MonthId = cursor.getInt(1);
+                    expense.Salary = cursor.getInt(2);
+                    expense.SalaryAllowance = cursor.getInt(3);
+                    expense.OtherAllowance = cursor.getInt(4);
+                    expense.EmpInsurrance = cursor.getInt(5);
+                    expense.CompanyInsurrance = cursor.getInt(6);
+                    expense.Total = cursor.getInt(7);
+                    expense.TotalCaseAllowance = cursor.getInt(8);
+                    expense.Remarks = cursor.getString(9);
+                    GlobalFunctions.m("2 Position Year : " + cursor.getString(0));
+                    data.add(expense);
+
+                }
+                else if (cursor.getPosition()>0){
+                    if (cursor.getString(0).trim().equals(data.get(data.size()-1).YearName.trim())){
+                        expense = new OfficeExpenseDetailModel();
+                        expense.YearName = cursor.getString(0);
+                        expense.MonthId = cursor.getInt(1);
+                        expense.Salary = cursor.getInt(2);
+                        expense.SalaryAllowance = cursor.getInt(3);
+                        expense.OtherAllowance = cursor.getInt(4);
+                        expense.EmpInsurrance = cursor.getInt(5);
+                        expense.CompanyInsurrance = cursor.getInt(6);
+                        expense.Total = cursor.getInt(7);
+                        expense.TotalCaseAllowance = cursor.getInt(8);
+                        expense.Remarks = cursor.getString(9);
+
+                        data.add(expense);
+                    }
+                    else{
+                        expense = new OfficeExpenseDetailModel();
+                        expense.YearName = cursor.getString(0);
+                        expense.MonthId = cursor.getInt(1);
+                        data.add(expense);
+
+
+                        // Add all values as a second record in array list.
+                        expense = new OfficeExpenseDetailModel();
+                        expense.YearName = cursor.getString(0);
+                        expense.MonthId = cursor.getInt(1);
+                        expense.Salary = cursor.getInt(2);
+                        expense.SalaryAllowance = cursor.getInt(3);
+                        expense.OtherAllowance = cursor.getInt(4);
+                        expense.EmpInsurrance = cursor.getInt(5);
+                        expense.CompanyInsurrance = cursor.getInt(6);
+                        expense.Total = cursor.getInt(7);
+                        expense.TotalCaseAllowance = cursor.getInt(8);
+                        expense.Remarks = cursor.getString(9);
+                        data.add(expense);
+
+                    }
+                }
+            }while (cursor.moveToNext());
+        }
+        return data;
+    }
+
 }

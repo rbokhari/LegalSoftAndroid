@@ -1,59 +1,30 @@
 package app.legalsoft.ve.employee;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.os.Environment;
 import android.provider.ContactsContract;
 import android.provider.MediaStore;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Base64;
-import android.util.Log;
 import android.view.ContextThemeWrapper;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
-
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.JsonRequest;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.util.ArrayList;
-import java.util.List;
 
-import app.legalsoft.ve.PhotoDialog;
 import app.legalsoft.ve.R;
 import app.legalsoft.ve.model.EmployeeModel;
-import app.legalsoft.ve.network.VolleySingleton;
 import app.legalsoft.ve.tabs.EmployeeDetailTabPagerAdapter;
 import app.legalsoft.ve.tabs.SlidingTabLayout;
 import app.legalsoft.ve.util.CONSTANTS;
@@ -95,6 +66,13 @@ public class EmployeeDetail extends ActionBarActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Employee Detail");
+
+        if (getResources().getConfiguration().orientation == CONSTANTS.DEVICE_ORIENTATION_LANDSCAPE)
+        {
+            imgPicture.setVisibility(View.GONE);
+        }
+
 
         mPager = (ViewPager) findViewById(R.id.tabPager);
         mTabs = (SlidingTabLayout) findViewById(R.id.employeeTabs);
@@ -155,6 +133,18 @@ public class EmployeeDetail extends ActionBarActivity {
                 callIntent.setData(Uri.parse("tel:" + employeeModel.getGSM()));
                 startActivity(callIntent);
             }
+
+            /*Intent intent = new Intent(
+                    ContactsContract.Intents.SHOW_OR_CREATE_CONTACT,
+                    Uri.parse("tel:" + employeeModel.getGSM()));
+
+                       intent.putExtra(ContactsContract.Intents.EXTRA_FORCE_CREATE, true);
+            startActivity(intent);
+
+            Intent intent = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
+            startActivityForResult(intent, 1022);
+*/
+
             return true;
         }
         else if (id==R.id.action_SMS){
@@ -313,7 +303,7 @@ public class EmployeeDetail extends ActionBarActivity {
     }
 
     public static void getData(){
-        employeeModel = MyApplication.getWriteableDatabase().readEmployeeById(empId + "");
+        employeeModel = MyApplication.getWriteableDatabase().getEmployeeById(empId + "");
         if (employeeModel.getEmpPicture()!=null) {
             //GlobalFunctions.showMessage(MyApplication.getAppContext(), employeeModel.getEmpPicture().toString());
             //employeeModel.EmpPicture = jsonObject.getString("empPic");

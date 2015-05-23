@@ -11,6 +11,7 @@
         <item>Forms</item>
         <item>Reports</item>
         <item>Validation</item>
+        <item>Contact Us</item>
         <item>Log Out</item>
     </string-array>
     <integer-array name="home_icon">
@@ -70,4 +71,5 @@
     <string name="volley_parse_error">Oops ! parse error occured !</string>
     <string name="pick_option">Pick an Opttion</string>
     <string name="title_activity_employee_salary">Employee Salary</string>
+    <string name="title_activity_contact_us">Contact Us</string>
 </resources>

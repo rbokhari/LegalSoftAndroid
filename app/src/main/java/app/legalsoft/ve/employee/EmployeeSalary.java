@@ -3,11 +3,20 @@ package app.legalsoft.ve.employee;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
+
+import java.util.ArrayList;
 
 import app.legalsoft.ve.R;
+import app.legalsoft.ve.model.OfficeExpenseDetailModel;
+import app.legalsoft.ve.model.OfficeExpenseModel;
+import app.legalsoft.ve.recycler.rvEmployeeSalaryAdapter;
+import app.legalsoft.ve.util.DividerItemDecoration;
 import app.legalsoft.ve.util.GlobalFunctions;
 import app.legalsoft.ve.util.MyApplication;
 
@@ -15,20 +24,39 @@ import app.legalsoft.ve.util.MyApplication;
 public class EmployeeSalary extends ActionBarActivity {
 
     private Toolbar toolbar;
+    TextView tHeading ;
     private int EmpId;
 
-    @Override
+    RecyclerView rvExpense;
+
+    private static rvEmployeeSalaryAdapter adapter;
+    private static ArrayList<OfficeExpenseDetailModel> expenseDetailList;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_employee_salary);
 
+        rvExpense = (RecyclerView) findViewById(R.id.RVSalary);
+        tHeading = (TextView) findViewById(R.id.tHeading);
+
         Intent intent = getIntent();
         EmpId = intent.getIntExtra("empId", 0);
-        GlobalFunctions.showMessage("intent : " + EmpId);
         toolbar = (Toolbar) findViewById(R.id.app_bar);
 
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Salary Transaction");
+        adapter = new rvEmployeeSalaryAdapter(MyApplication.getAppContext());
+        tHeading.setText(intent.getStringExtra("empName"));
 
+        getData();
+
+        rvExpense.setHasFixedSize(true);
+        rvExpense.setLayoutManager(new LinearLayoutManager(MyApplication.getAppContext()));
+        rvExpense.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.HORIZONTAL_LIST));
+
+        adapter.setEmployeeSalaryList(expenseDetailList);
+
+        rvExpense.setAdapter(adapter);
     }
 
     @Override
@@ -57,5 +85,10 @@ public class EmployeeSalary extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    private void getData(){
+        expenseDetailList = MyApplication.getWriteableDatabase().getOfficeExpenseByEmployeeId(EmpId);
+
+        GlobalFunctions.m("Total Year found : " + expenseDetailList.size());
+    }
 
 }

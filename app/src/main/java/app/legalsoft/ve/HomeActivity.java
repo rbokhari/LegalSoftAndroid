@@ -62,7 +62,8 @@ public class HomeActivity extends ActionBarActivity {
         mTitle =res.getStringArray(R.array.home_menu);
         mIcon = new int[]{R.drawable.ic_action_edit, R.drawable.ic_action_add_group,
                 R.drawable.ic_action_collection, R.drawable.ic_action_dock,
-                R.drawable.ic_action_important, R.drawable.ic_action_read, R.drawable.ic_action_read};
+                R.drawable.ic_action_important, R.drawable.ic_action_read,
+                R.drawable.ic_pin_drop_grey600_18dp, R.drawable.ic_action_read};
 
         adapter = new rvAdapter(getApplicationContext(),getData());
 

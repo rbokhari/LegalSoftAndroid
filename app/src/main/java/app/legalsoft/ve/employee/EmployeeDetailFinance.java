@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import app.legalsoft.ve.R;
 import app.legalsoft.ve.model.EmployeeModel;
+import app.legalsoft.ve.util.CONSTANTS;
 import app.legalsoft.ve.util.GlobalFunctions;
 
 /**
@@ -51,8 +52,8 @@ public class EmployeeDetailFinance extends Fragment {
         tBank.setText(employeeModel.getBankName());
         tBranch.setText(employeeModel.getBranchName());
         tAccountNo.setText(employeeModel.getAccountNo());
-        tSalary.setText(employeeModel.getEmpSalary() + "");
-        tAllowance.setText(employeeModel.getEmpAllowance() + "");
+        tSalary.setText(CONSTANTS.FORMAT_CURRENCY.format(employeeModel.getEmpSalary()) + " RO");
+        tAllowance.setText(CONSTANTS.FORMAT_CURRENCY.format(employeeModel.getEmpAllowance()) + " RO");
 
 
         btnSalary.setOnClickListener(new View.OnClickListener() {
@@ -61,6 +62,7 @@ public class EmployeeDetailFinance extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), EmployeeSalary.class);
                 intent.putExtra("empId", employeeModel.getEmpID());
+                intent.putExtra("empName", employeeModel.getEmpName());
                 startActivity(intent);
             }
         });
