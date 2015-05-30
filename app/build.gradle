@@ -27,5 +27,6 @@ dependencies {
     compile 'org.lucasr.dspec:dspec:0.1.1'
     compile 'com.mcxiaoke.volley:library:1.0.+'
     compile 'me.tatarka.support:jobscheduler:0.1.1'
+    compile 'com.google.android.gms:play-services:7.5.0'
 
 }

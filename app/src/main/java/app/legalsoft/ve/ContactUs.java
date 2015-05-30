@@ -1,38 +1,46 @@
 package app.legalsoft.ve;
 
-import android.support.v7.app.ActionBarActivity;
+
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 
-public class ContactUs extends ActionBarActivity {
+/**
+ * A simple {@link Fragment} subclass.
+ */
+public class ContactUs extends Fragment {
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_contact_us);
+
+    public ContactUs() {
+        // Required empty public constructor
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_contact_us, menu);
-        return true;
-    }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        View v = inflater.inflate(R.layout.fragment_contact_us, container, false);
+        GoogleMap map=((MapFragment)getActivity().getFragmentManager().findFragmentById(R.id.map)).getMap();
+
+        if(map!=null){
+            map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+            map.addMarker(new MarkerOptions()
+                    .position(new LatLng(23.597966, 58.215920)) // latitude and longitude info is given here
+                    .title("Titklene")); // title for the marker
         }
 
-        return super.onOptionsItemSelected(item);
+        return v;
     }
+
+
 }

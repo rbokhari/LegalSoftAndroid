@@ -87,6 +87,11 @@ public class HomeActivity extends ActionBarActivity {
                         //intent.putExtra("default_fragment", position);
                         startActivity(intent);
                         break;
+
+                    case 6:
+                        //Intent intentContactus = new Intent(getApplicationContext(), ContactUs.class);
+                        //startActivity(intentContactus);
+                        break;
                 }
             }
 
