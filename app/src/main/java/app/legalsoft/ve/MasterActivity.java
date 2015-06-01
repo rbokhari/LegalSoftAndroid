@@ -3,6 +3,7 @@ package app.legalsoft.ve;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
+import android.provider.Settings;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.NavUtils;
@@ -94,6 +95,7 @@ public class MasterActivity extends ActionBarActivity {
 
                     view.setBackgroundColor(Color.LTGRAY);
                     //view.isSelected();
+                    GlobalFunctions.showMessage("MasterActivity :" + position);
                     selectItem(position);
                 }
 
@@ -151,8 +153,11 @@ public class MasterActivity extends ActionBarActivity {
                 break;
 */
 
-            case 7:
-
+            case 6:
+                newFragment = new ContactUs();
+                transaction.replace(R.id.fragment_main_content, newFragment);
+                transaction.addToBackStack(null);
+                transaction.commit();
 
                 break;
         }
