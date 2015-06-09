@@ -32,6 +32,7 @@ import app.legalsoft.ve.model.ClientModel;
 import app.legalsoft.ve.network.VolleySingleton;
 import app.legalsoft.ve.recycler.RecyclerTouchListener;
 import app.legalsoft.ve.recycler.rvClientAdapter;
+import app.legalsoft.ve.util.CONSTANTS;
 import app.legalsoft.ve.util.DividerItemDecoration;
 import app.legalsoft.ve.util.MyApplication;
 
@@ -43,7 +44,7 @@ public class ClientFragment extends Fragment {
 
     static RecyclerView clientRecyclerView;
     //private static final String urlData = "http://192.168.1.37:84/api/client";//   "http://192.168.159.1:90/api/supplier";
-    private static final String urlData = "http://192.168.159.1:84/api/client";
+    //private static final String urlData = "http://192.168.159.1:84/api/client";
     private static rvClientAdapter adapterClient;
     private SwipeRefreshLayout swipeRefreshLayout;
     static TextView mLoading;
@@ -116,7 +117,7 @@ public class ClientFragment extends Fragment {
         RequestQueue requestQueue = VolleySingleton.getsInstance().getRequestQuery();
 
         if (requestQueue!=null) {
-            JsonArrayRequest request = new JsonArrayRequest(urlData, new Response.Listener<JSONArray>() {
+            JsonArrayRequest request = new JsonArrayRequest(CONSTANTS.CLIENTS_API_URL, new Response.Listener<JSONArray>() {
                 @Override
                 public void onResponse(JSONArray response) {
                     //Iterator<JSONObject> jsonObjectIterator = response.iterator();

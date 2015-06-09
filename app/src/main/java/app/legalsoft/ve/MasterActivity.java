@@ -5,6 +5,7 @@ import android.content.res.Resources;
 import android.graphics.Color;
 import android.provider.Settings;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.NavUtils;
 import android.support.v4.widget.DrawerLayout;
@@ -86,6 +87,8 @@ public class MasterActivity extends ActionBarActivity {
 
             recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST));
 
+
+
             recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(), recyclerView, new RecyclerTouchListener.ClickListener() {
 
                 @Override
@@ -95,7 +98,6 @@ public class MasterActivity extends ActionBarActivity {
 
                     view.setBackgroundColor(Color.LTGRAY);
                     //view.isSelected();
-                    GlobalFunctions.showMessage("MasterActivity :" + position);
                     selectItem(position);
                 }
 
@@ -125,6 +127,14 @@ public class MasterActivity extends ActionBarActivity {
             }
         }
 
+        //getSupportFragmentManager().popBackStack(null, getSupportFragmentManager().POP_BACK_STACK_INCLUSIVE);
+/*
+        FragmentManager fm = getSupportFragmentManager();
+        int count = fm.getBackStackEntryCount();
+        for(int i = 0; i < count; ++i) {
+            fm.popBackStackImmediate();
+        }
+*/
 
         switch (position) {
             case 0:
@@ -132,9 +142,9 @@ public class MasterActivity extends ActionBarActivity {
                 break;
             case 1:
                 newFragment = new EmployeeFragment();
-                transaction.replace(R.id.fragment_main_content, newFragment);
-                transaction.addToBackStack(null);
-                transaction.commit();
+                transaction.replace(R.id.fragment_main_content, newFragment)
+                    //.addToBackStack(null)
+                        .commit();
 
                 break;
 /*
@@ -155,9 +165,9 @@ public class MasterActivity extends ActionBarActivity {
 
             case 6:
                 newFragment = new ContactUs();
-                transaction.replace(R.id.fragment_main_content, newFragment);
-                transaction.addToBackStack(null);
-                transaction.commit();
+                transaction.replace(R.id.fragment_main_content, newFragment)
+                    //.addToBackStack(null)
+                    .commit();
 
                 break;
         }
@@ -165,10 +175,6 @@ public class MasterActivity extends ActionBarActivity {
         v = recyclerView.getChildAt(position);
         if (v != null) {
             v.setBackgroundColor(Color.LTGRAY);
-            //TextView txtview = (TextView) v.findViewById(R.id.mText);
-            //Typeface font = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Light.ttf");
-            //txtview.setTypeface(font);
-            //txtview.setTextColor(Color.BLUE);
         }
 
         //DrawerList.setItemChecked(position, true);

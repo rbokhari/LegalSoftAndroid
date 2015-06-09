@@ -72,4 +72,5 @@
     <string name="pick_option">Pick an Opttion</string>
     <string name="title_activity_employee_salary">Employee Salary</string>
     <string name="title_activity_contact_us">Contact Us</string>
+    <string name="action_openmap">Open Maps</string>
 </resources>

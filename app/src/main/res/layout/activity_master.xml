@@ -15,7 +15,16 @@
         <include android:id="@+id/app_bar"
             layout="@layout/app_toolbar" />
 
-        <fragment
+        <FrameLayout
+            android:layout_below="@+id/app_bar"
+            android:id="@+id/fragment_main_content"
+
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+        </FrameLayout>
+
+        <!--fragment
             android:layout_below="@+id/app_bar"
             android:id="@+id/fragment_main_content"
             android:layout_width="match_parent"
@@ -23,7 +32,7 @@
             android:layout="@layout/fragment_employee"
             android:name="app.legalsoft.ve.employee.EmployeeFragment"
             tools:layout="@layout/fragment_employee"
-             />
+             /-->
     </RelativeLayout>
 
 
