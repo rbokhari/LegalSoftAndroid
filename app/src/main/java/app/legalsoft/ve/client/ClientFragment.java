@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -25,7 +26,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import app.legalsoft.ve.R;
 import app.legalsoft.ve.model.ClientModel;
@@ -142,12 +145,21 @@ public class ClientFragment extends Fragment {
                     mLoading.setVisibility(View.GONE);
                     clientRecyclerView.setVisibility(View.VISIBLE);
                 }
+
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     //Toast.makeText(getApplicationContext(), "error ; " + error, Toast.LENGTH_SHORT).show();
                 }
-            });
+            }) {
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    HashMap<String, String> headers = new HashMap<String, String>();
+                    headers.put("CUSTOM_HEADER", "Yahoo");
+                    headers.put("ANOTHER_CUSTOM_HEADER", "Google");
+                    return headers;
+                }
+            };
             requestQueue.add(request);
         }
         /*for (int i=0; i<titles.length && i<titles.length; i++){

@@ -5,7 +5,6 @@ import java.util.ArrayList;
 
 import app.legalsoft.ve.callbacks.EmployeesLoadedListener;
 import app.legalsoft.ve.model.EmployeeModel;
-import app.legalsoft.ve.services.EmployeeService;
 import app.legalsoft.ve.util.AppDataLoader;
 
 /**
