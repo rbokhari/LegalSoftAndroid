@@ -3,6 +3,7 @@ package app.legalsoft.ve.employee;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -21,7 +22,7 @@ import app.legalsoft.ve.util.GlobalFunctions;
 import app.legalsoft.ve.util.MyApplication;
 
 
-public class EmployeeSalary extends ActionBarActivity {
+public class EmployeeSalary extends AppCompatActivity {   //ActionBarActivity
 
     private Toolbar toolbar;
     TextView tHeading ;

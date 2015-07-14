@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
@@ -31,7 +32,7 @@ import me.tatarka.support.job.JobInfo;
 import me.tatarka.support.job.JobScheduler;
 
 
-public class HomeActivity extends ActionBarActivity {
+public class HomeActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
     private static rvAdapter adapter;
@@ -60,10 +61,14 @@ public class HomeActivity extends ActionBarActivity {
         Resources res = getResources();
 
         mTitle =res.getStringArray(R.array.home_menu);
-        mIcon = new int[]{R.drawable.ic_action_edit, R.drawable.ic_action_add_group,
-                R.drawable.ic_action_collection, R.drawable.ic_action_dock,
-                R.drawable.ic_action_important, R.drawable.ic_action_read,
-                R.drawable.ic_pin_drop_grey600_18dp, R.drawable.ic_action_read};
+        mIcon = new int[]{R.drawable.ic_action_edit,
+                R.drawable.ic_action_add_group,
+                R.drawable.ic_action_collection,
+                R.drawable.ic_action_dock,
+                R.drawable.ic_action_important,
+                R.drawable.ic_action_read,
+                R.drawable.ic_pin_drop_grey600_18dp,
+                R.drawable.ic_action_read};
 
         adapter = new rvAdapter(getApplicationContext(),getData());
 

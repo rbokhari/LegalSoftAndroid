@@ -13,6 +13,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.ContextThemeWrapper;
 import android.view.Menu;
@@ -32,7 +33,7 @@ import app.legalsoft.ve.util.GlobalFunctions;
 import app.legalsoft.ve.util.MyApplication;
 
 
-public class EmployeeDetail extends ActionBarActivity {
+public class EmployeeDetail extends AppCompatActivity {
 
     private static final int PIC_CROP = 104;
     private Toolbar toolbar;

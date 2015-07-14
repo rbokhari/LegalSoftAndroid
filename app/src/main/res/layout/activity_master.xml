@@ -24,6 +24,7 @@
 
         </FrameLayout>
 
+
         <!--fragment
             android:layout_below="@+id/app_bar"
             android:id="@+id/fragment_main_content"
@@ -36,12 +37,22 @@
     </RelativeLayout>
 
 
-    <fragment
+    <android.support.design.widget.NavigationView
+        android:id="@+id/navigation_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:headerLayout="@layout/navigation_header"
+        app:menu="@menu/drawer">
+
+    </android.support.design.widget.NavigationView>
+
+    <!--fragment
         android:id="@+id/fragment_navigation_drawer"
         android:layout_width="@dimen/nav_drawer_width"
         android:layout_height="match_parent"
         android:layout_gravity="start"
         app:layout="@layout/fragment_navigation_drawer"
         android:name="app.legalsoft.ve.NavigationDrawerFragment"
-        tools:layout="@layout/fragment_navigation_drawer" />
+        tools:layout="@layout/fragment_navigation_drawer" /-->
 </android.support.v4.widget.DrawerLayout>

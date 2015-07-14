@@ -31,12 +31,13 @@ public interface CONSTANTS {
     int OFFICEEXPENSE_JOB_ID = 102;
     int OFFICEEXPENSE_JOB_SERVICE_PERIODIC_INTERVAL = 99000;
 
-    String API_URL = "http://192.168.1.35:84";
+    String API_URL = "http://192.168.1.38:84/";
     String AuthToken_URL =  "http://amc.azurewebsites.net/token";
     String EMPLOYEES_API_URL = API_URL + "/api/employee";
     String CLIENTS_API_URL = API_URL + "/api/client";
     String OFFICEEXPENSE_API_URL = API_URL + "/api/officeexpense";
     //private static final String urlData = "http://192.168.1.37:84/api/employee";//
+    String SPECIALIST_API_URL = API_URL + "/api/specialist/getActive";
 
 
     DecimalFormat FORMAT_CURRENCY = new DecimalFormat("0.000");

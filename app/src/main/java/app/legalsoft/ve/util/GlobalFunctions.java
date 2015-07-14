@@ -17,6 +17,8 @@ import app.legalsoft.ve.R;
  */
 public  class GlobalFunctions {
 
+    public static int mNavposition = 0;
+
     public static void showMessage(String message){
         //Toast.makeText(context, message, Toast.LENGTH_LONG).show();
         Toast.makeText(MyApplication.getAppContext(), message, Toast.LENGTH_LONG).show();

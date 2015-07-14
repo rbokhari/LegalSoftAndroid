@@ -6,6 +6,6 @@
     android:background="@color/primaryColor"
     android:fitsSystemWindows="true"
     app:popupTheme="@style/ThemeOverlay.AppCompat.Dark"
-    app:theme="@style/MyCustomToolBarTheme">
+    android:theme="@style/MyCustomToolBarTheme">
 
 </android.support.v7.widget.Toolbar>

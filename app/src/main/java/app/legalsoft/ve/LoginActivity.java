@@ -45,7 +45,16 @@ public class LoginActivity extends Activity {
 
         btnLogin = (Button) findViewById(R.id.btnLogin);
 
+        btnLogin.setOnClickListener(new View.OnClickListener(){
 
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),MasterActivity.class);
+                startActivity(intent);
+            }
+        });
+
+/*
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -54,7 +63,7 @@ public class LoginActivity extends Activity {
                 GlobalFunctions.showMessage("Click ");
 
                 String url = "http://amc.azurewebsites.net/token";
-                String url1 = "http://192.168.1.36:91/token";
+                //String url1 = "http://192.168.1.36:91/token";
 
                 StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
                     @Override
@@ -129,6 +138,8 @@ public class LoginActivity extends Activity {
         };
 
         requestQueue.add(request);
+
+    */
 
     }
 }

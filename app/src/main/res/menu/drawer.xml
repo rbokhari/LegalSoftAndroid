@@ -1,8 +1,224 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools" tools:context="app.legalsoft.ve.DrawerActivity">
-    <item android:id="@+id/action_example" android:title="@string/action_example"
-        app:showAsAction="withText|ifRoom" />
-    <item android:id="@+id/action_settings" android:title="@string/action_settings"
-        android:orderInCategory="100" app:showAsAction="never" />
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="app.legalsoft.ve.DrawerActivity">
+
+    <item
+        android:id="@+id/mnuDashboard"
+        android:icon="@drawable/ic_action_dock"
+        android:title="Dashboard">
+
+    </item>
+
+    <item
+        android:id="@+id/mnuDefinition"
+        android:title="@string/mnuDefinition">
+        <menu>
+            <item
+                android:id="@+id/mnuSpecialist"
+                android:icon="@drawable/ic_action_next_item"
+                android:title="@string/mnuSpecialist"
+                app:showAsAction="withText|ifRoom" />
+            <item
+                android:id="@+id/mnuMainCourt"
+                android:icon="@drawable/ic_action_next_item"
+                android:orderInCategory="100"
+                android:title="@string/mnuMainCourt"
+                app:showAsAction="never" />
+            <item
+                android:id="@+id/mnuSubCourt"
+                android:icon="@drawable/ic_action_next_item"
+                android:orderInCategory="100"
+                android:title="@string/mnuSubCourt"
+                app:showAsAction="never" />
+            <item
+                android:id="@+id/mnuDefender"
+                android:icon="@drawable/ic_action_next_item"
+                android:orderInCategory="100"
+                android:title="@string/mnuDefender"
+                app:showAsAction="never" />
+        </menu>
+
+    </item>
+
+    <item
+        android:id="@+id/mnuRegistration"
+        android:title="Registration">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/mnuEmployee"
+                    android:icon="@drawable/ic_action_next_item"
+                    android:orderInCategory="100"
+                    android:title="@string/mnuEmployee"
+                    app:showAsAction="never" />
+                <item
+                    android:id="@+id/mnuClient"
+                    android:icon="@drawable/ic_action_next_item"
+                    android:orderInCategory="100"
+                    android:title="@string/mnuClient"
+                    app:showAsAction="never" />
+            </group>
+        </menu>
+
+    </item>
+
+    <item
+        android:id="@+id/mnuCase"
+        android:title="Case">
+        <menu>
+            <item
+                android:id="@+id/mnuCaseAll"
+                android:icon="@drawable/ic_action_next_item"
+                android:orderInCategory="100"
+                android:title="@string/mnuCaseAll"
+                app:showAsAction="never" />
+            <item
+                android:id="@+id/mnuCaseFollowup"
+                android:icon="@drawable/ic_action_next_item"
+                android:orderInCategory="100"
+                android:title="@string/mnuCaseFollowup"
+                app:showAsAction="never" />
+            <item
+                android:id="@+id/mnuCaseFollowup2"
+                android:icon="@drawable/ic_action_next_item"
+                android:orderInCategory="100"
+                android:title="@string/mnuCaseFollowup2"
+                app:showAsAction="never" />
+            <item
+                android:id="@+id/mnuCaseAdministration"
+                android:icon="@drawable/ic_action_next_item"
+                android:orderInCategory="100"
+                android:title="@string/mnuCaseAdministration"
+                app:showAsAction="never" />
+        </menu>
+    </item>
+
+    <item
+        android:id="@+id/mnuReport"
+        android:title="Reports">
+        <menu>
+            <item
+                android:id="@+id/mnuSearch"
+                android:icon="@drawable/ic_action_next_item"
+                android:orderInCategory="100"
+                android:title="@string/mnuSearch"
+                app:showAsAction="never" />
+            <item
+                android:id="@+id/mnuCloseCase"
+                android:icon="@drawable/ic_action_next_item"
+                android:orderInCategory="100"
+                android:title="@string/mnuCloseCase"
+                app:showAsAction="never" />
+            <item
+                android:id="@+id/mnuNextHearing"
+                android:icon="@drawable/ic_action_next_item"
+                android:orderInCategory="100"
+                android:title="@string/mnuNextHearing"
+                app:showAsAction="never" />
+            <item
+                android:id="@+id/mnuJudgementDate"
+                android:icon="@drawable/ic_action_next_item"
+                android:orderInCategory="100"
+                android:title="@string/mnuJudgementDate"
+                app:showAsAction="never" />
+            <item
+                android:id="@+id/mnuGeneralReport"
+                android:icon="@drawable/ic_action_next_item"
+                android:orderInCategory="100"
+                android:title="@string/mnuGeneralReport"
+                app:showAsAction="never" />
+        </menu>
+    </item>
+
+    <item
+        android:id="@+id/mnuForm"
+        android:title="Forms">
+        <menu>
+            <item
+                android:id="@+id/mnuDailyTimeSheet"
+                android:icon="@drawable/ic_action_next_item"
+                android:orderInCategory="100"
+                android:title="@string/mnuDailyTimeSheet"
+                app:showAsAction="never" />
+            <item
+                android:id="@+id/mnuEmployeeAllowance"
+                android:icon="@drawable/ic_action_next_item"
+                android:orderInCategory="100"
+                android:title="@string/mnuEmployeeAllowance"
+                app:showAsAction="never" />
+            <item
+                android:id="@+id/mnuEmployeeLeave"
+                android:icon="@drawable/ic_action_next_item"
+                android:orderInCategory="100"
+                android:title="@string/mnuEmployeeLeave"
+                app:showAsAction="never" />
+            <item
+                android:id="@+id/mnuEmployeeLoan"
+                android:icon="@drawable/ic_action_next_item"
+                android:orderInCategory="100"
+                android:title="@string/mnuEmployeeLoan"
+                app:showAsAction="never" />
+            <item
+                android:id="@+id/mnuInbox"
+                android:icon="@drawable/ic_action_next_item"
+                android:orderInCategory="100"
+                android:title="@string/mnuInbox"
+                app:showAsAction="never" />
+        </menu>
+    </item>
+
+    <item
+        android:id="@+id/mnuFinance"
+        android:icon="@drawable/ic_action_next_item"
+        android:title="Finance">
+        <menu>
+            <item
+                android:id="@+id/mnuOfficeIncome"
+                android:icon="@drawable/ic_action_next_item"
+                android:orderInCategory="100"
+                android:title="@string/mnuOfficeIncome"
+                app:showAsAction="never" />
+            <item
+                android:id="@+id/mnuOfficeExpense"
+                android:icon="@drawable/ic_action_next_item"
+                android:orderInCategory="100"
+                android:title="@string/mnuOfficeExpense"
+                app:showAsAction="never" />
+            <item
+                android:id="@+id/mnuMonthlyExpense"
+                android:icon="@drawable/ic_action_next_item"
+                android:orderInCategory="100"
+                android:title="@string/mnuMonthlyExpense"
+                app:showAsAction="never" />
+        </menu>
+    </item>
+
+    <group
+        android:id="@+id/mnuExit"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/mnuOptions"
+            android:icon="@drawable/ic_action_next_item"
+            android:orderInCategory="100"
+            android:title="@string/mnuOptions"
+            app:showAsAction="never" />
+        <item
+            android:id="@+id/mnuContactUs"
+            android:icon="@drawable/ic_action_next_item"
+            android:orderInCategory="100"
+            android:title="@string/mnuContactUs"
+            app:showAsAction="never" />
+        <item
+            android:id="@+id/mnuSignOut"
+            android:icon="@drawable/ic_action_next_item"
+            android:orderInCategory="100"
+            android:title="@string/mnuSignOut"
+            app:showAsAction="never" />
+    </group>
+
 </menu>
+
+
+
+
