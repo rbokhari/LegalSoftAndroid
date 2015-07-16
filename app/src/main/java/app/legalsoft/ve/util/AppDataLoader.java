@@ -7,6 +7,7 @@ import app.legalsoft.ve.json.Requestor;
 import app.legalsoft.ve.model.EmployeeModel;
 import app.legalsoft.ve.model.OfficeExpenseDetailModel;
 import app.legalsoft.ve.model.OfficeExpenseModel;
+import app.legalsoft.ve.model.SubCourtModel;
 
 /**
  * Created by Syed.Rahman on 02/05/2015.
@@ -27,12 +28,18 @@ public class AppDataLoader {
         ArrayList<OfficeExpenseModel> listOfficeExpense = Parser.parseOfficeExpenseResponseArray(response);
         ArrayList<OfficeExpenseDetailModel> listOfficeExpenseDetail = Parser.officeExpenseDetailModelArrayList;
 
-        GlobalFunctions.m("OffixeExpense :" + listOfficeExpense.size());
-        GlobalFunctions.m("OffixeExpense Detail :" + listOfficeExpenseDetail.size());
-
         MyApplication.getWriteableDatabase().InsertOfficeExpense(listOfficeExpense, listOfficeExpenseDetail, true);
 
         return  listOfficeExpense;
+    }
+
+    public static JSONArray getSubCourt(){
+        GlobalFunctions.m(".......... AddDataLoader start........");
+        JSONArray response = Requestor.requestData(CONSTANTS.SUBCOURT_API_URL);
+        GlobalFunctions.m(".......... AddDataLoader ........");
+        //ArrayList<SubCourtModel> list = Parser.parseSubCourtResponseArray(response);
+        GlobalFunctions.m(".......... AddDataLoader AFter........");
+        return response;
     }
 
 }

@@ -34,6 +34,7 @@ public class rvSpecialistAdapter extends RecyclerView.Adapter<rvSpecialistHolder
         this.layoutInflater = LayoutInflater.from(context);
     }
 
+
     @Override
     public rvSpecialistHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = layoutInflater.inflate(R.layout.specialist_rv_row, parent, false);

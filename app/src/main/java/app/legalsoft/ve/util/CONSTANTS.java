@@ -38,6 +38,8 @@ public interface CONSTANTS {
     String OFFICEEXPENSE_API_URL = API_URL + "/api/officeexpense";
     //private static final String urlData = "http://192.168.1.37:84/api/employee";//
     String SPECIALIST_API_URL = API_URL + "/api/specialist/getActive";
+    String MAINCOURT_API_URL = API_URL + "/api/maincourt/getActive";
+    String SUBCOURT_API_URL = API_URL + "/api/subcourt/getactive";
 
 
     DecimalFormat FORMAT_CURRENCY = new DecimalFormat("0.000");

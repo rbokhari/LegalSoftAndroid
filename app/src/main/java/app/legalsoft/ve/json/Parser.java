@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import app.legalsoft.ve.model.EmployeeModel;
 import app.legalsoft.ve.model.OfficeExpenseDetailModel;
 import app.legalsoft.ve.model.OfficeExpenseModel;
+import app.legalsoft.ve.model.SubCourtModel;
 import app.legalsoft.ve.util.GlobalFunctions;
 
 /**
@@ -279,4 +280,49 @@ public class Parser {
         return detailModel;
 
     }
+
+
+    public static ArrayList<SubCourtModel> parseSubCourtResponseArray(JSONArray response)
+    {
+        ArrayList<SubCourtModel> models = new ArrayList<>();
+        if (response!=null && response.length()>0){
+            try {
+                JSONArray array = response; //.getJSONArray("employees");
+                for (int i=0; i<array.length(); i++){
+                    models.add(parseSubCourtResponse(array.getJSONObject(i)));
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        return models;
+    }
+
+    public static SubCourtModel parseSubCourtResponse(JSONObject response)
+    {
+        SubCourtModel model= new SubCourtModel();
+
+        try {
+            if (GlobalFunctions.getIsNotNull(response, "subCourtID")) {
+                model.SubCourtID = response.getInt("subCourtID");
+            }
+            if (GlobalFunctions.getIsNotNull(response, "subCourtCode")) {
+                model.SubCourtCode = response.getString("subCourtCode");
+            }
+            if (GlobalFunctions.getIsNotNull(response, "subCourtCode_EN")) {
+                model.SubCourtCode_EN = response.getString("subCourtCode_EN");
+            }
+            if (GlobalFunctions.getIsNotNull(response, "subCourtName")) {
+                model.SubCourtName = response.getString("subCourtName");
+            }
+            if (GlobalFunctions.getIsNotNull(response, "isActive")) {
+                model.IsActive = response.getInt("isActive");
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return model;
+    }
+
 }

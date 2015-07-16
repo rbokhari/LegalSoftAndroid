@@ -17,7 +17,9 @@ import android.view.View;
 
 import app.legalsoft.ve.client.ClientFragment;
 import app.legalsoft.ve.dashboard.DashboardFragment;
+import app.legalsoft.ve.definition.MainCourtFragment;
 import app.legalsoft.ve.definition.SpecialistFragment;
+import app.legalsoft.ve.definition.SubCourtFragment;
 import app.legalsoft.ve.employee.EmployeeFragment;
 import app.legalsoft.ve.util.GlobalFunctions;
 
@@ -127,9 +129,16 @@ public class MasterActivity extends AppCompatActivity {
 
                 break;
             case R.id.mnuMainCourt:
+                Fragment fragMain = new MainCourtFragment();
+                transaction.replace(R.id.fragment_main_content, fragMain)
+                        .commit();
 
                 break;
             case R.id.mnuSubCourt:
+                Fragment fragSubCourt = new SubCourtFragment();
+                transaction
+                        .replace(R.id.fragment_main_content, fragSubCourt)
+                        .commit();
                 break;
             case R.id.mnuDefender:
                 break;
