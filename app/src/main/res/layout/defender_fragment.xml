@@ -1,30 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <TextView android:id="@+id/tHeading" android:layout_width="match_parent"
         android:layout_height="wrap_content" android:layout_gravity="top"
         android:background="@color/primaryColor" android:gravity="center" android:padding="8dp"
-        android:text="Sub Court Listing" android:textColor="#FFF"
+        android:text="Defender Listing" android:textColor="#FFF"
         android:textSize="24dp" android:visibility="visible" />
 
     <TextView android:id="@+id/tLoading" android:layout_width="wrap_content"
         android:layout_height="wrap_content" android:layout_gravity="center"
-        android:gravity="center" android:text="Loading Sub Court......"
+        android:gravity="center" android:text="Loading Defender ......"
         android:visibility="visible" />
 
     <android.support.v4.widget.SwipeRefreshLayout android:id="@+id/swipeRefreshLayout"
         android:layout_width="match_parent" android:layout_height="match_parent"
         android:layout_marginTop="50dp">
 
-        <android.support.v7.widget.RecyclerView android:id="@+id/rvSubCourt"
+        <android.support.v7.widget.RecyclerView android:id="@+id/rvDefender"
             android:layout_width="match_parent" android:layout_height="match_parent"
             android:backgroundTint="@color/ripple_material_dark" android:visibility="gone">
 
         </android.support.v7.widget.RecyclerView>
 
     </android.support.v4.widget.SwipeRefreshLayout>
-
 
 </FrameLayout>

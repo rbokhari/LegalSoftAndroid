@@ -31,7 +31,7 @@ public interface CONSTANTS {
     int OFFICEEXPENSE_JOB_ID = 102;
     int OFFICEEXPENSE_JOB_SERVICE_PERIODIC_INTERVAL = 99000;
 
-    String API_URL = "http://192.168.1.38:84/";
+    String API_URL = "http://192.168.1.38:84";
     String AuthToken_URL =  "http://amc.azurewebsites.net/token";
     String EMPLOYEES_API_URL = API_URL + "/api/employee";
     String CLIENTS_API_URL = API_URL + "/api/client";
@@ -40,6 +40,7 @@ public interface CONSTANTS {
     String SPECIALIST_API_URL = API_URL + "/api/specialist/getActive";
     String MAINCOURT_API_URL = API_URL + "/api/maincourt/getActive";
     String SUBCOURT_API_URL = API_URL + "/api/subcourt/getactive";
+    String DEFENDER_API_URL = API_URL + "/api/defender/getactive";
 
 
     DecimalFormat FORMAT_CURRENCY = new DecimalFormat("0.000");

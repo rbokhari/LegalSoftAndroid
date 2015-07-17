@@ -33,12 +33,9 @@ public class AppDataLoader {
         return  listOfficeExpense;
     }
 
-    public static JSONArray getSubCourt(){
-        GlobalFunctions.m(".......... AddDataLoader start........");
-        JSONArray response = Requestor.requestData(CONSTANTS.SUBCOURT_API_URL);
-        GlobalFunctions.m(".......... AddDataLoader ........");
+    public static JSONArray getJSONArray(String url){
+        JSONArray response = Requestor.requestData(url);
         //ArrayList<SubCourtModel> list = Parser.parseSubCourtResponseArray(response);
-        GlobalFunctions.m(".......... AddDataLoader AFter........");
         return response;
     }
 

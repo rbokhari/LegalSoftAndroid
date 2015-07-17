@@ -62,14 +62,12 @@ public class SubCourtFragment extends Fragment implements JOSNLoadedListener {
         recyclerView = (RecyclerView) view.findViewById(R.id.rvSubCourt);
         swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipeRefreshLayout);
         mLoading = (TextView) view.findViewById(R.id.tLoading);
-        recyclerView.setVisibility(View.VISIBLE);
+        recyclerView.setVisibility(View.GONE);
         recyclerView.setLayoutManager(new LinearLayoutManager(MyApplication.getAppContext()));
 
         adapter = new SubCourtAdapter(getActivity());
         recyclerView.setAdapter(adapter);
         recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST));
-
-
 
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), recyclerView, new RecyclerTouchListener.ClickListener() {
 
@@ -81,7 +79,7 @@ public class SubCourtFragment extends Fragment implements JOSNLoadedListener {
 
             @Override
             public void onLongClick(View view, int position) {
-                Toast.makeText(getActivity(), "onLongClick " + position, Toast.LENGTH_SHORT).show();
+
             }
         }));
 
@@ -91,12 +89,11 @@ public class SubCourtFragment extends Fragment implements JOSNLoadedListener {
                 refreshItem();
             }
         });
-        GlobalFunctions.m("--------<<<<< before data");
 
         //getData();
-        GlobalFunctions.m("-------->>>>>> after data");
+        GlobalFunctions.m("-------->>>>>> call JSONAsyncTask");
 
-        new JSONAsyncTask(this).execute();
+        new JSONAsyncTask(this, CONSTANTS.SUBCOURT_API_URL).execute();
 
         return view;
     }
@@ -105,6 +102,7 @@ public class SubCourtFragment extends Fragment implements JOSNLoadedListener {
         mLoading.setVisibility(View.VISIBLE);
         recyclerView.setVisibility(View.GONE);
         //getData();
+        new JSONAsyncTask(this, CONSTANTS.SUBCOURT_API_URL).execute();
         swipeRefreshLayout.setRefreshing(false);
     }
 /*
@@ -117,9 +115,14 @@ public class SubCourtFragment extends Fragment implements JOSNLoadedListener {
     @Override
     public void onJSONLoaded(JSONArray jsonArray) {
         List<SubCourtModel>  data = Parser.parseSubCourtResponseArray(jsonArray);
-        GlobalFunctions.m("Returning Data ::::::::: " + data.size());
-        mLoading.setVisibility(View.GONE);
-        recyclerView.setVisibility(View.VISIBLE);
-        adapter.setSubCoutList(data);
+        GlobalFunctions.m("data found " + data.size());
+        if (data.size()==0){
+            mLoading.setText("No data is found !");
+        }
+        else {
+            mLoading.setVisibility(View.GONE);
+            recyclerView.setVisibility(View.VISIBLE);
+            adapter.setSubCoutList(data);
+        }
     }
 }

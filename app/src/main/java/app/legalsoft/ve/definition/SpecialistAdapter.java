@@ -2,27 +2,29 @@ package app.legalsoft.ve.definition;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import java.util.Collections;
 import java.util.List;
 
 import app.legalsoft.ve.R;
-import app.legalsoft.ve.model.ClientModel;
 import app.legalsoft.ve.model.SpecialistModel;
-import app.legalsoft.ve.recycler.rvClientHolder;
 
 /**
- * Created by Syed.Rahman on 15/07/2015.
+ * Created by Syed.Rahman on 17/07/2015.
  */
-public class rvSpecialistAdapter extends RecyclerView.Adapter<rvSpecialistHolder> {
+public class SpecialistAdapter extends RecyclerView.Adapter<SpecialistAdapter.SpecialistHolder> {
 
     private LayoutInflater layoutInflater;
 
     List<SpecialistModel> dataList = Collections.emptyList();
+
+    public SpecialistAdapter(Context context) {
+        this.layoutInflater = LayoutInflater.from(context);
+    }
 
     public void setSpecialistList(List<SpecialistModel> list)
     {
@@ -30,20 +32,15 @@ public class rvSpecialistAdapter extends RecyclerView.Adapter<rvSpecialistHolder
         notifyItemRangeChanged(0, list.size());
     }
 
-    public rvSpecialistAdapter(Context context) {
-        this.layoutInflater = LayoutInflater.from(context);
-    }
-
-
     @Override
-    public rvSpecialistHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public SpecialistHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = layoutInflater.inflate(R.layout.specialist_rv_row, parent, false);
-        rvSpecialistHolder holder = new rvSpecialistHolder(view);
+        SpecialistHolder holder = new SpecialistHolder(view);
         return holder;
     }
 
     @Override
-    public void onBindViewHolder(rvSpecialistHolder holder, int position) {
+    public void onBindViewHolder(SpecialistHolder holder, int position) {
         holder.tCode.setText(dataList.get(position).getSpecializeCode());
         holder.tCodeEn.setText(dataList.get(position).getSpecializeCode_EN());
         holder.tArea.setText(dataList.get(position).getSpecializeArea());
@@ -54,4 +51,24 @@ public class rvSpecialistAdapter extends RecyclerView.Adapter<rvSpecialistHolder
     public int getItemCount() {
         return dataList.size();
     }
+
+    public class SpecialistHolder extends RecyclerView.ViewHolder {
+
+        public TextView tCode;
+        public TextView tCodeEn;
+        public TextView tArea;
+        public TextView tActive;
+
+        public SpecialistHolder(View itemView) {
+            super(itemView);
+
+            tCode = (TextView) itemView.findViewById(R.id.tSpecialistCode);
+            tCodeEn = (TextView) itemView.findViewById(R.id.tSpecialistCodeEn);
+            tArea = (TextView) itemView.findViewById(R.id.tSpecialistArea);
+            tActive = (TextView) itemView.findViewById(R.id.tSpecialistActive);
+
+
+        }
+    }
+
 }

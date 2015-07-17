@@ -29,22 +29,27 @@ import java.util.List;
 import java.util.Map;
 
 import app.legalsoft.ve.R;
+import app.legalsoft.ve.callbacks.JOSNLoadedListener;
+import app.legalsoft.ve.json.Parser;
 import app.legalsoft.ve.model.MainCourtModel;
 import app.legalsoft.ve.model.SpecialistModel;
+import app.legalsoft.ve.model.SubCourtModel;
 import app.legalsoft.ve.network.VolleySingleton;
 import app.legalsoft.ve.recycler.RecyclerTouchListener;
+import app.legalsoft.ve.tasks.JSONAsyncTask;
 import app.legalsoft.ve.util.CONSTANTS;
 import app.legalsoft.ve.util.DividerItemDecoration;
+import app.legalsoft.ve.util.GlobalFunctions;
 import app.legalsoft.ve.util.MyApplication;
 
 /**
  * Created by Syed.Rahman on 15/07/2015.
  */
-public class MainCourtFragment extends Fragment {
+public class MainCourtFragment extends Fragment implements JOSNLoadedListener {
 
     static RecyclerView recyclerView;
     private SwipeRefreshLayout swipeRefreshLayout;
-    private static rvMainCourtAdapter adapter;
+    private static MainCourtAdapter adapter;
     static TextView mLoading;
 
     public MainCourtFragment(){}
@@ -60,11 +65,11 @@ public class MainCourtFragment extends Fragment {
         recyclerView.setVisibility(View.VISIBLE);
         recyclerView.setLayoutManager(new LinearLayoutManager(MyApplication.getAppContext()));
 
-        adapter = new rvMainCourtAdapter(getActivity());
+        adapter = new MainCourtAdapter(getActivity());
 
         recyclerView.setAdapter(adapter);
 
-        recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST ));
+        recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST));
 
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), recyclerView, new RecyclerTouchListener.ClickListener() {
 
@@ -77,7 +82,7 @@ public class MainCourtFragment extends Fragment {
 
             @Override
             public void onLongClick(View view, int position) {
-                Toast.makeText(getActivity(), "onLongClick " + position, Toast.LENGTH_SHORT).show();
+
             }
         }));
 
@@ -88,7 +93,9 @@ public class MainCourtFragment extends Fragment {
             }
         });
 
-        getData();
+        new JSONAsyncTask(this, CONSTANTS.MAINCOURT_API_URL).execute();
+
+        //getData();
         return view;
 
     }
@@ -96,10 +103,26 @@ public class MainCourtFragment extends Fragment {
     void refreshItem(){
         mLoading.setVisibility(View.VISIBLE);
         recyclerView.setVisibility(View.GONE);
-        getData();
+        new JSONAsyncTask(this, CONSTANTS.MAINCOURT_API_URL).execute();
+        //getData();
         swipeRefreshLayout.setRefreshing(false);
     }
 
+    @Override
+    public void onJSONLoaded(JSONArray jsonArray) {
+        List<MainCourtModel>  data = Parser.parseMainCourtResponseArray(jsonArray);
+        GlobalFunctions.m("data found " + data.size());
+        if (data.size()==0){
+            mLoading.setText("No data is found !");
+        }
+        else {
+            mLoading.setVisibility(View.GONE);
+            recyclerView.setVisibility(View.VISIBLE);
+            adapter.setMainCoutList(data);
+        }
+    }
+
+    /*
     public static List<MainCourtModel> getData(){
         final List<MainCourtModel>  data = new ArrayList<>();
         RequestQueue requestQueue = VolleySingleton.getsInstance().getRequestQuery();
@@ -149,14 +172,10 @@ public class MainCourtFragment extends Fragment {
             };
             requestQueue.add(request);
         }
-        /*for (int i=0; i<titles.length && i<titles.length; i++){
-            InformationModel current = new InformationModel();
-            current.ItemName = titles[i];
-            current.ItemId = icons[0];
-            data.add(current);
-        }*/
+
         return data;
     }
+*/
 
 
 }

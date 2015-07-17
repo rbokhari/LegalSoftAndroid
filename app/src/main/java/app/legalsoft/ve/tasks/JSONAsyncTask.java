@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import app.legalsoft.ve.callbacks.JOSNLoadedListener;
 import app.legalsoft.ve.util.AppDataLoader;
+import app.legalsoft.ve.util.GlobalFunctions;
 
 /**
  * Created by Syed.Rahman on 16/07/2015.
@@ -15,14 +16,16 @@ import app.legalsoft.ve.util.AppDataLoader;
 public class JSONAsyncTask extends AsyncTask<Void, Void, JSONArray> {
 
     private JOSNLoadedListener jsonLoadedListener;
+    private String url;
 
-    public JSONAsyncTask(JOSNLoadedListener jsonLoadedListener) {
+    public JSONAsyncTask(JOSNLoadedListener jsonLoadedListener, String url) {
         this.jsonLoadedListener = jsonLoadedListener;
+        this.url = url;
     }
 
     @Override
     protected JSONArray doInBackground(Void... params) {
-        JSONArray jsonArray = AppDataLoader.getSubCourt();
+        JSONArray jsonArray = AppDataLoader.getJSONArray(url);
 
         return jsonArray;
     }
@@ -30,6 +33,7 @@ public class JSONAsyncTask extends AsyncTask<Void, Void, JSONArray> {
     @Override
     protected void onPostExecute(JSONArray jsonArrays) {
         if (jsonLoadedListener!=null){
+            GlobalFunctions.m("onPostExecute inside");
             jsonLoadedListener.onJSONLoaded(jsonArrays);
         }
     }

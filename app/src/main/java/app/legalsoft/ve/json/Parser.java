@@ -8,9 +8,12 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import app.legalsoft.ve.model.DefenderModel;
 import app.legalsoft.ve.model.EmployeeModel;
+import app.legalsoft.ve.model.MainCourtModel;
 import app.legalsoft.ve.model.OfficeExpenseDetailModel;
 import app.legalsoft.ve.model.OfficeExpenseModel;
+import app.legalsoft.ve.model.SpecialistModel;
 import app.legalsoft.ve.model.SubCourtModel;
 import app.legalsoft.ve.util.GlobalFunctions;
 
@@ -282,6 +285,91 @@ public class Parser {
     }
 
 
+    public static ArrayList<SpecialistModel> parseSpecialistResponseArray(JSONArray response)
+    {
+        ArrayList<SpecialistModel> models = new ArrayList<>();
+        if (response!=null && response.length()>0){
+            try {
+                JSONArray array = response; //.getJSONArray("employees");
+                for (int i=0; i<array.length(); i++){
+                    models.add(parseSpecialistResponse(array.getJSONObject(i)));
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        return models;
+    }
+
+    public static SpecialistModel parseSpecialistResponse(JSONObject response)
+    {
+        SpecialistModel model= new SpecialistModel();
+
+        try {
+            if (GlobalFunctions.getIsNotNull(response, "specializeID")) {
+                model.SpecializeID = response.getInt("specializeID");
+            }
+            if (GlobalFunctions.getIsNotNull(response, "specializeCode")) {
+                model.SpecializeCode = response.getString("specializeCode");
+            }
+            if (GlobalFunctions.getIsNotNull(response, "specializeCode_EN")) {
+                model.SpecializeCode_EN = response.getString("specializeCode_EN");
+            }
+            if (GlobalFunctions.getIsNotNull(response, "isActive")) {
+                model.IsActive = response.getInt("isActive");
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return model;
+    }
+
+    public static ArrayList<MainCourtModel> parseMainCourtResponseArray(JSONArray response)
+    {
+        ArrayList<MainCourtModel> models = new ArrayList<>();
+        if (response!=null && response.length()>0){
+            try {
+                JSONArray array = response; //.getJSONArray("employees");
+                for (int i=0; i<array.length(); i++){
+                    models.add(parseMainCourtResponse(array.getJSONObject(i)));
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        return models;
+    }
+
+    public static MainCourtModel parseMainCourtResponse(JSONObject response)
+    {
+        MainCourtModel model= new MainCourtModel();
+        try {
+            if (GlobalFunctions.getIsNotNull(response, "mainCourtID")) {
+                model.MainCourtID = response.getInt("mainCourtID");
+            }
+            if (GlobalFunctions.getIsNotNull(response, "mainCourtCode")) {
+                model.MainCourtCode = response.getString("mainCourtCode");
+            }
+            if (GlobalFunctions.getIsNotNull(response, "mainCourtCode_EN")) {
+                model.MainCourtCode_EN = response.getString("mainCourtCode_EN");
+            }
+            if (GlobalFunctions.getIsNotNull(response, "mainCourtSpecialist")) {
+                model.MainCourtSpecialist = response.getString("mainCourtSpecialist");
+            }
+            if (GlobalFunctions.getIsNotNull(response, "mainCourtLocation")) {
+                model.MainCourtLocation = response.getString("mainCourtLocation");
+            }
+            if (GlobalFunctions.getIsNotNull(response, "isActive")) {
+                model.IsActive = response.getInt("isActive");
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return model;
+    }
+
     public static ArrayList<SubCourtModel> parseSubCourtResponseArray(JSONArray response)
     {
         ArrayList<SubCourtModel> models = new ArrayList<>();
@@ -325,4 +413,46 @@ public class Parser {
         return model;
     }
 
+    public static ArrayList<DefenderModel> parseDefenderResponseArray(JSONArray response)
+    {
+        ArrayList<DefenderModel> models = new ArrayList<>();
+        if (response!=null && response.length()>0){
+            try {
+                JSONArray array = response; //.getJSONArray("employees");
+                for (int i=0; i<array.length(); i++){
+                    models.add(parseDefenderResponse(array.getJSONObject(i)));
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        return models;
+    }
+
+    public static DefenderModel parseDefenderResponse(JSONObject response)
+    {
+        DefenderModel model= new DefenderModel();
+
+        try {
+            if (GlobalFunctions.getIsNotNull(response, "defenderID")) {
+                model.DefenderID = response.getInt("defenderID");
+            }
+            if (GlobalFunctions.getIsNotNull(response, "defenderCode")) {
+                model.DefenderCode = response.getString("defenderCode");
+            }
+            if (GlobalFunctions.getIsNotNull(response, "defenderName")) {
+                model.DefenderName = response.getString("defenderName");
+            }
+            if (GlobalFunctions.getIsNotNull(response, "defenderName_EN")) {
+                model.DefenderName_EN = response.getString("defenderName_EN");
+            }
+            if (GlobalFunctions.getIsNotNull(response, "isActive")) {
+                model.IsActive = response.getInt("isActive");
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return model;
+    }
 }

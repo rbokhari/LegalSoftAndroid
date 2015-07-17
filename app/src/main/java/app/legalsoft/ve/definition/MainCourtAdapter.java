@@ -5,21 +5,20 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import java.util.Collections;
 import java.util.List;
 
 import app.legalsoft.ve.R;
 import app.legalsoft.ve.model.MainCourtModel;
-import app.legalsoft.ve.model.SpecialistModel;
 
 /**
- * Created by Syed.Rahman on 15/07/2015.
+ * Created by Syed.Rahman on 17/07/2015.
  */
-public class rvMainCourtAdapter extends RecyclerView.Adapter<rvMainCourtHolder> {
+public class MainCourtAdapter extends RecyclerView.Adapter<MainCourtAdapter.MainCourtHolder> {
 
     private LayoutInflater layoutInflater;
-
 
     List<MainCourtModel> dataList = Collections.emptyList();
 
@@ -29,21 +28,20 @@ public class rvMainCourtAdapter extends RecyclerView.Adapter<rvMainCourtHolder> 
         notifyItemRangeChanged(0, list.size());
     }
 
-    public rvMainCourtAdapter(Context context) {
+    public MainCourtAdapter(Context context) {
         this.layoutInflater = LayoutInflater.from(context);
     }
 
-
-
     @Override
-    public rvMainCourtHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public MainCourtHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = layoutInflater.inflate(R.layout.maincourt_rv_row, parent, false);
-        rvMainCourtHolder holder = new rvMainCourtHolder(view);
+        MainCourtHolder holder = new MainCourtHolder(view);
         return holder;
+
     }
 
     @Override
-    public void onBindViewHolder(rvMainCourtHolder holder, int position) {
+    public void onBindViewHolder(MainCourtHolder holder, int position) {
         holder.tCode.setText(dataList.get(position).getMainCourtCode());
         holder.tCodeEn.setText(dataList.get(position).getMainCourtCode_EN());
         holder.tSpecialize.setText(dataList.get(position).getMainCourtSpecialist());
@@ -55,4 +53,23 @@ public class rvMainCourtAdapter extends RecyclerView.Adapter<rvMainCourtHolder> 
     public int getItemCount() {
         return dataList.size();
     }
+
+
+    public class MainCourtHolder extends RecyclerView.ViewHolder {
+
+        TextView tCode;
+        TextView tCodeEn;
+        TextView tSpecialize;
+        TextView tActive;
+
+        public MainCourtHolder(View itemView) {
+            super(itemView);
+
+            tCode = (TextView) itemView.findViewById(R.id.tMainCourtCode);
+            tCodeEn = (TextView) itemView.findViewById(R.id.tMainCourtCodeEn);
+            tSpecialize = (TextView) itemView.findViewById(R.id.tMainCourSpecializationArea);
+            tActive = (TextView) itemView.findViewById(R.id.tMainCourtActive);
+        }
+    }
+
 }
