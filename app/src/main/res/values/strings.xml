@@ -100,4 +100,5 @@
     <string name="mnuSignOut">Sign Out</string>
     <string name="mnuDefinition">Definition</string>
     <string name="mnuContactUs">Contact Us</string>
+    <string name="action_search">search</string>
 </resources>

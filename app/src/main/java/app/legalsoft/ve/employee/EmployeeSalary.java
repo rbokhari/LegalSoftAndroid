@@ -88,8 +88,6 @@ public class EmployeeSalary extends AppCompatActivity {   //ActionBarActivity
 
     private void getData(){
         expenseDetailList = MyApplication.getWriteableDatabase().getOfficeExpenseByEmployeeId(EmpId);
-
-        GlobalFunctions.m("Total Year found : " + expenseDetailList.size());
     }
 
 }

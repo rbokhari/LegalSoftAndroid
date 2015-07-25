@@ -67,6 +67,13 @@
             android:name=".employee.EmployeeSalary"
             android:label="@string/title_activity_employee_salary" >
         </activity>
+        <activity android:name=".cases.CaseListActivity"
+            android:label="Case List">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MasterActivity" />
+
+        </activity>
 
         <service
             android:name=".services.EmployeeService"

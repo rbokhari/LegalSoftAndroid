@@ -122,6 +122,11 @@ public class MainCourtFragment extends Fragment implements JOSNLoadedListener {
         }
     }
 
+    @Override
+    public void onJSONLoadedObject(JSONObject jsonObject) {
+
+    }
+
     /*
     public static List<MainCourtModel> getData(){
         final List<MainCourtModel>  data = new ArrayList<>();

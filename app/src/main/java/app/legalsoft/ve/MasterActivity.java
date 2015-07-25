@@ -15,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import app.legalsoft.ve.cases.CaseCourtFragment;
 import app.legalsoft.ve.client.ClientFragment;
 import app.legalsoft.ve.dashboard.DashboardFragment;
 import app.legalsoft.ve.definition.DefenderFragment;
@@ -34,6 +35,7 @@ public class MasterActivity extends AppCompatActivity {
     private NavigationView navigationView;
 
     private Toolbar toolbar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,6 +109,8 @@ public class MasterActivity extends AppCompatActivity {
         }
     }
 
+
+
     private void selectItem(int position) {
         Fragment newFragment;
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
@@ -160,6 +164,9 @@ public class MasterActivity extends AppCompatActivity {
                         .commit();
                 break;
             case R.id.mnuCaseAll:
+                Fragment fragCases = new CaseCourtFragment();
+                transaction.replace(R.id.fragment_main_content, fragCases)
+                        .commit();
                 break;
             case R.id.mnuCaseFollowup:
                 break;

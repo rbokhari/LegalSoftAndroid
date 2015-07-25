@@ -36,6 +36,7 @@ public class MainCourtAdapter extends RecyclerView.Adapter<MainCourtAdapter.Main
     public MainCourtHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = layoutInflater.inflate(R.layout.maincourt_rv_row, parent, false);
         MainCourtHolder holder = new MainCourtHolder(view);
+
         return holder;
 
     }
@@ -69,6 +70,9 @@ public class MainCourtAdapter extends RecyclerView.Adapter<MainCourtAdapter.Main
             tCodeEn = (TextView) itemView.findViewById(R.id.tMainCourtCodeEn);
             tSpecialize = (TextView) itemView.findViewById(R.id.tMainCourSpecializationArea);
             tActive = (TextView) itemView.findViewById(R.id.tMainCourtActive);
+
+
+
         }
     }
 

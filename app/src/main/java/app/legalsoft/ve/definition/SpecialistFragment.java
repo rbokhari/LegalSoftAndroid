@@ -121,4 +121,9 @@ public class SpecialistFragment extends Fragment implements JOSNLoadedListener {
             adapter.setSpecialistList(data);
         }
     }
+
+    @Override
+    public void onJSONLoadedObject(JSONObject jsonObject) {
+
+    }
 }

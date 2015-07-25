@@ -82,4 +82,31 @@ public class Requestor {
         return response;
     }
 
+    public static JSONObject requestDataObject(String url){
+        JSONObject response = null;
+        RequestFuture<JSONObject> requestFuture = RequestFuture.newFuture();
+        RequestQueue requestQueue = VolleySingleton.getsInstance().getRequestQuery();
+        if (requestQueue!=null) {
+            //JsonObjectRequest request1 = new JsonObjectRequest(CONSTANTS.EMPLOYEES_API_URL,
+            //        requestFuture, requestFuture);
+            JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url,(String)null, requestFuture, requestFuture);
+            //           JSONObject params = new JSONObject();
+            //           params.put("token", "token value");
+            //           JsonObjectRequest request1 = new JsonObjectRequest((Request.Method.GET, url, new JSONObject(params), requestFuture, requestFuture);
+
+            requestQueue.add(request);
+            try {
+                response = requestFuture.get(60, TimeUnit.SECONDS);
+            } catch (InterruptedException e) {
+                GlobalFunctions.m("InterruptedException-------" + e.getMessage());
+            } catch (ExecutionException e) {
+                GlobalFunctions.m("ExecutionException-------" + e.getMessage());
+            } catch (TimeoutException e) {
+                GlobalFunctions.m("TimeoutException-------" + e.getMessage());
+            }
+        }
+        //GlobalFunctions.m("response length in getData : " + response.length());
+        return response;
+    }
+
 }

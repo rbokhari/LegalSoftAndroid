@@ -8,6 +8,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import app.legalsoft.ve.model.CaseFileModel;
 import app.legalsoft.ve.model.DefenderModel;
 import app.legalsoft.ve.model.EmployeeModel;
 import app.legalsoft.ve.model.MainCourtModel;
@@ -449,10 +450,94 @@ public class Parser {
             if (GlobalFunctions.getIsNotNull(response, "isActive")) {
                 model.IsActive = response.getInt("isActive");
             }
+            if (GlobalFunctions.getIsNotNull(response, "caseCountActive")) {
+                model.CaseActive = response.getInt("caseCountActive");
+            }
+            if (GlobalFunctions.getIsNotNull(response, "caseCountNotActive")) {
+                model.CaseNonActive = response.getInt("caseCountNotActive");
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
         return model;
     }
+
+    public static ArrayList<CaseFileModel> parseCaseListResponseArray(JSONArray response)
+    {
+        ArrayList<CaseFileModel> models = new ArrayList<>();
+        if (response!=null && response.length()>0){
+            try {
+                JSONArray array = response; //.getJSONArray("employees");
+                for (int i=0; i<array.length(); i++){
+                    models.add(parseCaseListResponse(array.getJSONObject(i)));
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        return models;
+    }
+
+    public static CaseFileModel parseCaseListResponse(JSONObject response)
+    {
+        CaseFileModel model= new CaseFileModel();
+
+        try {
+            if (GlobalFunctions.getIsNotNull(response, "caseFileID")) {
+                model.CaseFileID = response.getInt("caseFileID");
+            }
+            if (GlobalFunctions.getIsNotNull(response, "fileNo")) {
+                model.FileNo = response.getInt("fileNo");
+            }
+            if (GlobalFunctions.getIsNotNull(response, "priorityID")) {
+                model.PriorityID = response.getInt("priorityID");
+            }
+            if (GlobalFunctions.getIsNotNull(response, "startDate")) {
+                model.StartDate = response.getString("startDate");
+            }
+            if (GlobalFunctions.getIsNotNull(response, "statusID")) {
+                model.StatusID = response.getInt("statusID");
+            }
+            if (GlobalFunctions.getIsNotNull(response, "type")) {
+                model.Type = response.getInt("type");
+            }
+            if (GlobalFunctions.getIsNotNull(response,"clientID")) {
+                JSONObject clientRegistration = response.getJSONObject("clientRegistration");
+                if (GlobalFunctions.getIsNotNull(clientRegistration,"clientName")) {
+                    model.ClientName = clientRegistration.getString("clientName");
+                }
+            }
+            if (GlobalFunctions.getIsNotNull(response,"defenderID")) {
+                JSONObject defenderDetail = response.getJSONObject("defenderDetail");
+                if (GlobalFunctions.getIsNotNull(defenderDetail,"defenderName")) {
+                    model.DefenderName = defenderDetail.getString("defenderName");
+
+                }
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return model;
+    }
+
+/*
+    public static JSONArray parseCountByTypeStatus(JSONObject response)
+    {
+        JSONArray response;
+        int returnValue = 0;
+        if (response!=null){
+            try {
+                if (GlobalFunctions.getIsNotNull(response, "value")) {
+                    returnValue = response.getInt("value");
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        return returnValue;
+    }
+*/
 }

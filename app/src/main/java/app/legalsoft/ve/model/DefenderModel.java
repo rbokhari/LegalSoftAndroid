@@ -20,6 +20,17 @@ public class DefenderModel {
     public int ModifiedBy;
     public String ModifiedOn;
 
+    public int CaseActive;
+    public int CaseNonActive;
+
+public int getCaseActive() {
+        return CaseActive;
+    }
+
+    public int getCaseNonActive() {
+        return CaseNonActive;
+    }
+
     public int getDefenderID() {
         return DefenderID;
     }

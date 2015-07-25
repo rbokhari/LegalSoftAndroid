@@ -73,7 +73,6 @@ public class SubCourtFragment extends Fragment implements JOSNLoadedListener {
 
             @Override
             public void onClick(View view, int position) {
-                //Toast.makeText(getApplicationContext(), "onClick " + position, Toast.LENGTH_SHORT).show();
                 //selectItem(position);
             }
 
@@ -89,9 +88,6 @@ public class SubCourtFragment extends Fragment implements JOSNLoadedListener {
                 refreshItem();
             }
         });
-
-        //getData();
-        GlobalFunctions.m("-------->>>>>> call JSONAsyncTask");
 
         new JSONAsyncTask(this, CONSTANTS.SUBCOURT_API_URL).execute();
 
@@ -124,5 +120,10 @@ public class SubCourtFragment extends Fragment implements JOSNLoadedListener {
             recyclerView.setVisibility(View.VISIBLE);
             adapter.setSubCoutList(data);
         }
+    }
+
+    @Override
+    public void onJSONLoadedObject(JSONObject jsonObject) {
+
     }
 }

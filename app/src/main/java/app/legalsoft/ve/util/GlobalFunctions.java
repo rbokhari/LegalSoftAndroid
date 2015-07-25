@@ -10,7 +10,12 @@ import com.android.volley.ServerError;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import app.legalsoft.ve.R;
+import app.legalsoft.ve.model.DefenderModel;
 
 /**
  * Created by Syed.Rahman on 25/04/2015.
@@ -53,5 +58,19 @@ public  class GlobalFunctions {
         String[] monthNames = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
         return monthNames[month - 1];
     }
+/*
+    private List<T> filter(List<T> models, String query) {
+        query = query.toLowerCase();
 
+        final List<T> filteredModelList = new ArrayList<>();
+        for (T model : models) {
+            final String text = model.toString().toLowerCase();
+            if (text.contains(query)) {
+                filteredModelList.add(model);
+            }
+        }
+        return filteredModelList;
+    }
+
+*/
 }

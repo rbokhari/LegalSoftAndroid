@@ -42,10 +42,32 @@ public interface CONSTANTS {
     String SUBCOURT_API_URL = API_URL + "/api/subcourt/getactive";
     String DEFENDER_API_URL = API_URL + "/api/defender/getactive";
 
+    String CASE_COUNT_API_URL = API_URL + "/api/case/GetCountTypeStatus/";
+    String CASE_LIST_BY_TYPE_STATUS_API_URL = API_URL + "/api/case/GetCaseFileByType/" + CaseTypeID.CASE_FILE;
+
+
 
     DecimalFormat FORMAT_CURRENCY = new DecimalFormat("0.000");
     DecimalFormat FORMAT_QUANTITY = new DecimalFormat("0.00");
 
     DateFormat FORMAT_DATE = new SimpleDateFormat("DD-MM-yyyy");
+
+    static class CaseTypeID{
+        public static int CASE_FILE = 26;
+        public static int CASE_BANK_FILE = 133;
+        public static int CASE_BEFORE_COURT = 24;
+        public static int CASE_CONSULTANCY = 25;
+    }
+
+    static class CaseStatusID {
+        public static int CASE_FILE_OPEN = 3;
+        public static int CASE_FILE_CLOSE = 7;
+
+        public static int CASE_BEFORE_COURT_OPEN = 2;
+        public static int CASE_BEFORE_COURT_CLOSE = 4;
+        public static int CASE_BEFORE_COURT_TRANSFER = 6;
+
+        public static int CASE_CONSULTANCY_OPEN = 1;
+    }
 
 }
