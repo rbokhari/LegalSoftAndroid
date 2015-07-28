@@ -28,6 +28,7 @@ import app.legalsoft.ve.json.Parser;
 import app.legalsoft.ve.model.CaseFileModel;
 import app.legalsoft.ve.model.ClientModel;
 import app.legalsoft.ve.model.DefenderModel;
+import app.legalsoft.ve.recycler.RecyclerTouchListener;
 import app.legalsoft.ve.tasks.JSONAsyncTask;
 import app.legalsoft.ve.util.CONSTANTS;
 import app.legalsoft.ve.util.GlobalFunctions;
@@ -52,15 +53,16 @@ public class CaseListActivity extends AppCompatActivity implements JOSNLoadedLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.case_list_activity);
 
-        toolbar = (Toolbar) findViewById(R.id.app_bar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setHomeButtonEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("Legal Soft");
+        setupToolbar();
+        setupRecyclerView();
+        setupSwipeRefreshLayout();
+        setupLoading();
 
-        recyclerView = (RecyclerView) findViewById(R.id.rvCaseFile);
-        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout);
-        recyclerView.setLayoutManager(new LinearLayoutManager(MyApplication.getAppContext()));
+        setupIntent();
+        setupAsyncTask();
+    }
+
+    private void setupLoading(){
         mLoading = (TextView) findViewById(R.id.tLoading);
 
         mLoading.setVisibility(View.VISIBLE);
@@ -69,11 +71,44 @@ public class CaseListActivity extends AppCompatActivity implements JOSNLoadedLis
         adapter = new CaseListAdapter(MyApplication.getAppContext());
         recyclerView.setAdapter(adapter);
 
+    }
+
+    private void setupIntent(){
         Intent intent = getIntent();
         int typeId = intent.getIntExtra("TypeId", -1);
         int statusId =  intent.getIntExtra("StatusId", 0);
+    }
 
-        new JSONAsyncTask(this, CONSTANTS.CASE_LIST_BY_TYPE_STATUS_API_URL).execute();
+    private void setupToolbar(){
+        toolbar = (Toolbar) findViewById(R.id.app_bar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Legal Soft");
+    }
+
+    private void setupRecyclerView(){
+        recyclerView = (RecyclerView) findViewById(R.id.rvCaseFile);
+        recyclerView.setLayoutManager(new LinearLayoutManager(MyApplication.getAppContext()));
+
+        recyclerView.addOnItemTouchListener(new RecyclerTouchListener(MyApplication.getAppContext(), recyclerView, new RecyclerTouchListener.ClickListener() {
+
+            @Override
+            public void onClick(View view, int position) {
+                Intent intent = new Intent(MyApplication.getAppContext(), CaseDetailActivity.class);
+                intent.putExtra("casefileData", caseFileModelList.get(position).toBundle());
+                startActivity(intent);
+            }
+
+            @Override
+            public void onLongClick(View view, int position) {
+
+            }
+        }));
+    }
+
+    private void setupSwipeRefreshLayout(){
+        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout);
 
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -81,7 +116,10 @@ public class CaseListActivity extends AppCompatActivity implements JOSNLoadedLis
                 refreshItem();
             }
         });
+    }
 
+    private void setupAsyncTask(){
+        new JSONAsyncTask(this, CONSTANTS.CASE_LIST_BY_TYPE_STATUS_API_URL).execute();
     }
 
     @Override
@@ -100,7 +138,7 @@ public class CaseListActivity extends AppCompatActivity implements JOSNLoadedLis
     void refreshItem(){
         mLoading.setVisibility(View.VISIBLE);
         recyclerView.setVisibility(View.GONE);
-        new JSONAsyncTask(this, CONSTANTS.CASE_LIST_BY_TYPE_STATUS_API_URL).execute();
+        setupAsyncTask();
         //getData();
         swipeRefreshLayout.setRefreshing(false);
     }

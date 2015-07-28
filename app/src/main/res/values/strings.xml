@@ -35,6 +35,14 @@
         <item>Leaves</item>
     </string-array>
 
+    <string-array name="tab_case_detail">
+        <item>General</item>
+        <item>Follow Up</item>
+        <item>Finance</item>
+        <item>Tools</item>
+    </string-array>
+
+
     <string-array name="camera_gallery_array">
         <item>From Gallery</item>
         <item>From Camera</item>

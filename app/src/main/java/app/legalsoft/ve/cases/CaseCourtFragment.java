@@ -79,6 +79,8 @@ public class CaseCourtFragment extends Fragment implements JOSNLoadedListener {
     public void onJSONLoaded(JSONArray jsonArray) {
         GlobalFunctions.m("CaseCourtFragment ---- onJSONLoaded");
 
+        if (jsonArray==null) return;
+
         try {
             for (int i=0; i<jsonArray.length(); i++) {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);

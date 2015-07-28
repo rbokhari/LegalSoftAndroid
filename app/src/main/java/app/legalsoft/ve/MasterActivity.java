@@ -87,10 +87,12 @@ public class MasterActivity extends AppCompatActivity {
                     else
                         menuItem.setChecked(true);
 
+
+                    menuItem.setChecked(true);
                     //Closing drawer on item click
-                    drawerLayout.closeDrawers();
+                    //drawerLayout.closeDrawers();
                     selectItem(menuItem.getItemId());
-                    actionBarDrawerToggle.syncState();
+                    //actionBarDrawerToggle.syncState();
                     return true;
                 }
             });
@@ -114,6 +116,7 @@ public class MasterActivity extends AppCompatActivity {
     private void selectItem(int position) {
         Fragment newFragment;
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
 
 
         GlobalFunctions.mNavposition = position;

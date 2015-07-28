@@ -74,6 +74,12 @@
                 android:value=".MasterActivity" />
 
         </activity>
+        <activity android:name=".cases.CaseDetailActivity"
+                android:label="Case Detail">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".cases.CaseListActivity" />
+        </activity>
 
         <service
             android:name=".services.EmployeeService"
