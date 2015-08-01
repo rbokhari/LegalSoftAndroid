@@ -10,6 +10,8 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="80dp"
@@ -20,45 +22,7 @@
                 android:layout_height="24dp"
                 android:layout_gravity="center"
                 android:layout_marginLeft="16dp"
-                android:src="@drawable/ic_person_grey600_18dp" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:gravity="center_vertical"
-                android:orientation="vertical"
-                android:paddingLeft="20dp"
-                android:paddingRight="16dp">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:text="File No"
-                    android:textSize="15sp" />
-
-                <TextView
-                    android:id="@+id/tCaseFileNo"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical|center_horizontal"
-                    android:text="1234"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_gravity="center"
-                android:layout_marginLeft="16dp"
-                android:src="@drawable/ic_person_grey600_18dp" />
+                android:src="@drawable/ic_action_important" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -80,12 +44,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical|center_horizontal"
-                    android:text="1234"
+                    android:text=""
                     android:textSize="20sp"
                     android:textStyle="bold" />
             </LinearLayout>
 
         </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/graySeparator" />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="80dp"
@@ -96,7 +64,7 @@
                 android:layout_height="24dp"
                 android:layout_gravity="center"
                 android:layout_marginLeft="16dp"
-                android:src="@drawable/ic_person_grey600_18dp" />
+                />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -118,12 +86,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical|center_horizontal"
-                    android:text="1234"
+                    android:text=""
                     android:textSize="20sp"
                     android:textStyle="bold" />
             </LinearLayout>
 
         </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/graySeparator" />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="80dp"
@@ -156,12 +128,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical|center_horizontal"
-                    android:text="1234"
+                    android:text=""
                     android:textSize="20sp"
                     android:textStyle="bold" />
             </LinearLayout>
 
         </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/graySeparator" />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="80dp"
@@ -172,7 +148,7 @@
                 android:layout_height="24dp"
                 android:layout_gravity="center"
                 android:layout_marginLeft="16dp"
-                android:src="@drawable/ic_person_grey600_18dp" />
+                />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -194,13 +170,18 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical|center_horizontal"
-                    android:text="1234"
+                    android:text=""
                     android:textSize="20sp"
                     android:textStyle="bold" />
             </LinearLayout>
 
         </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/graySeparator" />
         <LinearLayout
+            android:id="@+id/lBankFileNo"
             android:layout_width="match_parent"
             android:layout_height="80dp"
             android:orientation="horizontal">
@@ -210,7 +191,7 @@
                 android:layout_height="24dp"
                 android:layout_gravity="center"
                 android:layout_marginLeft="16dp"
-                android:src="@drawable/ic_person_grey600_18dp" />
+                />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -232,14 +213,18 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical|center_horizontal"
-                    android:text="1234"
+                    android:text=""
                     android:textSize="20sp"
                     android:textStyle="bold" />
             </LinearLayout>
 
         </LinearLayout>
-
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/graySeparator" />
         <LinearLayout
+            android:id="@+id/lAccountNo"
             android:layout_width="match_parent"
             android:layout_height="80dp"
             android:orientation="horizontal">
@@ -249,7 +234,7 @@
                 android:layout_height="24dp"
                 android:layout_gravity="center"
                 android:layout_marginLeft="16dp"
-                android:src="@drawable/ic_person_grey600_18dp" />
+                />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -271,13 +256,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical|center_horizontal"
-                    android:text="1234"
+                    android:text=""
                     android:textSize="20sp"
                     android:textStyle="bold" />
             </LinearLayout>
 
         </LinearLayout>
-
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/graySeparator" />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="80dp"
@@ -310,12 +298,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical|center_horizontal"
-                    android:text="1234"
+                    android:text=""
                     android:textSize="20sp"
                     android:textStyle="bold" />
             </LinearLayout>
 
         </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/graySeparator" />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="80dp"
@@ -326,7 +318,7 @@
                 android:layout_height="24dp"
                 android:layout_gravity="center"
                 android:layout_marginLeft="16dp"
-                android:src="@drawable/ic_person_grey600_18dp" />
+                />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -348,12 +340,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical|center_horizontal"
-                    android:text="1234"
+                    android:text=""
                     android:textSize="20sp"
                     android:textStyle="bold" />
             </LinearLayout>
 
         </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/graySeparator" />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="80dp"
@@ -364,7 +360,7 @@
                 android:layout_height="24dp"
                 android:layout_gravity="center"
                 android:layout_marginLeft="16dp"
-                android:src="@drawable/ic_person_grey600_18dp" />
+                />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -386,12 +382,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical|center_horizontal"
-                    android:text="1234"
+                    android:text=""
                     android:textSize="20sp"
                     android:textStyle="bold" />
             </LinearLayout>
 
         </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/graySeparator" />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="80dp"
@@ -402,7 +402,7 @@
                 android:layout_height="24dp"
                 android:layout_gravity="center"
                 android:layout_marginLeft="16dp"
-                android:src="@drawable/ic_person_grey600_18dp" />
+                />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -424,12 +424,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical|center_horizontal"
-                    android:text="1234"
+                    android:text=""
                     android:textSize="20sp"
                     android:textStyle="bold" />
             </LinearLayout>
 
         </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/graySeparator" />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="80dp"
@@ -462,12 +466,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical|center_horizontal"
-                    android:text="1234"
+                    android:text=""
                     android:textSize="20sp"
                     android:textStyle="bold" />
             </LinearLayout>
 
         </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/graySeparator" />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="80dp"
@@ -478,7 +486,7 @@
                 android:layout_height="24dp"
                 android:layout_gravity="center"
                 android:layout_marginLeft="16dp"
-                android:src="@drawable/ic_person_grey600_18dp" />
+                />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -500,12 +508,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical|center_horizontal"
-                    android:text="1234"
+                    android:text=""
                     android:textSize="20sp"
                     android:textStyle="bold" />
             </LinearLayout>
 
         </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/graySeparator" />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="80dp"
@@ -538,13 +550,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical|center_horizontal"
-                    android:text="1234"
+                    android:text=""
                     android:textSize="20sp"
                     android:textStyle="bold" />
             </LinearLayout>
 
         </LinearLayout>
-
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/graySeparator" />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="80dp"
@@ -577,13 +592,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical|center_horizontal"
-                    android:text="1234"
+                    android:text=""
                     android:textSize="20sp"
                     android:textStyle="bold" />
             </LinearLayout>
 
         </LinearLayout>
-
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/graySeparator" />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="80dp"
@@ -616,13 +634,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical|center_horizontal"
-                    android:text="1234"
+                    android:text=""
                     android:textSize="20sp"
                     android:textStyle="bold" />
             </LinearLayout>
 
         </LinearLayout>
-
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/graySeparator" />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="80dp"
@@ -633,7 +654,7 @@
                 android:layout_height="24dp"
                 android:layout_gravity="center"
                 android:layout_marginLeft="16dp"
-                android:src="@drawable/ic_person_grey600_18dp" />
+                android:src="@drawable/ic_action_dock" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -655,7 +676,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical|center_horizontal"
-                    android:text="1234"
+                    android:text=""
                     android:textSize="20sp"
                     android:textStyle="bold" />
             </LinearLayout>

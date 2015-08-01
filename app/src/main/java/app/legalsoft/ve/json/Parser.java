@@ -7,10 +7,14 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import app.legalsoft.ve.model.CaseFileAttachmentModel;
 import app.legalsoft.ve.model.CaseFileModel;
+import app.legalsoft.ve.model.CaseFollowupModel;
 import app.legalsoft.ve.model.DefenderModel;
 import app.legalsoft.ve.model.EmployeeModel;
+import app.legalsoft.ve.model.InvoiceModel;
 import app.legalsoft.ve.model.MainCourtModel;
 import app.legalsoft.ve.model.OfficeExpenseDetailModel;
 import app.legalsoft.ve.model.OfficeExpenseModel;
@@ -98,7 +102,7 @@ public class Parser {
                     employeeModel.IsAdmin = response.getInt("isAdmin");
                 }
                 if (GlobalFunctions.getIsNotNull(response,"startDate")) {
-                    employeeModel.StartDate  = response.getString("startDate");
+                    employeeModel.StartDate  = GlobalFunctions.getFormattedDate(response.getString("startDate"));
                 }
                 if (GlobalFunctions.getIsNotNull(response,"isAdmin")) {
                     employeeModel.IsAdmin = response.getInt("isAdmin");
@@ -175,7 +179,7 @@ public class Parser {
                 officeExpenseModel.ExpenseCode = response.getString("expenseCode");
             }
             if (GlobalFunctions.getIsNotNull(response,"expenseDate")) {
-                officeExpenseModel.ExpenseDate = response.getString("expenseDate");
+                officeExpenseModel.ExpenseDate = GlobalFunctions.getFormattedDate(response.getString("expenseDate"));
             }
             if (GlobalFunctions.getIsNotNull(response,"monthID")) {
                 officeExpenseModel.MonthID = response.getInt("monthID");
@@ -215,13 +219,13 @@ public class Parser {
                 officeExpenseModel.CreatedBy = response.getInt("createdBy");
             }
             if (GlobalFunctions.getIsNotNull(response,"createdOn")) {
-                officeExpenseModel.CreatedOn = response.getString("createdOn");
+                officeExpenseModel.CreatedOn = GlobalFunctions.getFormattedDate(response.getString("createdOn"));
             }
             if (GlobalFunctions.getIsNotNull(response,"modifiedBy")) {
                 officeExpenseModel.ModifiedBy = response.getInt("modifiedBy");
             }
             if (GlobalFunctions.getIsNotNull(response,"modifiedOn")) {
-                officeExpenseModel.ModifiedOn = response.getString("modifiedOn");
+                officeExpenseModel.ModifiedOn = GlobalFunctions.getFormattedDate(response.getString("modifiedOn"));
             }
 
             if (GlobalFunctions.getIsNotNull(response,"officeExpenseDetails")) {
@@ -494,7 +498,7 @@ public class Parser {
                 model.PriorityID = response.getInt("priorityID");
             }
             if (GlobalFunctions.getIsNotNull(response, "startDate")) {
-                model.StartDate = response.getString("startDate");
+                model.StartDate = GlobalFunctions.getFormattedDate(response.getString("startDate"));
             }
             if (GlobalFunctions.getIsNotNull(response, "clientID")) {
                 model.ClientID = response.getInt("clientID");
@@ -518,13 +522,13 @@ public class Parser {
                 model.OtherPerson = response.getString("otherPerson");
             }
             if (GlobalFunctions.getIsNotNull(response, "complainDate")) {
-                model.ComplainDate = response.getString("complainDate");
+                model.ComplainDate = GlobalFunctions.getFormattedDate(response.getString("complainDate"));
             }
             if (GlobalFunctions.getIsNotNull(response, "followUpDate")) {
-                model.FollowUpDate = response.getString("followUpDate");
+                model.FollowUpDate = GlobalFunctions.getFormattedDate(response.getString("followUpDate"));
             }
-            if (GlobalFunctions.getIsNotNull(response, "CourtCaseNo")) {
-                model.CourtCaseNo = response.getString("CourtCaseNo");
+            if (GlobalFunctions.getIsNotNull(response, "courtCaseNo")) {
+                model.CourtCaseNo = response.getString("courtCaseNo");
             }
             if (GlobalFunctions.getIsNotNull(response, "defendentLawyer")) {
                 model.DefendentLawyer = response.getString("defendentLawyer");
@@ -563,7 +567,7 @@ public class Parser {
                 model.Division = response.getString("division");
             }
             if (GlobalFunctions.getIsNotNull(response, "closeDate")) {
-                model.CloseDate = response.getString("closeDate");
+                model.CloseDate = GlobalFunctions.getFormattedDate(response.getString("closeDate"));
             }
             if (GlobalFunctions.getIsNotNull(response, "contractAmount")) {
                 model.ContractAmount = response.getLong("contractAmount");
@@ -616,16 +620,10 @@ public class Parser {
                     model.DefenderCaseSpecName = defenderDetail.getString("descName");
                 }
             }
-            if (GlobalFunctions.getIsNotNull(response,"defenderCaseSpecID")) {
-                JSONObject defenderDetail = response.getJSONObject("defenderSpecDetail");
-                if (GlobalFunctions.getIsNotNull(defenderDetail,"descName")) {
-                    model.DefenderCaseSpecName = defenderDetail.getString("descName");
-                }
-            }
             if (GlobalFunctions.getIsNotNull(response,"lawyerID")) {
                 JSONObject defenderDetail = response.getJSONObject("lawyerDetail");
                 if (GlobalFunctions.getIsNotNull(defenderDetail,"empName")) {
-                    model.LawyerName = defenderDetail.getString("empName");
+                    model.EmployeeName = defenderDetail.getString("empName");
                 }
             }
             if (GlobalFunctions.getIsNotNull(response,"priorityID")) {
@@ -635,9 +633,9 @@ public class Parser {
                 }
             }
             if (GlobalFunctions.getIsNotNull(response,"specialistID")) {
-                JSONObject defenderDetail = response.getJSONObject("specialistDetail");
-                if (GlobalFunctions.getIsNotNull(defenderDetail,"specializeCode")) {
-                    model.SpecialistName = defenderDetail.getString("specializeCode");
+                JSONObject detail = response.getJSONObject("specialistDetail");
+                if (GlobalFunctions.getIsNotNull(detail,"specializeCode")) {
+                    model.SpecialistName = detail.getString("specializeCode");
                 }
             }
             if (GlobalFunctions.getIsNotNull(response,"physicalFileID")) {
@@ -648,9 +646,274 @@ public class Parser {
             }
 
         } catch (JSONException e) {
-            GlobalFunctions.showMessage("casefile parse error : " + model.FileNo + "::" + e.getMessage());
+            //GlobalFunctions.showMessage("casefile parse error : " + model.FileNo + "::" + e.getMessage());
             e.printStackTrace();
 
+        }
+
+        return model;
+    }
+
+    public static ArrayList<CaseFollowupModel> parseCaseFollowupResponseArray(JSONArray response)
+    {
+        ArrayList<CaseFollowupModel> models = new ArrayList<>();
+        if (response!=null && response.length()>0){
+            try {
+                JSONArray array = response; //.getJSONArray("employees");
+                for (int i=0; i<array.length(); i++){
+                    models.add(parseCaseFollowupResponse(array.getJSONObject(i)));
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        return models;
+    }
+
+    public static CaseFollowupModel parseCaseFollowupResponse(JSONObject response)
+    {
+        CaseFollowupModel model= new CaseFollowupModel();
+
+        try {
+            if (GlobalFunctions.getIsNotNull(response, "caseFollowUpID")) {
+                model.CaseFollowUpID = response.getInt("caseFollowUpID");
+            }
+            if (GlobalFunctions.getIsNotNull(response, "caseFileID")) {
+                model.CaseFileID = response.getInt("caseFileID");
+            }
+            if (GlobalFunctions.getIsNotNull(response, "clientID")) {
+                model.ClientID = response.getInt("clientID");
+            }
+            if (GlobalFunctions.getIsNotNull(response, "clientSpecID")) {
+                model.ClientSpecID = response.getInt("clientSpecID");
+            }
+            if (GlobalFunctions.getIsNotNull(response, "comments")) {
+                model.Comments = response.getString("comments");
+            }
+            if (GlobalFunctions.getIsNotNull(response, "courtCaseNo")) {
+                model.CourtCaseNo = response.getString("courtCaseNo");
+            }
+            if (GlobalFunctions.getIsNotNull(response, "daysAllowed")) {
+                model.DaysAllowed = response.getInt("daysAllowed");
+            }
+            if (GlobalFunctions.getIsNotNull(response, "followUpDate")) {
+                model.FollowUpDate = GlobalFunctions.getFormattedDate(response.getString("followUpDate"));
+            }
+            if (GlobalFunctions.getIsNotNull(response, "judgementDate")) {
+                model.JudgementDate = GlobalFunctions.getFormattedDate(response.getString("judgementDate"));
+            }
+            if (GlobalFunctions.getIsNotNull(response, "judgementType")) {
+                model.JudgementType = response.getInt("judgementType");
+            }
+            if (GlobalFunctions.getIsNotNull(response, "mainCourtID")) {
+                model.MainCourtID = response.getInt("mainCourtID");
+            }
+            if (GlobalFunctions.getIsNotNull(response, "nextDate")) {
+                model.NextDate = GlobalFunctions.getFormattedDate(response.getString("nextDate"));
+            }
+            if (GlobalFunctions.getIsNotNull(response, "sessionDate")) {
+                model.SessionDate = GlobalFunctions.getFormattedDate(response.getString("sessionDate"));
+            }
+            if (GlobalFunctions.getIsNotNull(response, "subCourtID")) {
+                model.SubCourtID = response.getInt("subCourtID");
+            }
+            if (GlobalFunctions.getIsNotNull(response, "clientSpecID")) {
+                JSONObject detail = response.getJSONObject("ClientSpecDetail");
+                if (GlobalFunctions.getIsNotNull(detail,"descName")) {
+                    model.ClientSpecName = detail.getString("descName");
+                }
+            }
+            if (GlobalFunctions.getIsNotNull(response, "mainCourtID")) {
+                JSONObject detail = response.getJSONObject("mainCourtDetail");
+                if (GlobalFunctions.getIsNotNull(detail,"mainCourtCode")) {
+                    model.MainCourtName = detail.getString("mainCourtCode");
+                }
+            }
+            if (GlobalFunctions.getIsNotNull(response, "subCourtID")) {
+                JSONObject detail = response.getJSONObject("subCourtDetail");
+                if (GlobalFunctions.getIsNotNull(detail,"subCourtCode")) {
+                    model.SubCourtName = detail.getString("subCourtCode");
+                }
+            }
+            if (GlobalFunctions.getIsNotNull(response, "judgementType")) {
+                JSONObject detail = response.getJSONObject("JudgementTypeDetail");
+                if (GlobalFunctions.getIsNotNull(detail,"descName")) {
+                    model.JudgementTypeName = detail.getString("descName");
+                }
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return model;
+    }
+
+    public static List<InvoiceModel> parseInvoiceupResponseArray(JSONArray response) {
+        ArrayList<InvoiceModel> models = new ArrayList<>();
+        if (response!=null && response.length()>0){
+            try {
+                JSONArray array = response; //.getJSONArray("employees");
+                for (int i=0; i<array.length(); i++){
+                    models.add(parseInvoiceResponse(array.getJSONObject(i)));
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        return models;
+    }
+
+    public static InvoiceModel parseInvoiceResponse(JSONObject response)
+    {
+        InvoiceModel model= new InvoiceModel();
+
+        try {
+            if (GlobalFunctions.getIsNotNull(response, "invoiceID")) {
+                model.InvoiceID = response.getInt("invoiceID");
+            }
+            if (GlobalFunctions.getIsNotNull(response, "invoiceCode")) {
+                model.InvoiceCode = response.getString("invoiceCode");
+            }
+            if (GlobalFunctions.getIsNotNull(response, "clientID")) {
+                model.ClientID = response.getInt("clientID");
+            }
+            if (GlobalFunctions.getIsNotNull(response, "caseFileID")) {
+                model.CaseFileID = response.getInt("caseFileID");
+            }
+            if (GlobalFunctions.getIsNotNull(response, "customerName")) {
+                model.CustomerName = response.getString("customerName");
+            }
+            if (GlobalFunctions.getIsNotNull(response, "paymentMethod")) {
+                model.PaymentMethod = response.getInt("paymentMethod");
+            }
+            if (GlobalFunctions.getIsNotNull(response, "paymentDate")) {
+                model.PaymentDate = GlobalFunctions.getFormattedDate(response.getString("paymentDate"));
+            }
+            if (GlobalFunctions.getIsNotNull(response, "courtFee")) {
+                model.CourtFee = response.getLong("courtFee");
+            }
+            if (GlobalFunctions.getIsNotNull(response, "officeFee")) {
+                model.OfficeFee = response.getLong("officeFee");
+            }
+            if (GlobalFunctions.getIsNotNull(response, "paidHours")) {
+                model.PaidHours = response.getInt("paidHours");
+            }
+            if (GlobalFunctions.getIsNotNull(response, "paidFee")) {
+                model.PaidFee = response.getInt("paidFee");
+            }
+            if (GlobalFunctions.getIsNotNull(response, "totalAmount")) {
+                model.TotalAmount = response.getLong("totalAmount");
+            }
+            if (GlobalFunctions.getIsNotNull(response, "isPaid")) {
+                model.IsPaid = response.getInt("isPaid");
+            }
+            if (GlobalFunctions.getIsNotNull(response, "paidDate")) {
+                model.PaidDate = response.getString("paidDate");
+            }
+            if (GlobalFunctions.getIsNotNull(response, "amountInWords")) {
+                model.AmountInWords = response.getString("amountInWords");
+            }
+            if (GlobalFunctions.getIsNotNull(response, "comments")) {
+                model.Comments = response.getString("comments");
+            }
+            if (GlobalFunctions.getIsNotNull(response, "statusID")) {
+                model.StatusID = response.getInt("statusID");
+            }
+            if (GlobalFunctions.getIsNotNull(response, "contractFeeTypeID")) {
+                model.ContractFeeTypeID = response.getInt("contractFeeTypeID");
+            }
+            if (GlobalFunctions.getIsNotNull(response, "lawyerID")) {
+                model.LawyerID = response.getInt("lawyerID");
+            }
+            if (GlobalFunctions.getIsNotNull(response, "lawyerPercentage")) {
+                model.LawyerPercentage = response.getInt("lawyerPercentage");
+            }
+            if (GlobalFunctions.getIsNotNull(response, "lawyerAmount")) {
+                model.LawyerAmount = response.getInt("lawyerAmount");
+            }
+            if (GlobalFunctions.getIsNotNull(response, "companyBankID")) {
+                model.CompanyBankID = response.getInt("companyBankID");
+            }
+            if (GlobalFunctions.getIsNotNull(response, "createdBy")) {
+                model.CreatedBy = response.getInt("createdBy");
+            }
+            if (GlobalFunctions.getIsNotNull(response, "createdOn")) {
+                model.CreatedOn = response.getString("createdOn");
+            }
+
+
+            if (GlobalFunctions.getIsNotNull(response, "clientID")) {
+                JSONObject detail = response.getJSONObject("clientDetail");
+                if (GlobalFunctions.getIsNotNull(detail,"descName")) {
+                    model.ClientName = detail.getString("descName");
+                }
+            }
+            if (GlobalFunctions.getIsNotNull(response, "mainCourtID")) {
+                JSONObject detail = response.getJSONObject("caseFileDetail");
+                if (GlobalFunctions.getIsNotNull(detail,"mainCourtCode")) {
+                    model.CaseFileNo = detail.getString("mainCourtCode");
+                }
+            }
+            if (GlobalFunctions.getIsNotNull(response, "subCourtID")) {
+                JSONObject detail = response.getJSONObject("lawyerDetail");
+                if (GlobalFunctions.getIsNotNull(detail,"subCourtCode")) {
+                    model.LawyerName = detail.getString("subCourtCode");
+                }
+            }
+            if (GlobalFunctions.getIsNotNull(response, "judgementType")) {
+                JSONObject detail = response.getJSONObject("paymentMethodName");
+                if (GlobalFunctions.getIsNotNull(detail,"descName")) {
+                    model.PaymentMethodName = detail.getString("descName");
+                }
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return model;
+    }
+
+    public static List<CaseFileAttachmentModel> parseCaseAttachmentResponseArray(JSONArray response) {
+        ArrayList<CaseFileAttachmentModel> models = new ArrayList<>();
+        if (response!=null && response.length()>0){
+            try {
+                JSONArray array = response; //.getJSONArray("employees");
+                for (int i=0; i<array.length(); i++){
+                    models.add(parseCaseAttachmentResponse(array.getJSONObject(i)));
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        return models;
+    }
+
+    public static CaseFileAttachmentModel parseCaseAttachmentResponse(JSONObject response)
+    {
+        CaseFileAttachmentModel model= new CaseFileAttachmentModel();
+
+        try {
+            if (GlobalFunctions.getIsNotNull(response, "attachmentID")) {
+                model.AttachmentID = response.getInt("attachmentID");
+            }
+            if (GlobalFunctions.getIsNotNull(response, "caseFileID")) {
+                model.CaseFileID = response.getInt("caseFileID");
+            }
+            if (GlobalFunctions.getIsNotNull(response, "fileName")) {
+                model.FileName = response.getString("fileName");
+            }
+            if (GlobalFunctions.getIsNotNull(response, "attachmentFileName")) {
+                model.AttachmentFileName = response.getString("attachmentFileName");
+            }
+            if (GlobalFunctions.getIsNotNull(response, "createdBy")) {
+                model.CreatedBy = response.getInt("createdBy");
+            }
+            if (GlobalFunctions.getIsNotNull(response, "createdOn")) {
+                model.CreatedOn = GlobalFunctions.getFormattedDate(response.getString("createdOn"));
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
 
         return model;

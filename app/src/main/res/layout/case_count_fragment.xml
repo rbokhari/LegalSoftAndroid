@@ -19,11 +19,14 @@
         android:visibility="visible" />
 
     <LinearLayout
+        android:id="@+id/linearGeneralCase"
         android:layout_width="match_parent"
         android:layout_height="72dp"
         android:paddingTop="16dp"
         android:paddingBottom="16dp"
         android:clickable="true"
+        android:longClickable="true"
+        android:background="@drawable/ripple_bg"
         android:orientation="horizontal">
 
         <ImageView
@@ -71,10 +74,15 @@
         android:background="@color/graySeparator" />
 
     <LinearLayout
+        android:id="@+id/linearBankCases"
         android:layout_width="match_parent"
         android:layout_height="72dp"
         android:paddingTop="16dp"
         android:paddingBottom="16dp"
+        android:clickable="true"
+        android:longClickable="true"
+        android:background="@drawable/ripple_bg"
+
         android:orientation="horizontal">
 
         <ImageView
@@ -121,10 +129,15 @@
         android:background="@color/graySeparator" />
 
     <LinearLayout
+        android:id="@+id/linearBeforeCourt"
         android:layout_width="match_parent"
         android:layout_height="72dp"
         android:paddingTop="16dp"
         android:paddingBottom="16dp"
+        android:clickable="true"
+        android:longClickable="true"
+        android:background="@drawable/ripple_bg"
+
         android:orientation="horizontal">
 
         <ImageView
@@ -172,10 +185,15 @@
         android:background="@color/graySeparator" />
 
     <LinearLayout
+        android:id="@+id/linearConsultancy"
         android:layout_width="match_parent"
         android:layout_height="72dp"
         android:paddingTop="16dp"
         android:paddingBottom="16dp"
+        android:clickable="true"
+        android:longClickable="true"
+        android:background="@drawable/ripple_bg"
+
         android:orientation="horizontal">
 
         <ImageView

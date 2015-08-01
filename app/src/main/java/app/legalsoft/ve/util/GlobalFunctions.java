@@ -11,7 +11,10 @@ import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import app.legalsoft.ve.R;
@@ -58,6 +61,20 @@ public  class GlobalFunctions {
         String[] monthNames = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
         return monthNames[month - 1];
     }
+
+    public static String getFormattedDate(String date){
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            Date date1 = simpleDateFormat.parse(date);
+            SimpleDateFormat fmtOut = new SimpleDateFormat("dd MMMM yyyy");
+            return fmtOut.format(date1);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return "";
+        }
+    }
+
+
 /*
     private List<T> filter(List<T> models, String query) {
         query = query.toLowerCase();

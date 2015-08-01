@@ -31,20 +31,26 @@ public interface CONSTANTS {
     int OFFICEEXPENSE_JOB_ID = 102;
     int OFFICEEXPENSE_JOB_SERVICE_PERIODIC_INTERVAL = 99000;
 
-    String API_URL = "http://192.168.1.38:84";
+    String API_URL ="http://10.0.3.2:84/api/";
+    //String API_URL = "http://192.168.1.38:84/api/";
+
     String AuthToken_URL =  "http://amc.azurewebsites.net/token";
-    String EMPLOYEES_API_URL = API_URL + "/api/employee";
-    String CLIENTS_API_URL = API_URL + "/api/client";
-    String OFFICEEXPENSE_API_URL = API_URL + "/api/officeexpense";
+    String EMPLOYEES_API_URL = API_URL + "employee";
+    String CLIENTS_API_URL = API_URL + "client";
+    String OFFICEEXPENSE_API_URL = API_URL + "officeexpense";
     //private static final String urlData = "http://192.168.1.37:84/api/employee";//
-    String SPECIALIST_API_URL = API_URL + "/api/specialist/getActive";
-    String MAINCOURT_API_URL = API_URL + "/api/maincourt/getActive";
-    String SUBCOURT_API_URL = API_URL + "/api/subcourt/getactive";
-    String DEFENDER_API_URL = API_URL + "/api/defender/getactive";
+    String SPECIALIST_API_URL = API_URL + "specialist/getActive";
+    String MAINCOURT_API_URL = API_URL + "maincourt/getActive";
+    String SUBCOURT_API_URL = API_URL + "subcourt/getactive";
+    String DEFENDER_API_URL = API_URL + "defender/getactive";
 
-    String CASE_COUNT_API_URL = API_URL + "/api/case/GetCountTypeStatus/";
-    String CASE_LIST_BY_TYPE_STATUS_API_URL = API_URL + "/api/case/GetCaseFileByType/" + CaseTypeID.CASE_FILE;
+    String CASE_COUNT_API_URL = API_URL + "case/GetCountTypeStatus/";
+    String CASE_LIST_BY_TYPE_STATUS_API_URL = API_URL + "case/GetCaseFileByType/";
 
+    String CASE_FOLLOWUPS_API_URL = API_URL + "case/CaseFollowUps";
+    String CASE_ATTACHMENTS_API_URL = API_URL + "case/CaseAttachmentByCase";
+
+    String INVOICE_CASE_FILE_API_URL = API_URL + "invoice/InvoicesByCaseFile";
 
 
     DecimalFormat FORMAT_CURRENCY = new DecimalFormat("0.000");

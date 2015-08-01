@@ -30,17 +30,20 @@ public class CaseDetailActivity extends AppCompatActivity {
 
     static CaseFileModel caseFileModel;
 
+    String title = "File No : ";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.case_detail_activity);
 
-        setupLoading();
-        setupToolbar();
-
-
         Intent intent = getIntent();
         Bundle b = intent.getBundleExtra("casefileData");
+        title += intent.getIntExtra("caseFileNo",0) + "";
+
+
+        setupLoading();
+        setupToolbar();
 
         caseFileModel = new CaseFileModel().fromBundle(b);
 
@@ -65,7 +68,7 @@ public class CaseDetailActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("Case Detail");
+        getSupportActionBar().setTitle(title);
     }
 
     private void setupTabs(){

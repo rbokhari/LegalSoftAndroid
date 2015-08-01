@@ -7,7 +7,7 @@ import android.os.Parcelable;
 /**
  * Created by Syed.Rahman on 17/07/2015.
  */
-public class DefenderModel {
+public class DefenderModel implements Parcelable {
 
     public int DefenderID;
     public String DefenderCode;
@@ -111,6 +111,12 @@ public int getCaseActive() {
         return getDefenderName();
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
     public void writeToParcel(Parcel dest, int flags){
         dest.writeInt(getDefenderID());
         dest.writeString(getDefenderCode());

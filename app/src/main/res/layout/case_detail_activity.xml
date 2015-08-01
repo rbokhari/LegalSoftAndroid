@@ -15,6 +15,7 @@
     <app.legalsoft.ve.tabs.SlidingTabLayout
         android:id="@+id/caseDetailTabs"
         android:animateLayoutChanges="true"
+
         android:background="@color/primaryColor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />

@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import org.json.JSONArray;
@@ -36,6 +37,11 @@ public class CaseCourtFragment extends Fragment implements JOSNLoadedListener {
     TextView tCaseConsultancyCount;
     TextView tCaseConsultancyCountClose;
 
+    LinearLayout linearGeneralCases;
+    LinearLayout linearBankCases;
+    LinearLayout linearBeforeCourt;
+    LinearLayout linearConsultancy;
+
     Button bCase;
 
     public CaseCourtFragment() {}
@@ -53,6 +59,8 @@ public class CaseCourtFragment extends Fragment implements JOSNLoadedListener {
         tCaseBeforeCountClose = (TextView) view.findViewById(R.id.tCaseBeforeCountClose);
         tCaseConsultancyCount = (TextView) view.findViewById(R.id.tCaseConsultancyCount);
         tCaseConsultancyCountClose = (TextView) view.findViewById(R.id.tCaseConsultancyCountClose);
+
+        setupLinearLayout(view);
 
         bCase = (Button) view.findViewById(R.id.bCaseOpen);
 
@@ -73,6 +81,81 @@ public class CaseCourtFragment extends Fragment implements JOSNLoadedListener {
 
 
         return view;
+    }
+
+    private void setupLinearLayout(View view){
+        linearGeneralCases = (LinearLayout) view.findViewById(R.id.linearGeneralCase);
+        linearBankCases = (LinearLayout) view.findViewById(R.id.linearBankCases);
+        linearBeforeCourt = (LinearLayout) view.findViewById(R.id.linearBeforeCourt);
+        linearConsultancy = (LinearLayout) view.findViewById(R.id.linearConsultancy);
+
+
+        linearGeneralCases.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                setupLinearLayoutClick(CONSTANTS.CaseTypeID.CASE_FILE, CONSTANTS.CaseStatusID.CASE_FILE_OPEN);
+            }
+        });
+
+        linearGeneralCases.setOnLongClickListener(new View.OnLongClickListener(){
+
+            @Override
+            public boolean onLongClick(View v) {
+                setupLinearLayoutClick(CONSTANTS.CaseTypeID.CASE_FILE, CONSTANTS.CaseStatusID.CASE_FILE_CLOSE);
+                return true;
+            }
+        });
+
+        linearBankCases.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                setupLinearLayoutClick(CONSTANTS.CaseTypeID.CASE_BANK_FILE, CONSTANTS.CaseStatusID.CASE_FILE_OPEN);            }
+        });
+
+        linearBankCases.setOnLongClickListener(new View.OnLongClickListener(){
+
+            @Override
+            public boolean onLongClick(View v) {
+                setupLinearLayoutClick(CONSTANTS.CaseTypeID.CASE_BANK_FILE, CONSTANTS.CaseStatusID.CASE_FILE_CLOSE);
+                return true;
+            }
+        });
+
+        linearBeforeCourt.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                setupLinearLayoutClick(CONSTANTS.CaseTypeID.CASE_BEFORE_COURT, CONSTANTS.CaseStatusID.CASE_BEFORE_COURT_OPEN);
+            }
+        });
+
+        linearBeforeCourt.setOnLongClickListener(new View.OnLongClickListener(){
+
+            @Override
+            public boolean onLongClick(View v) {
+                setupLinearLayoutClick(CONSTANTS.CaseTypeID.CASE_BEFORE_COURT, CONSTANTS.CaseStatusID.CASE_BEFORE_COURT_CLOSE);
+                return true;
+            }
+        });
+
+        linearConsultancy.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                setupLinearLayoutClick(CONSTANTS.CaseTypeID.CASE_CONSULTANCY, CONSTANTS.CaseStatusID.CASE_CONSULTANCY_OPEN);
+            }
+        });
+
+    }
+
+    private void setupLinearLayoutClick(int typeId, int statusId){
+        Intent intent = new Intent(getActivity(),CaseListActivity.class);
+        intent.putExtra("TypeId", typeId);
+        intent.putExtra("StatusId", statusId);
+
+        startActivity(intent);
     }
 
     @Override

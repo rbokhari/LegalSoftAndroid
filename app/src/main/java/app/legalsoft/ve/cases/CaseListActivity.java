@@ -20,6 +20,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArraySet;
 
 import app.legalsoft.ve.R;
 import app.legalsoft.ve.callbacks.JOSNLoadedListener;
@@ -47,6 +48,8 @@ public class CaseListActivity extends AppCompatActivity implements JOSNLoadedLis
 
     List<CaseFileModel> caseFileModelList;
 
+    int intTypeId = CONSTANTS.CaseTypeID.CASE_FILE;
+    int intStatusId = CONSTANTS.CaseStatusID.CASE_BEFORE_COURT_OPEN;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,8 +78,8 @@ public class CaseListActivity extends AppCompatActivity implements JOSNLoadedLis
 
     private void setupIntent(){
         Intent intent = getIntent();
-        int typeId = intent.getIntExtra("TypeId", -1);
-        int statusId =  intent.getIntExtra("StatusId", 0);
+        intTypeId = intent.getIntExtra("TypeId", CONSTANTS.CaseTypeID.CASE_FILE);
+        intStatusId =  intent.getIntExtra("StatusId", CONSTANTS.CaseStatusID.CASE_BEFORE_COURT_OPEN);
     }
 
     private void setupToolbar(){
@@ -97,6 +100,7 @@ public class CaseListActivity extends AppCompatActivity implements JOSNLoadedLis
             public void onClick(View view, int position) {
                 Intent intent = new Intent(MyApplication.getAppContext(), CaseDetailActivity.class);
                 intent.putExtra("casefileData", caseFileModelList.get(position).toBundle());
+                intent.putExtra("caseFileNo", caseFileModelList.get(position).getFileNo());
                 startActivity(intent);
             }
 
@@ -119,7 +123,7 @@ public class CaseListActivity extends AppCompatActivity implements JOSNLoadedLis
     }
 
     private void setupAsyncTask(){
-        new JSONAsyncTask(this, CONSTANTS.CASE_LIST_BY_TYPE_STATUS_API_URL).execute();
+        new JSONAsyncTask(this, CONSTANTS.CASE_LIST_BY_TYPE_STATUS_API_URL + intTypeId).execute();
     }
 
     @Override

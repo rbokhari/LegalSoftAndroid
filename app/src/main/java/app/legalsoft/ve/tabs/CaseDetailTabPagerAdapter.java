@@ -7,7 +7,10 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.widget.TextView;
 
 import app.legalsoft.ve.R;
+import app.legalsoft.ve.cases.CaseDetailAttachment;
+import app.legalsoft.ve.cases.CaseDetailFollowup;
 import app.legalsoft.ve.cases.CaseDetailGeneral;
+import app.legalsoft.ve.cases.CaseDetailInvoice;
 import app.legalsoft.ve.model.CaseFileModel;
 import app.legalsoft.ve.util.MyApplication;
 
@@ -28,24 +31,35 @@ public class CaseDetailTabPagerAdapter extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int position) {
         Bundle b = new Bundle();
-        //b.clear();
+        b.clear();
         //b.putInt("EmployeeId", employeeModel.getEmpID());
-        b.putAll(model.toBundle());
+
 
         switch (position){
             case 0:
+                b.putAll(model.toBundle());
                 CaseDetailGeneral caseDetailGeneral = new CaseDetailGeneral();
                 caseDetailGeneral.setArguments(b);
                 return caseDetailGeneral;
-
             case 1:
-                CaseDetailGeneral caseDetailGeneral1 = new CaseDetailGeneral();
-                caseDetailGeneral1.setArguments(b);
-                return caseDetailGeneral1;
+                b.clear();
+                b.putInt("caseFileId", model.getCaseFileID());
+                CaseDetailFollowup caseDetailFollowup = new CaseDetailFollowup();
+                caseDetailFollowup.setArguments(b);
+                return caseDetailFollowup;
             case 2:
-                CaseDetailGeneral caseDetailGeneral2 = new CaseDetailGeneral();
-                caseDetailGeneral2.setArguments(b);
-                return caseDetailGeneral2;
+                b.clear();
+                b.putInt("caseFileId", model.getCaseFileID());
+                CaseDetailInvoice caseDetailInvoice = new CaseDetailInvoice();
+                caseDetailInvoice.setArguments(b);
+                return caseDetailInvoice;
+            case 3:
+                b.clear();
+                b.putInt("caseFileId", model.getCaseFileID());
+                CaseDetailAttachment caseDetailAttachment = new CaseDetailAttachment();
+                caseDetailAttachment.setArguments(b);
+                return caseDetailAttachment;
+
         }
         return  null;
     }

@@ -124,7 +124,6 @@ public class MasterActivity extends AppCompatActivity {
         switch (position){
 
             case R.id.mnuDashboard:
-                GlobalFunctions.showMessage("dashboard");
                 Fragment fragDashboard = new DashboardFragment();
                 transaction.replace(R.id.fragment_main_content, fragDashboard)
                         .commit();

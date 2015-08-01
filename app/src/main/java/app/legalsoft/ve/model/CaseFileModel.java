@@ -64,6 +64,7 @@ public class CaseFileModel implements Parcelable {
     public String ComplainTypeName;
     public String DefenderCaseSpecName;
     public String SpecialistName;
+    public String EmployeeName;
 
     public String getComplainDepartmentName() {
         return ComplainDepartmentName;
@@ -71,6 +72,10 @@ public class CaseFileModel implements Parcelable {
 
     public String getComplainTypeName() {
         return ComplainTypeName;
+    }
+
+    public String getEmployeeName() {
+        return EmployeeName;
     }
 
     public String getDefenderCaseSpecName() {
@@ -309,6 +314,7 @@ public class CaseFileModel implements Parcelable {
         bundle.putString("CourtCaseNo", getCourtCaseNo());
         bundle.putInt("DefenderID", getDefenderID());
         bundle.putInt("DefenderCaseSpecID", getDefenderCaseSpecID());
+        bundle.putString("DefendentLawyer", getDefendentLawyer());
         bundle.putString("LawyerName", getLawyerName());
         bundle.putInt("SpecialistID", getSpecialistID());
         bundle.putInt("LawyerID", getLawyerID());
@@ -340,6 +346,11 @@ public class CaseFileModel implements Parcelable {
         bundle.putString("PhysicalFileName", getPhysicalFileName());
         bundle.putString("MainCourtName", getMainCourtName());
         bundle.putString("DefenderName", getDefenderName());
+        bundle.putString("complainTypeName", getComplainTypeName());
+        bundle.putString("complainDepartmentName", getComplainDepartmentName());
+        bundle.putString("EmployeeName", getEmployeeName());
+        bundle.putString("DefenderCaseSpecName", getDefenderCaseSpecName());
+
 
         return bundle;
     }
@@ -367,6 +378,7 @@ public class CaseFileModel implements Parcelable {
         caseFileModel.CourtCaseNo = bundle.getString("CourtCaseNo");
         caseFileModel.DefenderID = bundle.getInt("DefenderID");
         caseFileModel.DefenderCaseSpecID = bundle.getInt("DefenderCaseSpecID");
+        caseFileModel.DefendentLawyer = bundle.getString("DefendentLawyer");
         caseFileModel.LawyerName = bundle.getString("LawyerName");
         caseFileModel.SpecialistID = bundle.getInt("SpecialistID");
         caseFileModel.LawyerID = bundle.getInt("LawyerID");
@@ -398,6 +410,10 @@ public class CaseFileModel implements Parcelable {
         caseFileModel.PhysicalFileName = bundle.getString("PhysicalFileName");
         caseFileModel.MainCourtName = bundle.getString("MainCourtName");
         caseFileModel.DefenderName = bundle.getString("DefenderName");
+        caseFileModel.ComplainTypeName = bundle.getString("complainTypeName");
+        caseFileModel.ComplainDepartmentName = bundle.getString("complainDepartmentName");
+        caseFileModel.EmployeeName = bundle.getString("EmployeeName");
+        caseFileModel.DefenderCaseSpecName = bundle.getString("DefenderCaseSpecName");
 
         return caseFileModel;
     }
