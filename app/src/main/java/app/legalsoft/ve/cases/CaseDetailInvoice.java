@@ -109,7 +109,7 @@ public class CaseDetailInvoice extends Fragment implements JOSNLoadedListener {
 
     @Override
     public void onJSONLoaded(JSONArray jsonArray) {
-        data = Parser.parseInvoiceupResponseArray(jsonArray);
+        data = Parser.parseInvoiceResponseArray(jsonArray);
         GlobalFunctions.m("data found invoice " + data.size());
         if (data.size()==0){
             mLoading.setText("No data is found !");

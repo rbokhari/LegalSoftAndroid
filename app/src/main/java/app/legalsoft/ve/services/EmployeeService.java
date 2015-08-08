@@ -17,7 +17,6 @@ public class EmployeeService extends JobService implements EmployeesLoadedListen
 
     @Override
     public boolean onStartJob(JobParameters jobParameters) {
-        GlobalFunctions.showMessage("onStartJob");
         this.jobParameters = jobParameters;
         new EmployeeAsyncTask(this).execute();
 
@@ -26,7 +25,6 @@ public class EmployeeService extends JobService implements EmployeesLoadedListen
 
     @Override
     public boolean onStopJob(JobParameters jobParameters) {
-        GlobalFunctions.showMessage("onStopJob");
         return false;
     }
 

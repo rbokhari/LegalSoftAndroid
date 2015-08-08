@@ -18,7 +18,7 @@ public class OfficeExpenseService extends JobService implements OfficeExpensesLo
     @Override
     public boolean onStartJob(JobParameters params) {
 
-        GlobalFunctions.showMessage("Office Expense Job Started");
+        GlobalFunctions.m("OfficeExpenseService Job Start>>>>>");
         this.jobParameters = params;
         new OfficeExpenseAsyncTask(this).execute();
 

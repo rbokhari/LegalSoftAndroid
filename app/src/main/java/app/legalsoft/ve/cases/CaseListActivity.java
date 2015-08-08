@@ -159,7 +159,6 @@ public class CaseListActivity extends AppCompatActivity implements JOSNLoadedLis
             recyclerView.setVisibility(View.VISIBLE);
             adapter.setCaseFileList(caseFileModelList);
         }
-
     }
 
     @Override

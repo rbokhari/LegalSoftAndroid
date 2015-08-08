@@ -3,8 +3,8 @@ package app.legalsoft.ve.recycler;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
-
 import app.legalsoft.ve.R;
+
 
 /**
  * Created by Syed.Rahman on 18/05/2015.

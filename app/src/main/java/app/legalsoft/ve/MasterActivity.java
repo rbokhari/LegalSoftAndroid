@@ -1,6 +1,8 @@
 package app.legalsoft.ve;
 
+import android.content.ComponentName;
 import android.content.res.Resources;
+import android.os.Handler;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -23,7 +25,12 @@ import app.legalsoft.ve.definition.MainCourtFragment;
 import app.legalsoft.ve.definition.SpecialistFragment;
 import app.legalsoft.ve.definition.SubCourtFragment;
 import app.legalsoft.ve.employee.EmployeeFragment;
+import app.legalsoft.ve.services.OfficeExpenseService;
+import app.legalsoft.ve.util.CONSTANTS;
 import app.legalsoft.ve.util.GlobalFunctions;
+import app.legalsoft.ve.util.MyApplication;
+import me.tatarka.support.job.JobInfo;
+import me.tatarka.support.job.JobScheduler;
 
 
 public class MasterActivity extends AppCompatActivity {
@@ -35,6 +42,8 @@ public class MasterActivity extends AppCompatActivity {
     private NavigationView navigationView;
 
     private Toolbar toolbar;
+
+    private JobScheduler mJobScheduler;
 
 
     @Override
@@ -59,6 +68,14 @@ public class MasterActivity extends AppCompatActivity {
             else
                 selectItem(GlobalFunctions.mNavposition);
 
+
+            mJobScheduler = JobScheduler.getInstance(MyApplication.getAppContext());
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    constructOfficeExpenseJob();
+                }
+            }, 19000);
 
             final ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.drawer_open, R.string.drawer_close){
 
@@ -111,13 +128,9 @@ public class MasterActivity extends AppCompatActivity {
         }
     }
 
-
-
     private void selectItem(int position) {
         Fragment newFragment;
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-
-
 
         GlobalFunctions.mNavposition = position;
 
@@ -262,4 +275,16 @@ public class MasterActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    private void constructOfficeExpenseJob(){
+        JobInfo.Builder builder = new JobInfo.Builder(CONSTANTS.OFFICEEXPENSE_JOB_ID,
+                new ComponentName(MyApplication.getAppContext(), OfficeExpenseService.class));
+
+        builder.setPeriodic(CONSTANTS.OFFICEEXPENSE_JOB_SERVICE_PERIODIC_INTERVAL)
+                .setRequiredNetworkType(JobInfo.NETWORK_TYPE_UNMETERED);
+        //.setPersisted(true);
+
+        mJobScheduler.schedule(builder.build());
+    }
+
 }

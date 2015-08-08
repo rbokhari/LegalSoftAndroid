@@ -33,9 +33,8 @@ public class LegalDatabaseAdapter extends SQLiteOpenHelper {
             db.execSQL(EmployeeModel.Create_Table());
             db.execSQL(OfficeExpenseModel.Create_Table());
             db.execSQL(OfficeExpenseDetailModel.Create_Table());
-            GlobalFunctions.showMessage("onCreate Table Created");
+            //GlobalFunctions.showMessage("onCreate Table Created");
         } catch (SQLException e) {
-            Toast.makeText(context, "onCreate Error : " + e.getMessage(),Toast.LENGTH_LONG).show();
             e.printStackTrace();
         }
     }
@@ -44,7 +43,7 @@ public class LegalDatabaseAdapter extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         onCreate(db);
 
-        GlobalFunctions.showMessage("onUpgrade");
+        //GlobalFunctions.showMessage("onUpgrade");
     }
 
 

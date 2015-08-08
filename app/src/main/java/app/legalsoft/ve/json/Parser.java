@@ -275,9 +275,6 @@ public class Parser {
             if (GlobalFunctions.getIsNotNull(response,"total")) {
                 detailModel.Total = response.getInt("total");
             }
-            if (GlobalFunctions.getIsNotNull(response,"totalCaseAllowance")) {
-                detailModel.Total = response.getInt("totalCaseAllowance");
-            }
             if (GlobalFunctions.getIsNotNull(response,"remarks")) {
                 detailModel.Remarks = response.getString("remarks");
             }
@@ -717,25 +714,25 @@ public class Parser {
             if (GlobalFunctions.getIsNotNull(response, "subCourtID")) {
                 model.SubCourtID = response.getInt("subCourtID");
             }
-            if (GlobalFunctions.getIsNotNull(response, "clientSpecID")) {
-                JSONObject detail = response.getJSONObject("ClientSpecDetail");
+            if (GlobalFunctions.getIsNotNull(response, "clientSpecID") && response.getInt("clientSpecID") !=0) {
+                JSONObject detail = response.getJSONObject("clientSpecDetail");
                 if (GlobalFunctions.getIsNotNull(detail,"descName")) {
                     model.ClientSpecName = detail.getString("descName");
                 }
             }
-            if (GlobalFunctions.getIsNotNull(response, "mainCourtID")) {
+            if (GlobalFunctions.getIsNotNull(response, "mainCourtID") && response.getInt("mainCourtID") !=0) {
                 JSONObject detail = response.getJSONObject("mainCourtDetail");
                 if (GlobalFunctions.getIsNotNull(detail,"mainCourtCode")) {
                     model.MainCourtName = detail.getString("mainCourtCode");
                 }
             }
-            if (GlobalFunctions.getIsNotNull(response, "subCourtID")) {
+            if (GlobalFunctions.getIsNotNull(response, "subCourtID") && response.getInt("subCourtID") !=0) {
                 JSONObject detail = response.getJSONObject("subCourtDetail");
                 if (GlobalFunctions.getIsNotNull(detail,"subCourtCode")) {
                     model.SubCourtName = detail.getString("subCourtCode");
                 }
             }
-            if (GlobalFunctions.getIsNotNull(response, "judgementType")) {
+            if (GlobalFunctions.getIsNotNull(response, "judgementType") && response.getInt("judgementType") !=0) {
                 JSONObject detail = response.getJSONObject("JudgementTypeDetail");
                 if (GlobalFunctions.getIsNotNull(detail,"descName")) {
                     model.JudgementTypeName = detail.getString("descName");
@@ -748,7 +745,7 @@ public class Parser {
         return model;
     }
 
-    public static List<InvoiceModel> parseInvoiceupResponseArray(JSONArray response) {
+    public static List<InvoiceModel> parseInvoiceResponseArray(JSONArray response) {
         ArrayList<InvoiceModel> models = new ArrayList<>();
         if (response!=null && response.length()>0){
             try {

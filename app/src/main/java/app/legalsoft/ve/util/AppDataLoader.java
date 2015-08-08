@@ -25,7 +25,9 @@ public class AppDataLoader {
     }
 
     public static ArrayList<OfficeExpenseModel> loadOfficeExpenseData(){
+        //GlobalFunctions.m("loadOfficeExpenseData ::" + CONSTANTS.OFFICEEXPENSE_API_URL);
         JSONArray response = Requestor.requestData(CONSTANTS.OFFICEEXPENSE_API_URL);
+        //GlobalFunctions.m("loadOfficeExpenseData ::" + response.length());
         ArrayList<OfficeExpenseModel> listOfficeExpense = Parser.parseOfficeExpenseResponseArray(response);
         ArrayList<OfficeExpenseDetailModel> listOfficeExpenseDetail = Parser.officeExpenseDetailModelArrayList;
 
