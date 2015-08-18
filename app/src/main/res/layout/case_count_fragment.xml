@@ -62,7 +62,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textSize="24sp"
-            android:text="120"/>
+            android:text="..."/>
 
 
 
@@ -119,7 +119,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textSize="24sp"
-            android:text="120"/>
+            android:text="..."/>
 
     </LinearLayout>
 
@@ -175,7 +175,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textSize="24sp"
-            android:text="120"/>
+            android:text="..."/>
 
     </LinearLayout>
 
@@ -230,7 +230,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textSize="24sp"
-            android:text="120"/>
+            android:text="..."/>
 
     </LinearLayout>
 
@@ -238,12 +238,5 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/graySeparator" />
-
-    <Button
-        android:id="@+id/bCaseOpen"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Open Case"
-        />
 
 </LinearLayout>

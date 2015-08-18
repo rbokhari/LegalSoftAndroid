@@ -42,8 +42,6 @@ public class CaseCourtFragment extends Fragment implements JOSNLoadedListener {
     LinearLayout linearBeforeCourt;
     LinearLayout linearConsultancy;
 
-    Button bCase;
-
     public CaseCourtFragment() {}
 
     @Nullable
@@ -62,23 +60,7 @@ public class CaseCourtFragment extends Fragment implements JOSNLoadedListener {
 
         setupLinearLayout(view);
 
-        bCase = (Button) view.findViewById(R.id.bCaseOpen);
-
         new JSONAsyncTask(this, CONSTANTS.CASE_COUNT_API_URL).execute();
-
-
-        bCase.setOnClickListener(new View.OnClickListener(){
-
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(),CaseListActivity.class);
-                intent.putExtra("TypeId", CONSTANTS.CaseTypeID.CASE_FILE);
-                intent.putExtra("StatusId", CONSTANTS.CaseStatusID.CASE_FILE_OPEN);
-
-                startActivity(intent);
-            }
-        });
-
 
         return view;
     }

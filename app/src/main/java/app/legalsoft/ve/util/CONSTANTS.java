@@ -35,7 +35,7 @@ public interface CONSTANTS {
     int OFFICEEXPENSE_JOB_SERVICE_PERIODIC_INTERVAL = 99000;
 
     //String API_URL ="http://10.0.3.2:84/api/";
-    String API_URL = "http://192.168.1.38:84/api/";
+    String API_URL = "http://shaqsi.azurewebsites.net/api/"; // "http://192.168.1.38:84/api/";
     //String API_URL ="http://192.168.1.4:84/api/";
 
     String AuthToken_URL =  "http://amc.azurewebsites.net/token";
