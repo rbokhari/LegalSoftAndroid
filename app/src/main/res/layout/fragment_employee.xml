@@ -21,19 +21,21 @@
             android:padding="8dp"
             android:text="Employee List"
             android:textColor="#FFF"
-            android:textSize="24dp"
+            android:textSize="20dp"
             android:visibility="visible"
-            android:layout_weight="3"/>
+            android:layout_weight="4"/>
 
 
         <Spinner
             android:id="@+id/spStatus"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:gravity="bottom"
-            android:clickable="true"
             android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            android:gravity="center"
+            android:clickable="true"
+            android:textColor="#FFF"
+            android:textSize="20dp"
             style="@style/spinnerStyle"
             android:entries="@array/employee_status_values">
 

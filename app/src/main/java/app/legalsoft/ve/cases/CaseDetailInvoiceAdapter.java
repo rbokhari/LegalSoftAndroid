@@ -20,7 +20,6 @@ import app.legalsoft.ve.util.GlobalFunctions;
  */
 public class CaseDetailInvoiceAdapter extends RecyclerView.Adapter<CaseDetailInvoiceAdapter.CaseDetailInvoiceHolder> {
 
-
     private LayoutInflater layoutInflater;
     List<InvoiceModel> dataList = Collections.emptyList();
 
@@ -65,4 +64,5 @@ public class CaseDetailInvoiceAdapter extends RecyclerView.Adapter<CaseDetailInv
             tComments = (TextView) itemView.findViewById(R.id.tCaseInvoiceComments);
         }
     }
+
 }

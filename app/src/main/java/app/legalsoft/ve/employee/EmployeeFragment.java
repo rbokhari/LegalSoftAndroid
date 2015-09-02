@@ -186,13 +186,13 @@ public class EmployeeFragment extends Fragment implements EmployeesLoadedListene
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     //GlobalFunctions.showMessage(MyApplication.getAppContext(), position + "");
-                    tLoading.setVisibility(View.VISIBLE);
-                    employeeRecyclerView.setVisibility(View.GONE);
+                    //tLoading.setVisibility(View.VISIBLE);
+                    //employeeRecyclerView.setVisibility(View.GONE);
                     data = MyApplication.getWriteableDatabase().getEmployees(position + "");
 
                     adapterEmployee.setEmployeeList(data);
-                    employeeRecyclerView.setVisibility(View.VISIBLE);
-                    tLoading.setVisibility(View.GONE);
+                    //employeeRecyclerView.setVisibility(View.VISIBLE);
+                    //tLoading.setVisibility(View.GONE);
                 }
 
                 @Override

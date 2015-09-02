@@ -150,7 +150,6 @@ public class CaseListActivity extends AppCompatActivity implements JOSNLoadedLis
     @Override
     public void onJSONLoaded(JSONArray jsonArray) {
         caseFileModelList = Parser.parseCaseListResponseArray(jsonArray);
-        GlobalFunctions.m("data found case list " + caseFileModelList.size());
         if (caseFileModelList.size()==0){
             mLoading.setText("No data is found !");
         }

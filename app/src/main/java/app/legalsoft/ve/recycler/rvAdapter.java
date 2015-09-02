@@ -7,13 +7,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
 import app.legalsoft.ve.R;
-import app.legalsoft.ve.model.EmployeeModel;
 import app.legalsoft.ve.model.HomeMenuModel;
 
 /**
@@ -48,7 +44,6 @@ public class rvAdapter extends RecyclerView.Adapter<rvHolder> {
         rvHolder.menuIcon.setImageResource(dataList.get(position).getTitleIcon());
         Log.d("icon:---", String.valueOf(dataList.get(position).getTitleIcon()));
     }
-
 
     @Override
     public int getItemCount() {

@@ -25,6 +25,7 @@ import app.legalsoft.ve.definition.MainCourtFragment;
 import app.legalsoft.ve.definition.SpecialistFragment;
 import app.legalsoft.ve.definition.SubCourtFragment;
 import app.legalsoft.ve.employee.EmployeeFragment;
+import app.legalsoft.ve.employee.EmployeeTiming;
 import app.legalsoft.ve.services.OfficeExpenseService;
 import app.legalsoft.ve.util.CONSTANTS;
 import app.legalsoft.ve.util.GlobalFunctions;
@@ -189,7 +190,7 @@ public class MasterActivity extends AppCompatActivity {
                 break;
             case R.id.mnuCaseAdministration:
                 break;
-            case R.id.mnuSearch:
+/*            case R.id.mnuSearch:
                 break;
             case R.id.mnuCloseCase:
                 break;
@@ -199,9 +200,12 @@ public class MasterActivity extends AppCompatActivity {
                 break;
             case R.id.mnuGeneralReport:
                 break;
-            case R.id.mnuDailyTimeSheet:
+*/            case R.id.mnuDailyTimeSheet:
+                Fragment fragTiming = new EmployeeTiming();
+                transaction.replace(R.id.fragment_main_content, fragTiming)
+                        .commit();
                 break;
-            case R.id.mnuEmployeeAllowance:
+/*            case R.id.mnuEmployeeAllowance:
                 break;
             case R.id.mnuEmployeeLeave:
                 break;
@@ -215,7 +219,7 @@ public class MasterActivity extends AppCompatActivity {
                 break;
             case R.id.mnuMonthlyExpense:
                 break;
-            case R.id.mnuOptions:
+*/            case R.id.mnuOptions:
                 break;
             case R.id.mnuContactUs:
 

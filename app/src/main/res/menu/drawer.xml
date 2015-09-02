@@ -41,36 +41,6 @@
         </menu>
     </item>
 
-    <item
-        android:id="@+id/mnuDefinition"
-        android:title="@string/mnuDefinition">
-        <menu>
-            <item
-                android:id="@+id/mnuSpecialist"
-                android:icon="@drawable/ic_action_next_item"
-                android:title="@string/mnuSpecialist"
-                app:showAsAction="withText|ifRoom" />
-            <item
-                android:id="@+id/mnuMainCourt"
-                android:icon="@drawable/ic_action_next_item"
-                android:orderInCategory="100"
-                android:title="@string/mnuMainCourt"
-                app:showAsAction="never" />
-            <item
-                android:id="@+id/mnuSubCourt"
-                android:icon="@drawable/ic_action_next_item"
-                android:orderInCategory="100"
-                android:title="@string/mnuSubCourt"
-                app:showAsAction="never" />
-            <item
-                android:id="@+id/mnuDefender"
-                android:icon="@drawable/ic_action_next_item"
-                android:orderInCategory="100"
-                android:title="@string/mnuDefender"
-                app:showAsAction="never" />
-        </menu>
-
-    </item>
 
     <item
         android:id="@+id/mnuRegistration"
@@ -94,7 +64,7 @@
 
     </item>
 
-    <item
+    <!--item
         android:id="@+id/mnuReport"
         android:title="Reports">
         <menu>
@@ -129,7 +99,7 @@
                 android:title="@string/mnuGeneralReport"
                 app:showAsAction="never" />
         </menu>
-    </item>
+    </item/-->
 
     <item
         android:id="@+id/mnuForm"
@@ -141,7 +111,7 @@
                 android:orderInCategory="100"
                 android:title="@string/mnuDailyTimeSheet"
                 app:showAsAction="never" />
-            <item
+            <!--item
                 android:id="@+id/mnuEmployeeAllowance"
                 android:icon="@drawable/ic_action_next_item"
                 android:orderInCategory="100"
@@ -164,11 +134,11 @@
                 android:icon="@drawable/ic_action_next_item"
                 android:orderInCategory="100"
                 android:title="@string/mnuInbox"
-                app:showAsAction="never" />
+                app:showAsAction="never" /-->
         </menu>
     </item>
 
-    <item
+    <!--item
         android:id="@+id/mnuFinance"
         android:icon="@drawable/ic_action_next_item"
         android:title="Finance">
@@ -192,6 +162,38 @@
                 android:title="@string/mnuMonthlyExpense"
                 app:showAsAction="never" />
         </menu>
+    </item/-->
+
+
+    <item
+        android:id="@+id/mnuDefinition"
+        android:title="@string/mnuDefinition">
+        <menu>
+            <item
+                android:id="@+id/mnuSpecialist"
+                android:icon="@drawable/ic_action_next_item"
+                android:title="@string/mnuSpecialist"
+                app:showAsAction="withText|ifRoom" />
+            <item
+                android:id="@+id/mnuMainCourt"
+                android:icon="@drawable/ic_action_next_item"
+                android:orderInCategory="100"
+                android:title="@string/mnuMainCourt"
+                app:showAsAction="never" />
+            <item
+                android:id="@+id/mnuSubCourt"
+                android:icon="@drawable/ic_action_next_item"
+                android:orderInCategory="100"
+                android:title="@string/mnuSubCourt"
+                app:showAsAction="never" />
+            <item
+                android:id="@+id/mnuDefender"
+                android:icon="@drawable/ic_action_next_item"
+                android:orderInCategory="100"
+                android:title="@string/mnuDefender"
+                app:showAsAction="never" />
+        </menu>
+
     </item>
 
     <group

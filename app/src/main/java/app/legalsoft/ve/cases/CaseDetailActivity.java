@@ -6,20 +6,13 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
-import android.widget.TextView;
 
 import app.legalsoft.ve.R;
 import app.legalsoft.ve.model.CaseFileModel;
 import app.legalsoft.ve.tabs.CaseDetailTabPagerAdapter;
-import app.legalsoft.ve.tabs.EmployeeDetailTabPagerAdapter;
 import app.legalsoft.ve.tabs.SlidingTabLayout;
-import app.legalsoft.ve.util.GlobalFunctions;
-import app.legalsoft.ve.util.MyApplication;
 
-/**
- * Created by Syed.Rahman on 25/07/2015.
- */
+
 public class CaseDetailActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
@@ -40,7 +33,6 @@ public class CaseDetailActivity extends AppCompatActivity {
         Intent intent = getIntent();
         Bundle b = intent.getBundleExtra("casefileData");
         title += intent.getIntExtra("caseFileNo",0) + "";
-
 
         setupLoading();
         setupToolbar();
@@ -77,6 +69,5 @@ public class CaseDetailActivity extends AppCompatActivity {
         mPager.setAdapter(new CaseDetailTabPagerAdapter(fragmentManager,caseFileModel));
         mTabs.setViewPager(mPager);
     }
-
 
 }

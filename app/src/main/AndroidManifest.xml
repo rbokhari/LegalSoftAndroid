@@ -75,12 +75,15 @@
 
         </activity>
         <activity android:name=".cases.CaseDetailActivity"
-                android:label="Case Detail">
+            android:label="Case Detail">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".cases.CaseListActivity" />
-        </activity>
+         </activity>
+        <activity android:name=".employee.EmployeeTimingDetail"
+            android:label="Timing Sheet Detail">
 
+        </activity>
         <service
             android:name=".services.EmployeeService"
             android:exported="true"

@@ -56,6 +56,7 @@ public interface CONSTANTS {
 
     String INVOICE_CASE_FILE_API_URL = API_URL + "invoice/InvoicesByCaseFile";
 
+    String EMPLOYEE_TIMING_API_URL = API_URL + "employeetiming";
 
     DecimalFormat FORMAT_CURRENCY = new DecimalFormat("0.000");
     DecimalFormat FORMAT_QUANTITY = new DecimalFormat("0.00");

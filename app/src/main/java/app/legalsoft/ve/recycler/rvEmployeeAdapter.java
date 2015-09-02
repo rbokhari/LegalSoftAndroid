@@ -39,8 +39,16 @@ public class rvEmployeeAdapter extends RecyclerView.Adapter<rvEmployeeHolder> {
 
     public void setEmployeeList(List<EmployeeModel> listEmployee)
     {
+        int size = this.dataList.size();
+        for (int i = 0; i < size; i++) {
+            this.dataList.remove(0);
+        }
+        this.notifyItemRangeRemoved(0, size);
+
         this.dataList = listEmployee;
+
         notifyItemRangeChanged(0, listEmployee.size());
+
     }
 
     @Override

@@ -1,15 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
+    <include
+        android:id="@+id/app_bar"
+        layout="@layout/app_toolbar" />
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-
-
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -35,11 +41,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
-                    android:text="Priority"
+                    android:text="Code"
                     android:textSize="15sp" />
 
                 <TextView
-                    android:id="@+id/tCasePriority"
+                    android:id="@+id/tTimingCode"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical|center_horizontal"
@@ -77,11 +83,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
-                    android:text="Start Date"
+                    android:text="Date"
                     android:textSize="15sp" />
 
                 <TextView
-                    android:id="@+id/tCaseStartDate"
+                    android:id="@+id/tTimingDate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical|center_horizontal"
@@ -119,11 +125,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
-                    android:text="Client Name"
+                    android:text="Employee"
                     android:textSize="15sp" />
 
                 <TextView
-                    android:id="@+id/tCaseClientName"
+                    android:id="@+id/tEmployeeName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical|center_horizontal"
@@ -161,97 +167,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
-                    android:text="Case Computer No"
+                    android:text="Case"
                     android:textSize="15sp" />
 
                 <TextView
-                    android:id="@+id/tCaseComputerNo"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical|center_horizontal"
-                    android:text=""
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
-        </LinearLayout>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/graySeparator" />
-        <LinearLayout
-            android:id="@+id/lBankFileNo"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_gravity="center"
-                android:layout_marginLeft="16dp"
-                />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:gravity="center_vertical"
-                android:orientation="vertical"
-                android:paddingLeft="20dp"
-                android:paddingRight="16dp">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:text="Bank File No"
-                    android:textSize="15sp" />
-
-                <TextView
-                    android:id="@+id/tCaseBankFileNo"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical|center_horizontal"
-                    android:text=""
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
-        </LinearLayout>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/graySeparator" />
-        <LinearLayout
-            android:id="@+id/lAccountNo"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_gravity="center"
-                android:layout_marginLeft="16dp"
-                />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:gravity="center_vertical"
-                android:orientation="vertical"
-                android:paddingLeft="20dp"
-                android:paddingRight="16dp">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:text="Account No"
-                    android:textSize="15sp" />
-
-                <TextView
-                    android:id="@+id/tCaseAccountNo"
+                    android:id="@+id/tCase"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical|center_horizontal"
@@ -289,137 +209,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
-                    android:text="Client Specs"
+                    android:text="Client"
                     android:textSize="15sp" />
 
                 <TextView
-                    android:id="@+id/tCaseClientSpec"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical|center_horizontal"
-                    android:text=""
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
-        </LinearLayout>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/graySeparator" />
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_gravity="center"
-                android:layout_marginLeft="16dp"
-                />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:gravity="center_vertical"
-                android:orientation="vertical"
-                android:paddingLeft="20dp"
-                android:paddingRight="16dp">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:text="Physical File"
-                    android:textSize="15sp" />
-
-                <TextView
-                    android:id="@+id/tCasePhysicalFile"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical|center_horizontal"
-                    android:text=""
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
-        </LinearLayout>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/graySeparator" />
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_gravity="center"
-                android:layout_marginLeft="16dp"
-                />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:gravity="center_vertical"
-                android:orientation="vertical"
-                android:paddingLeft="20dp"
-                android:paddingRight="16dp">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:text="Complain Type"
-                    android:textSize="15sp" />
-
-                <TextView
-                    android:id="@+id/tCaseComplainType"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical|center_horizontal"
-                    android:text=""
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
-        </LinearLayout>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/graySeparator" />
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_gravity="center"
-                android:layout_marginLeft="16dp"
-                />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:gravity="center_vertical"
-                android:orientation="vertical"
-                android:paddingLeft="20dp"
-                android:paddingRight="16dp">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:text="Complain Department"
-                    android:textSize="15sp" />
-
-                <TextView
-                    android:id="@+id/tCaseComplainDepartment"
+                    android:id="@+id/tClientName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical|center_horizontal"
@@ -461,7 +255,7 @@
                     android:textSize="15sp" />
 
                 <TextView
-                    android:id="@+id/tCaseDefender"
+                    android:id="@+id/tDefenderName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical|center_horizontal"
@@ -471,6 +265,7 @@
             </LinearLayout>
 
         </LinearLayout>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
@@ -485,7 +280,7 @@
                 android:layout_height="24dp"
                 android:layout_gravity="center"
                 android:layout_marginLeft="16dp"
-                />
+                 />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -499,11 +294,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
-                    android:text="Defender Specs"
+                    android:text="Type"
                     android:textSize="15sp" />
 
                 <TextView
-                    android:id="@+id/tCaseDefenderSpecs"
+                    android:id="@+id/tTypeName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical|center_horizontal"
@@ -513,6 +308,7 @@
             </LinearLayout>
 
         </LinearLayout>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
@@ -527,7 +323,7 @@
                 android:layout_height="24dp"
                 android:layout_gravity="center"
                 android:layout_marginLeft="16dp"
-                android:src="@drawable/ic_person_grey600_18dp" />
+                android:src="@drawable/abc_btn_default_mtrl_shape" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -541,11 +337,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
-                    android:text="Defender Lawyer"
+                    android:text="Time"
                     android:textSize="15sp" />
 
                 <TextView
-                    android:id="@+id/tCaseDefenderLawyer"
+                    android:id="@+id/tTime"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical|center_horizontal"
@@ -555,6 +351,8 @@
             </LinearLayout>
 
         </LinearLayout>
+
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
@@ -569,7 +367,7 @@
                 android:layout_height="24dp"
                 android:layout_gravity="center"
                 android:layout_marginLeft="16dp"
-                android:src="@drawable/ic_person_grey600_18dp" />
+                 />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -583,11 +381,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
-                    android:text="Defender Lawyer Name"
+                    android:text="Notes"
                     android:textSize="15sp" />
 
                 <TextView
-                    android:id="@+id/tCaseDefenderLawyerName"
+                    android:id="@+id/tNotes"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical|center_horizontal"
@@ -597,92 +395,7 @@
             </LinearLayout>
 
         </LinearLayout>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/graySeparator" />
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_gravity="center"
-                android:layout_marginLeft="16dp"
-                android:src="@drawable/ic_person_grey600_18dp" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:gravity="center_vertical"
-                android:orientation="vertical"
-                android:paddingLeft="20dp"
-                android:paddingRight="16dp">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:text="Lawyer Name"
-                    android:textSize="15sp" />
-
-                <TextView
-                    android:id="@+id/tCaseLawyerName"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical|center_horizontal"
-                    android:text=""
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
-        </LinearLayout>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/graySeparator" />
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_gravity="center"
-                android:layout_marginLeft="16dp"
-                android:src="@drawable/ic_action_dock" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:gravity="center_vertical"
-                android:orientation="vertical"
-                android:paddingLeft="20dp"
-                android:paddingRight="16dp">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:text="Case Summary"
-                    android:textSize="15sp" />
-
-                <TextView
-                    android:id="@+id/tCaseSummary"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical|center_horizontal"
-                    android:text=""
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
-        </LinearLayout>
-
-
 
     </LinearLayout>
-</ScrollView>
+    </ScrollView>
+</LinearLayout>

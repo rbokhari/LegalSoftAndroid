@@ -14,6 +14,7 @@ import app.legalsoft.ve.model.CaseFileModel;
 import app.legalsoft.ve.model.CaseFollowupModel;
 import app.legalsoft.ve.model.DefenderModel;
 import app.legalsoft.ve.model.EmployeeModel;
+import app.legalsoft.ve.model.EmployeeTimingModel;
 import app.legalsoft.ve.model.InvoiceModel;
 import app.legalsoft.ve.model.MainCourtModel;
 import app.legalsoft.ve.model.OfficeExpenseDetailModel;
@@ -907,6 +908,88 @@ public class Parser {
             }
             if (GlobalFunctions.getIsNotNull(response, "createdOn")) {
                 model.CreatedOn = GlobalFunctions.getFormattedDate(response.getString("createdOn"));
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return model;
+    }
+
+    public static List<EmployeeTimingModel> parseEmployeeTimingResponseArray(JSONArray response) {
+        ArrayList<EmployeeTimingModel> models = new ArrayList<>();
+        if (response!=null && response.length()>0){
+            try {
+                JSONArray array = response; //.getJSONArray("employees");
+                for (int i=0; i<array.length(); i++){
+                    models.add(parseEmployeeTimingResponse(array.getJSONObject(i)));
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        return models;
+    }
+
+    public static EmployeeTimingModel parseEmployeeTimingResponse(JSONObject response)
+    {
+        EmployeeTimingModel model= new EmployeeTimingModel();
+
+        try {
+            if (GlobalFunctions.getIsNotNull(response, "timingId")) {
+                model.setTimingID(response.getInt("timingId"));
+            }
+            if (GlobalFunctions.getIsNotNull(response, "timingCode")) {
+                model.setTimingCode(response.getString("timingCode"));
+            }
+            if (GlobalFunctions.getIsNotNull(response, "timingDate")) {
+                model.setTimingDate(GlobalFunctions.getFormattedDate(response.getString("timingDate")));
+            }
+            if (GlobalFunctions.getIsNotNull(response, "employeeId")) {
+                model.setEmployeeId(response.getInt("employeeId"));
+            }
+            if (GlobalFunctions.getIsNotNull(response, "employeeCode")) {
+                model.setEmployeeCode(response.getString("employeeCode"));
+            }
+            if (GlobalFunctions.getIsNotNull(response, "employeeName")) {
+                model.setEmployeeName(response.getString("employeeName"));
+            }
+
+            if (GlobalFunctions.getIsNotNull(response, "caseFileId")) {
+                model.setCaseFileId(response.getInt("caseFileId"));
+            }
+
+            if (GlobalFunctions.getIsNotNull(response, "caseFileNo")) {
+                model.setCaseFileNo(response.getString("caseFileNo"));
+            }
+            if (GlobalFunctions.getIsNotNull(response, "clientId")) {
+                model.setClientId(response.getInt("clientId"));
+            }
+
+            if (GlobalFunctions.getIsNotNull(response, "clientCode")) {
+                model.setClientCode(response.getString("clientCode"));
+            }
+            if (GlobalFunctions.getIsNotNull(response, "clientName")) {
+                model.setClientName(response.getString("clientName"));
+            }
+            if (GlobalFunctions.getIsNotNull(response, "defenderId")) {
+                model.setDefenderId(response.getInt("defenderId"));
+            }
+            if (GlobalFunctions.getIsNotNull(response, "defenderName")) {
+                model.setDefenderName(response.getString("defenderName"));
+            }
+            if (GlobalFunctions.getIsNotNull(response, "typeName")) {
+                model.setTimingTypeName(response.getString("typeName"));
+            }
+            if (GlobalFunctions.getIsNotNull(response, "hours")) {
+                model.setHours(response.getDouble("hours"));
+            }
+            if (GlobalFunctions.getIsNotNull(response, "minutes")) {
+                model.setMinutes(response.getDouble("minutes"));
+            }
+            if (GlobalFunctions.getIsNotNull(response, "comments")) {
+                model.setComments(response.getString("comments"));
             }
 
         } catch (JSONException e) {
